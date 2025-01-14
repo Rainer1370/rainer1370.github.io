@@ -4,6 +4,65 @@
     <title>Rob Rainer Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Gradient background */
+        body {
+            background: linear-gradient(135deg, #007BFF, #28a745);
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation styling */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        h1, h2 {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Button styling */
+        a.button {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        a.button:hover {
+            background-color: #FF8C00;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -28,7 +87,7 @@
                 and AI-driven solutions. Explore my portfolio to learn about my projects, experience, and how I can contribute 
                 to solving complex technical challenges.
             </p>
-            <a href="about.html" style="display:inline-block; margin:20px; padding:10px 20px; background-color:#007BFF; color:white; text-decoration:none; border-radius:5px;">Learn More About Me</a>
+            <a href="about.html" class="button">Learn More About Me</a>
         </section>
 
         <section>
@@ -38,7 +97,7 @@
                 <li><strong>EPICS-Based ARM Modernization:</strong> Improved reliability and scalability of critical infrastructure.</li>
                 <li><strong>SBM Top-Off Script:</strong> Enhanced machine efficiency through uniform beam injection.</li>
             </ul>
-            <a href="projects.html" style="display:inline-block; margin:20px; padding:10px 20px; background-color:#28a745; color:white; text-decoration:none; border-radius:5px;">View All Projects</a>
+            <a href="projects.html" class="button">View All Projects</a>
         </section>
 
         <section id="contact">
