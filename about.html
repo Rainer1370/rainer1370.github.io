@@ -29,7 +29,16 @@
             text-decoration: underline;
         }
 
-        h1 {
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
             animation: fadeIn 2s ease-in-out;
         }
 
@@ -38,13 +47,20 @@
             to { opacity: 1; }
         }
 
-        section {
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            text-align: center;
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        ul li strong {
+            color: #FFD700;
         }
 
         img {
@@ -61,7 +77,7 @@
     <header>
         <nav>
             <a href="index.html">Home</a> |
-            <a href="projects.html">Projects</a> |
+            <a href="projects.html">Current Projects</a> |
             <a href="about.html">About Me</a> |
             <a href="index.html#contact">Contact</a> |
             <a href="https://www.researchgate.net/profile/Robert-Rainer" target="_blank">
@@ -81,15 +97,37 @@
                 EPICS development, and AI-driven solutions. My passion lies in solving complex technical challenges, driving 
                 innovation, and optimizing processes in high-performance research and industrial environments.
             </p>
-            <p>
-                I have led projects in beam diagnostics, accelerator timing systems, and modernizing critical infrastructure, 
-                focusing on enhancing reliability, scalability, and operational efficiency. My expertise extends to integrating 
-                AI and machine learning to develop smarter, more adaptive systems.
-            </p>
-            <p>
-                Beyond my technical achievements, I enjoy mentoring engineers, contributing to open-source projects, and developing 
-                creative solutions that impact the fields of automation, control systems, and advanced research technologies.
-            </p>
+        </section>
+
+        <section>
+            <h2>Skills</h2>
+            <ul>
+                <li><strong>Control Systems Engineering:</strong> EPICS development, accelerator timing systems.</li>
+                <li><strong>Programming:</strong> Python, C, Shell scripting, and automation tools.</li>
+                <li><strong>AI/ML Applications:</strong> Implementing AI for beam diagnostics and top-off injection.</li>
+                <li><strong>Network Infrastructure:</strong> MOXA devices, networking protocols, and configuration.</li>
+                <li><strong>Project Management:</strong> Leading cross-disciplinary teams and delivering critical solutions.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Key Accomplishments</h2>
+            <ul>
+                <li>Developed AI-Assisted Accelerator Timing System achieving picosecond resolution.</li>
+                <li>Modernized ARM infrastructure for enhanced reliability and scalability.</li>
+                <li>Designed the SBM Top-Off Script for uniform beam injection efficiency.</li>
+                <li>Authored research on chaos analysis using Shannon Entropy methods.</li>
+                <li>Served as a Work Control Coordinator ensuring 24/7 operational support.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Professional Organizations</h2>
+            <ul>
+                <li>Member of the International Society of Automation (ISA).</li>
+                <li>Active contributor to the EPICS community.</li>
+                <li>Collaborator with NSLS-II research teams on advanced beam diagnostics.</li>
+            </ul>
         </section>
     </main>
     <footer>
