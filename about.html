@@ -42,11 +42,6 @@
             animation: fadeIn 2s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         ul {
             list-style: none;
             padding: 0;
@@ -70,6 +65,21 @@
             border-radius: 50%;
             margin: 20px auto;
             display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Title Text */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* Larger font size for smaller screens */
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -126,7 +136,7 @@
             <ul>
                 <li>Member of the International Society of Automation (ISA).</li>
                 <li>Active contributor to the EPICS community.</li>
-                <li>Collaborator with NSLS-II research teams on advanced beam diagnostics.</li>
+                <li>Collaborator with research teams on advanced beam diagnostics.</li>
             </ul>
         </section>
     </main>
