@@ -29,15 +29,6 @@
             text-decoration: underline;
         }
 
-        h1 {
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         section {
             margin: 20px auto;
             padding: 20px;
@@ -46,20 +37,45 @@
             border-radius: 10px;
         }
 
+        h1, h2 {
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
         ul {
             list-style: none;
             padding: 0;
         }
 
-        li {
+        ul li {
             margin: 10px 0;
             padding: 10px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
         }
 
-        li strong {
+        ul li strong {
             color: #FFD700;
+        }
+
+        ul li em {
+            font-style: italic;
+            color: #FFD700;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Title Text */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* Larger font size for smaller screens */
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -85,20 +101,33 @@
             <ul>
                 <li>
                     <strong>AI-Assisted Accelerator Timing System</strong><br>
-                    Achieved picosecond resolution and optimized performance for NSLS-II storage ring operations.
+                    Achieved picosecond resolution and optimized performance for advanced accelerator timing systems.<br>
+                    <em>Key Skills Used:</em> AI/ML, EPICS, Timing Systems, Python, Data Analysis
                 </li>
                 <li>
                     <strong>EPICS-Based ARM Modernization</strong><br>
-                    Enhanced reliability and scalability of Area Radiation Monitors by implementing modernized hardware and software solutions.
+                    Enhanced reliability and scalability of radiation monitoring systems by implementing modernized hardware and software solutions.<br>
+                    <em>Key Skills Used:</em> EPICS, Networking, MOXA Devices, Hardware Integration
                 </li>
                 <li>
                     <strong>SBM Top-Off Script</strong><br>
-                    Developed a system for uniform beam injection using AI to analyze and adjust currents dynamically.
+                    Developed a system for uniform beam injection using AI to analyze and adjust currents dynamically.<br>
+                    <em>Key Skills Used:</em> Python, Machine Learning, Accelerator Operations, Optimization
                 </li>
                 <li>
                     <strong>Shannon Entropy Chaos Analysis</strong><br>
-                    Writing a manuscript on chaos analysis in the NSLS-II storage ring using Shannon Entropy methods.
+                    Writing a manuscript on chaos analysis for accelerator storage rings using Shannon Entropy methods.<br>
+                    <em>Key Skills Used:</em> Chaos Theory, Data Analytics, Research Writing
                 </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Learn More</h2>
+            <p>Explore additional resources and examples of my work:</p>
+            <ul>
+                <li><a href="https://github.com/rainer1370" target="_blank">GitHub Repository</a></li>
+                <li><a href="https://www.researchgate.net/profile/Robert-Rainer" target="_blank">ResearchGate Profile</a></li>
             </ul>
         </section>
     </main>
