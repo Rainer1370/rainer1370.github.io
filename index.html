@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Rob Rainer Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Rob Rainer's portfolio featuring expertise in EPICS development, accelerator timing systems, Python-based application development, and AI-driven solutions.">
+    <meta name="author" content="Rob Rainer">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         /* Gradient background */
         body {
@@ -34,6 +39,7 @@
         /* Main content styling */
         h1, h2 {
             animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Enhance readability */
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -62,6 +68,13 @@
         a.button:hover {
             background-color: #FF8C00;
         }
+
+        /* Accessibility for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            h1, h2 {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -81,21 +94,24 @@
     </header>
     <main>
         <section>
-            <h1>Welcome to My Portfolio</h1>
-            <p>
-                Hello! I’m Rob Rainer, a Senior Technology Engineer with expertise in control systems, EPICS development, 
-                and AI-driven solutions. Explore my portfolio to learn about my projects, experience, and how I can contribute 
-                to solving complex technical challenges.
-            </p>
-            <a href="about.html" class="button">Learn More About Me</a>
+            <div class="home">
+                <h1>Welcome!</h1>
+                <p>
+                    Explore my professional journey as a Controls Engineer, where cutting-edge solutions meet precision and 
+                    innovation. I specialize in accelerator control systems, EPICS integration, Python-based application 
+                    development, and AI-driven solutions. My work includes developing AI-assisted applications and incorporating 
+                    machine learning into niche and specialized applications.
+                </p>
+            </div>
         </section>
+    </main>
 
         <section>
             <h2>Highlighted Projects</h2>
             <ul>
                 <li><strong>AI-Assisted Accelerator Timing System:</strong> Achieved picosecond resolution and optimized performance.</li>
                 <li><strong>EPICS-Based ARM Modernization:</strong> Improved reliability and scalability of critical infrastructure.</li>
-                <li><strong>SBM Top-Off Script:</strong> Enhanced machine efficiency through uniform beam injection.</li>
+                <li><strong>SBM Top-Off Application:</strong> Enhanced machine efficiency through uniform beam injection and applied ML techniques for optimization.</li>
             </ul>
             <a href="projects.html" class="button">View All Projects</a>
         </section>
