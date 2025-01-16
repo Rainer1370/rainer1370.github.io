@@ -48,17 +48,7 @@ footer {
 footer #contact {
     max-width: 800px; /* Restricts the content width for better readability */
     margin: 0 auto;
-    text-align: center; /* Centers all the text within the footer */
-}
-
-/* Footer List Styling */
-footer ul {
-    list-style-type: none; /* Removes bullets since text is centered */
-    padding: 0; /* Removes unnecessary indentation */
-}
-
-footer li {
-    margin-bottom: 10px; /* Adds spacing between list items */
+    text-align: center; /* Ensures all text is centered */
 }
 
 /* Footer Links */
@@ -71,6 +61,43 @@ footer a {
 footer a:hover {
     text-decoration: underline;
     color: #FF8C00; /* Changes link color on hover */
+}
+
+/* Highlighted Projects Section Styling */
+.highlighted-projects {
+    text-align: left; /* Aligns the entire section's content to the left */
+    margin: 20px auto; /* Centers the section horizontally */
+    width: 75%; /* Sets the section's width */
+    max-width: 1200px; /* Limits width on larger screens */
+}
+
+.highlighted-projects h2 {
+    text-align: left; /* Ensures the heading is also left-aligned */
+}
+
+.highlighted-projects ul {
+    list-style-type: disc; /* Adds bullets to the list */
+    padding-left: 20px; /* Ensures proper indentation for bullets */
+    margin-top: 10px; /* Adds space between the heading and the list */
+}
+
+.highlighted-projects ul li {
+    margin-bottom: 10px; /* Adds spacing between list items */
+}
+
+.highlighted-projects .button {
+    display: inline-block;
+    margin-top: 20px; /* Adds space above the button */
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    color: black;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.highlighted-projects .button:hover {
+    background-color: #FF8C00; /* Changes the button color on hover */
 }
 
 /* Banner Image Styling */
@@ -111,20 +138,6 @@ section {
     width: 75%;
     max-width: 1200px; /* Limits width for larger screens */
     text-align: center;
-}
-
-/* Highlighted Projects Section Styling */
-.highlighted-projects h2 {
-    text-align: left;
-}
-
-.highlighted-projects ul {
-    list-style-type: disc; /* Adds bullet points to the list */
-    padding-left: 20px; /* Added spacing for bullets */
-}
-
-.highlighted-projects ul li {
-    margin-bottom: 10px;
 }
 
 /* Bottom Image and Text Container */
