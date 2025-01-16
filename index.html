@@ -11,31 +11,35 @@
     <script src="js/scripts.js" defer></script>
 </head>
 <body>
-    <!-- Placeholder for Header -->
-    <div id="header"></div>
+    <!-- Header Section -->
+    <header>
+        <h1>Rob Rainer Portfolio</h1>
+    </header>
 
     <main>
         <!-- Banner Section -->
-        <section class="banner" style="text-align: center;">
-            <img src="assets/NSLS2CR.jpg" alt="NSLS-II Control Room" style="width: 50%; height: auto;">
-            <p><a href="https://www.bnl.gov/nsls2/" style="color: #FFD700; text-decoration: none;">NSLS II Control Room</a></p>
+        <section class="banner">
+            <img src="assets/NSLS2CR.jpg" alt="NSLS-II Control Room">
+            <p><a href="https://www.bnl.gov/nsls2/" class="highlighted-link">NSLS II Control Room</a></p>
         </section>
 
-        <!-- Upper Text Container -->
-        <section style="margin: 0 auto; width: 75%; display: inline-block;">
-            <h1 style="text-align: center;">Welcome!</h1>
-            <p style="text-align: justify;">
-                I'm Rob Rainer. Explore my professional journey as a Controls Engineer, where cutting-edge solutions meet precision and 
-                innovation. I specialize in accelerator control systems, EPICS integration, Python-based application 
-                development, and AI-driven solutions. My work includes developing AI-assisted applications and incorporating 
-                machine learning into niche and specialized applications.
-            </p>
+        <!-- Welcome Section -->
+        <section class="welcome">
+            <h1>Welcome!</h1>
+            <div class="content">
+                <p>
+                    I'm Rob Rainer. Explore my professional journey as a Controls Engineer, where cutting-edge solutions meet precision and 
+                    innovation. I specialize in accelerator control systems, EPICS integration, Python-based application 
+                    development, and AI-driven solutions. My work includes developing AI-assisted applications and incorporating 
+                    machine learning into niche and specialized applications.
+                </p>
+            </div>
         </section>
 
-        <!-- Highlighted Projects -->
-        <section class="highlighted-projects" style="margin: 0 auto; width: 75%; display: inline-block;">
-            <h2 style="text-align: left;">Highlighted Projects</h2>
-            <ul style="list-style-type: disc; padding-left: 20px;">
+        <!-- Highlighted Projects Section -->
+        <section class="highlighted-projects">
+            <h2>Highlighted Projects</h2>
+            <ul>
                 <li><strong>AI-Assisted Accelerator Timing System:</strong> Achieved picosecond resolution and optimized performance through AI-driven optimization techniques.</li>
                 <li><strong>EPICS-Based ARM Modernization:</strong> Improved reliability and scalability of critical infrastructure by integrating modernized components and reducing system downtime.</li>
                 <li><strong>SBM Top-Off Application:</strong> Enhanced machine efficiency by enabling uniform beam injection and implementing ML techniques for optimization.</li>
@@ -43,26 +47,27 @@
             <a href="pages/projects.html" class="button">View All Projects</a>
         </section>
 
-        <!-- Bottom Image Section with Container for Photo and Text -->
-        <section class="bottom-image" style="text-align: center; margin: 0 auto; width: 75%; display: inline-block;">
-            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+        <!-- Bottom Image Section -->
+        <section class="bottom-image">
+            <div class="bottom-image-container">
                 <!-- Photo Container -->
-                <div style="flex: 1; max-width: 50%; margin-right: 20px;">
-                    <img src="assets/NSLS1CR.jpg" alt="NSLS-I Control Room" style="width: 50%; height: auto;">
+                <div class="photo">
+                    <img src="assets/NSLS1CR.jpg" alt="NSLS-I Control Room">
                 </div>
-                <!-- Text Container (caption/description) -->
-                <div style="flex: 1; max-width: 50%; vertical-align: top; padding-top: 10px;">
-                    <p style="font-style: italic;">
+                <!-- Text Container -->
+                <div class="text">
+                    <p>
                         "Brookhaven’s National Synchrotron Light Source was a pioneer in synchrotron science and laid the groundwork for future generations of research."
                     </p>
-                    <a href="https://www.bnl.gov/newsroom/news.php?a=22943" target="_blank" style="color: #FFD700; text-decoration: none; font-weight: bold;">Learn more about NSLS-I</a>
+                    <a href="https://www.bnl.gov/newsroom/news.php?a=22943" target="_blank" class="highlighted-link">Learn more about NSLS-I</a>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Placeholder for Footer -->
-    <div id="footer"></div>
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2025 Rob Rainer. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
