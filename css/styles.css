@@ -42,3 +42,11 @@ nav a:hover {
 .button:hover {
     background-color: #FF8C00;
 }
+
+.profile-pic {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 20px auto;
+}
