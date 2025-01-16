@@ -36,7 +36,7 @@ nav a:hover {
 footer {
     max-width: 90%; /* Keeps the footer within the page bounds */
     margin: 20px auto; /* Centers the footer horizontally with spacing above */
-    padding: 10px 20px; /* Reduces padding for a slimmer, rectangular look */
+    padding: 20px; /* Adds internal spacing for better readability */
     background-color: #003366; /* Matches the header background */
     border-radius: 5px; /* Slightly rounds corners to avoid sharp edges */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
@@ -48,13 +48,13 @@ footer {
 footer #contact {
     max-width: 800px; /* Restricts the content width for better readability */
     margin: 0 auto;
-    text-align: left; /* Aligns text and lists to the left */
+    text-align: center; /* Centers all the text within the footer */
 }
 
 /* Footer List Styling */
 footer ul {
-    list-style-type: disc; /* Adds bullet points to lists */
-    padding-left: 20px; /* Ensures proper indentation for bullets */
+    list-style-type: none; /* Removes bullets since text is centered */
+    padding: 0; /* Removes unnecessary indentation */
 }
 
 footer li {
