@@ -5,6 +5,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Ensures content starts from the top */
+    min-height: 100vh;
 }
 
 /* Header and Footer Styling */
@@ -58,9 +63,10 @@ nav a:hover {
 
 /* Upper Text Container Styling */
 section {
-    margin: 0 auto;
+    margin: 20px auto; /* Adds spacing and centers horizontally */
     width: 75%;
-    display: inline-block;
+    max-width: 1200px; /* Limits width for larger screens */
+    text-align: center;
 }
 
 /* Highlighted Projects Section Styling */
@@ -79,18 +85,18 @@ section {
 
 /* Bottom Image and Text Container */
 .bottom-image {
-    text-align: center;
     margin: 0 auto;
     width: 75%;
-    display: inline-block;
-    text-align: left;
+    max-width: 1200px;
+    text-align: center;
 }
 
 /* Flexbox for Bottom Photo and Text */
 .bottom-image-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap; /* Ensures responsiveness */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
     gap: 20px;
 }
 
@@ -108,18 +114,27 @@ section {
 }
 
 .bottom-image-container img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
 }
 
 /* Adjusting for smaller screen sizes */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    section {
+        width: 90%; /* Adjust section width for smaller screens */
+        text-align: center;
+    }
+
     .banner img {
         width: 100%;
     }
 
     .bottom-image-container {
-        flex-direction: column;
+        flex-direction: column; /* Stacks items vertically */
         text-align: center;
     }
 
@@ -129,11 +144,11 @@ section {
         margin-right: 0;
     }
 
-    .highlighted-projects {
+    .highlighted-projects h2 {
         text-align: center;
     }
 
     .highlighted-projects ul {
-        padding-left: 0;
+        padding-left: 0; /* Removes unnecessary padding */
     }
 }
