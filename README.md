@@ -37,3 +37,5 @@ Feel free to submit issues or pull requests for enhancements. Collaboration is w
 - LinkedIn: [Robert Rainer](https://www.linkedin.com/in/robert-rainer-223ba05)
 - ResearchGate: [Robert Rainer](https://researchgate.net/profile/Robert-Rainer)
 - Website: [Portfolio Website](https://rainer1370.github.io/RainerPortfolio/)
+
+© 2025 Rob Rainer. All rights reserved.
