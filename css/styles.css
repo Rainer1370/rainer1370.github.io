@@ -16,9 +16,10 @@ body {
 header, footer {
     text-align: center;
     padding: 20px 0; /* Increased padding for more spacing */
-    background-color: #003366; /* Optional: Added a background color for better contrast */
+    background-color: #003366; /* Ensures a distinct background color */
 }
 
+/* Navigation Links */
 nav a {
     color: white;
     margin: 0 15px; /* Increased margin for better spacing between links */
@@ -31,26 +32,45 @@ nav a:hover {
     color: #FFD700;
 }
 
-/* Footer Contact Section */
+/* Footer Section Enhancements */
 footer {
-    max-width: 90%; /* Allows footer to expand while keeping it centered */
-    margin: 0 auto;
-    padding-top: 30px; /* Adds spacing above the footer */
+    max-width: 90%; /* Keeps the footer within the page bounds */
+    margin: 20px auto; /* Centers the footer horizontally with spacing above */
+    padding: 10px 20px; /* Reduces padding for a slimmer, rectangular look */
+    background-color: #003366; /* Matches the header background */
+    border-radius: 5px; /* Slightly rounds corners to avoid sharp edges */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+    text-align: center; /* Centers the overall footer content */
+    color: white;
 }
 
+/* Footer Contact Section */
 footer #contact {
-    max-width: 800px; /* Limits width of contact section for readability */
+    max-width: 800px; /* Restricts the content width for better readability */
     margin: 0 auto;
-    text-align: left; /* Aligns the text and lists to the left */
+    text-align: left; /* Aligns text and lists to the left */
 }
 
+/* Footer List Styling */
 footer ul {
-    list-style-type: disc; /* Adds bullet points to the list */
-    padding-left: 20px; /* Creates space for the bullets */
+    list-style-type: disc; /* Adds bullet points to lists */
+    padding-left: 20px; /* Ensures proper indentation for bullets */
 }
 
 footer li {
     margin-bottom: 10px; /* Adds spacing between list items */
+}
+
+/* Footer Links */
+footer a {
+    color: #FFD700; /* Uses a golden color for links */
+    text-decoration: none;
+    font-weight: bold; /* Makes links stand out */
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #FF8C00; /* Changes link color on hover */
 }
 
 /* Banner Image Styling */
@@ -99,7 +119,7 @@ section {
 }
 
 .highlighted-projects ul {
-    list-style-type: disc; /* Changed to bullets */
+    list-style-type: disc; /* Adds bullet points to the list */
     padding-left: 20px; /* Added spacing for bullets */
 }
 
