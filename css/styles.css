@@ -15,18 +15,42 @@ body {
 /* Header and Footer Styling */
 header, footer {
     text-align: center;
-    padding: 10px 0;
+    padding: 20px 0; /* Increased padding for more spacing */
+    background-color: #003366; /* Optional: Added a background color for better contrast */
 }
 
 nav a {
     color: white;
-    margin: 0 10px;
+    margin: 0 15px; /* Increased margin for better spacing between links */
     text-decoration: none;
+    font-weight: bold; /* Makes links more prominent */
 }
 
 nav a:hover {
     text-decoration: underline;
     color: #FFD700;
+}
+
+/* Footer Contact Section */
+footer {
+    max-width: 90%; /* Allows footer to expand while keeping it centered */
+    margin: 0 auto;
+    padding-top: 30px; /* Adds spacing above the footer */
+}
+
+footer #contact {
+    max-width: 800px; /* Limits width of contact section for readability */
+    margin: 0 auto;
+    text-align: left; /* Aligns the text and lists to the left */
+}
+
+footer ul {
+    list-style-type: disc; /* Adds bullet points to the list */
+    padding-left: 20px; /* Creates space for the bullets */
+}
+
+footer li {
+    margin-bottom: 10px; /* Adds spacing between list items */
 }
 
 /* Banner Image Styling */
@@ -75,8 +99,8 @@ section {
 }
 
 .highlighted-projects ul {
-    list-style-type: none;
-    padding: 0;
+    list-style-type: disc; /* Changed to bullets */
+    padding-left: 20px; /* Added spacing for bullets */
 }
 
 .highlighted-projects ul li {
@@ -149,6 +173,6 @@ section {
     }
 
     .highlighted-projects ul {
-        padding-left: 0; /* Removes unnecessary padding */
+        padding-left: 20px; /* Ensures bullets are properly indented */
     }
 }
