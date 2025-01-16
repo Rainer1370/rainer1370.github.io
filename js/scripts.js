@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Include Header
-    fetch("components/header.html")
+    fetch("/RainerPortfolio/components/header.html")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to load header: " + response.statusText);
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((error) => console.error("Header Error:", error));
 
     // Include Footer
-    fetch("components/footer.html")
+    fetch("/RainerPortfolio/components/footer.html")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to load footer: " + response.statusText);
