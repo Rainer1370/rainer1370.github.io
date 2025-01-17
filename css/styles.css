@@ -31,19 +31,6 @@ footer {
     color: white;
 }
 
-/* Navigation Links */
-nav a {
-    color: white;
-    margin: 0 15px; /* Increased margin for better spacing between links */
-    text-decoration: none;
-    font-weight: bold; /* Makes links more prominent */
-}
-
-nav a:hover {
-    text-decoration: underline;
-    color: #FFD700;
-}
-
 /* Footer Contact Section */
 footer #contact {
     max-width: 800px; /* Restricts the content width for better readability */
@@ -63,6 +50,30 @@ footer a:hover {
     color: #FF8C00; /* Changes link color on hover */
 }
 
+/* Navigation Links */
+nav a {
+    color: white;
+    margin: 0 15px; /* Increased margin for better spacing between links */
+    text-decoration: none;
+    font-weight: bold; /* Makes links more prominent */
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #FFD700;
+}
+
+/* Global Bullet Styling */
+ul {
+    list-style-type: disc; /* Adds bullets to all unordered lists */
+    padding-left: 20px; /* Ensures proper indentation for bullets */
+    margin-top: 10px; /* Adds space above the list */
+}
+
+li {
+    margin-bottom: 10px; /* Adds spacing between list items */
+}
+
 /* Highlighted Projects Section Styling */
 .highlighted-projects {
     text-align: left; /* Aligns the entire section's content to the left */
@@ -76,7 +87,6 @@ footer a:hover {
 }
 
 .highlighted-projects ul {
-    list-style-type: disc; /* Adds bullets to the list */
     padding-left: 20px; /* Ensures proper indentation for bullets */
     margin-top: 10px; /* Adds space between the heading and the list */
 }
