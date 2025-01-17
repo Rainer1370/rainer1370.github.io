@@ -15,8 +15,20 @@ body {
 /* Header and Footer Styling */
 header, footer {
     text-align: center;
-    padding: 20px 0; /* Increased padding for more spacing */
+    padding: 20px 0; /* Adjust height of the header and footer */
     background-color: #003366; /* Ensures a distinct background color */
+}
+
+/* Footer Enhancements */
+footer {
+    max-width: 100%; /* Matches the header width */
+    margin: 0 auto;
+    padding: 20px 0; /* Makes the footer taller, matching the header */
+    background-color: #003366; /* Matches the header */
+    border-radius: 0; /* Removes rounded corners for a cleaner rectangle */
+    box-shadow: none; /* Removes the shadow for consistency */
+    text-align: center;
+    color: white;
 }
 
 /* Navigation Links */
@@ -32,21 +44,9 @@ nav a:hover {
     color: #FFD700;
 }
 
-/* Footer Section Enhancements */
-footer {
-    max-width: 80%; /* Reduces the width for a smaller, rectangular box */
-    margin: 30px auto; /* Centers the footer horizontally and adds spacing above */
-    padding: 10px 20px; /* Adjusts internal spacing for a compact layout */
-    background-color: #003366; /* Matches the header background */
-    border-radius: 15px; /* Adds slightly rounded corners for a rectangular look */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
-    text-align: center; /* Centers the text inside the footer */
-    color: white;
-}
-
 /* Footer Contact Section */
 footer #contact {
-    max-width: 600px; /* Restricts the content width for better readability */
+    max-width: 800px; /* Restricts the content width for better readability */
     margin: 0 auto;
     text-align: center; /* Ensures all text is centered */
 }
@@ -142,35 +142,27 @@ section {
 
 /* Bottom Image and Text Container */
 .bottom-image-container {
-    display: flex;
-    flex-wrap: wrap; /* Ensures responsiveness */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    gap: 20px;
+    display: block; /* Stacks photo and text vertically */
     width: 75%; /* Restricts container width */
     max-width: 1200px; /* Limits the width */
-    height: 50%; /* Explicitly sets height as 50% of width */
-    margin: 0 auto;
-    overflow: hidden; /* Ensures content doesn't spill out */
-    border-radius: 10px; /* Adds rounded corners */
+    margin: 20px auto;
 }
 
 .bottom-image-container .photo {
-    flex: 1;
-    max-width: 50%;
-    margin-right: 20px;
+    width: 100%; /* Makes the photo take full width */
+    margin-bottom: 20px; /* Adds spacing below the photo */
 }
 
 .bottom-image-container .text {
-    flex: 1;
-    max-width: 50%;
-    vertical-align: top;
-    padding-top: 10px;
+    width: 100%; /* Makes the text container take full width */
+    text-align: center; /* Centers the text */
 }
 
+/* Bottom Image Container Images */
 .bottom-image-container img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px; /* Adds a subtle roundness to images */
 }
 
 /* Adjusting for smaller screen sizes */
@@ -186,17 +178,6 @@ section {
 
     .banner img {
         width: 100%;
-    }
-
-    .bottom-image-container {
-        flex-direction: column; /* Stacks items vertically */
-        text-align: center;
-    }
-
-    .bottom-image-container .photo,
-    .bottom-image-container .text {
-        max-width: 100%;
-        margin-right: 0;
     }
 
     .highlighted-projects h2 {
