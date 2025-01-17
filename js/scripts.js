@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Load Header and Footer
     await Promise.all([
-        loadComponent("header", "/components/header.html"),
-        loadComponent("footer", "/components/footer.html"),
+        loadComponent("header", "./components/header.html"),
+        loadComponent("footer", "./components/footer.html"),
     ]);
 });
