@@ -21,14 +21,14 @@ header, footer {
 
 /* Footer Enhancements */
 footer {
-    max-width: 100%; /* Matches the header width */
-    margin: 0 auto;
-    padding: 20px 0; /* Makes the footer taller, matching the header */
+    max-width: 100%; /* Keeps the footer responsive */
+    margin: 0 20px; /* Adds a buffer on the left and right */
+    padding: 10px 20px; /* Adds internal spacing */
     background-color: #003366; /* Matches the header */
-    border-radius: 0; /* Removes rounded corners for a cleaner rectangle */
-    box-shadow: none; /* Removes the shadow for consistency */
-    text-align: center;
     color: white;
+    text-align: center;
+    border-radius: 10px; /* Adds rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
 }
 
 /* Footer Contact Section */
@@ -152,5 +152,9 @@ section {
 
     .banner img {
         width: 100%;
+    }
+
+    ul {
+        padding-left: 20px; /* Ensures bullets are properly indented */
     }
 }
