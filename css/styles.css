@@ -36,9 +36,9 @@ nav a:hover {
 footer {
     max-width: 80%; /* Reduces the width for a smaller, rectangular box */
     margin: 30px auto; /* Centers the footer horizontally and adds spacing above */
-    padding: 15px 20px; /* Adjusts internal spacing for a compact layout */
+    padding: 10px 20px; /* Adjusts internal spacing for a compact layout */
     background-color: #003366; /* Matches the header background */
-    border-radius: 10px; /* Adds slightly rounded corners for a rectangular look */
+    border-radius: 15px; /* Adds slightly rounded corners for a rectangular look */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
     text-align: center; /* Centers the text inside the footer */
     color: white;
@@ -141,25 +141,18 @@ section {
 }
 
 /* Bottom Image and Text Container */
-.bottom-image {
-    margin: 0 auto;
-    width: 75%;
-    max-width: 1200px;
-    text-align: center;
-}
-
-/* Flexbox for Bottom Photo and Text */
 .bottom-image-container {
     display: flex;
     flex-wrap: wrap; /* Ensures responsiveness */
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
     gap: 20px;
-    width: 100%; /* Full-width container */
-    max-width: 1200px; /* Limit maximum width */
-    aspect-ratio: 2 / 1; /* Makes the container height 50% of the width */
+    width: 75%; /* Restricts container width */
+    max-width: 1200px; /* Limits the width */
+    height: 50%; /* Explicitly sets height as 50% of width */
     margin: 0 auto;
     overflow: hidden; /* Ensures content doesn't spill out */
+    border-radius: 10px; /* Adds rounded corners */
 }
 
 .bottom-image-container .photo {
