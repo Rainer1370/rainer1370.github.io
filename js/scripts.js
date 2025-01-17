@@ -1,27 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Include Header
-    fetch("/RainerPortfolio/components/header.html")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to load header: " + response.statusText);
-            }
-            return response.text();
-        })
-        .then((data) => {
-            document.getElementById("header").innerHTML = data;
-        })
-        .catch((error) => console.error("Header Error:", error));
+document.addEventListener("DOMContentLoaded", async function () {
+    // Function to load content dynamically
+    async function loadComponent(id, filePath) {
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) throw new Error(`Failed to load ${id}: ${response.statusText}`);
+            document.getElementById(id).innerHTML = await response.text();
+        } catch (error) {
+            console.error(`${id} Error:`, error);
+            document.getElementById(id).innerHTML = `<p>${id} could not be loaded.</p>`;
+        }
+    }
 
-    // Include Footer
-    fetch("/RainerPortfolio/components/footer.html")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to load footer: " + response.statusText);
-            }
-            return response.text();
-        })
-        .then((data) => {
-            document.getElementById("footer").innerHTML = data;
-        })
-        .catch((error) => console.error("Footer Error:", error));
+    // Load Header and Footer
+    await Promise.all([
+        loadComponent("header", "/RainerPortfolio/components/header.html"),
+        loadComponent("footer", "/RainerPortfolio/components/footer.html"),
+    ]);
 });
