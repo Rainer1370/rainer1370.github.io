@@ -74,42 +74,6 @@ li {
     margin-bottom: 10px; /* Adds spacing between list items */
 }
 
-/* Highlighted Projects Section Styling */
-.highlighted-projects {
-    text-align: left; /* Aligns the entire section's content to the left */
-    margin: 20px auto; /* Centers the section horizontally */
-    width: 75%; /* Sets the section's width */
-    max-width: 1200px; /* Limits width on larger screens */
-}
-
-.highlighted-projects h2 {
-    text-align: left; /* Ensures the heading is also left-aligned */
-}
-
-.highlighted-projects ul {
-    padding-left: 20px; /* Ensures proper indentation for bullets */
-    margin-top: 10px; /* Adds space between the heading and the list */
-}
-
-.highlighted-projects ul li {
-    margin-bottom: 10px; /* Adds spacing between list items */
-}
-
-.highlighted-projects .button {
-    display: inline-block;
-    margin-top: 20px; /* Adds space above the button */
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #FFD700;
-    color: black;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.highlighted-projects .button:hover {
-    background-color: #FF8C00; /* Changes the button color on hover */
-}
-
 /* Banner Image Styling */
 .banner img {
     width: 100%;
@@ -188,13 +152,5 @@ section {
 
     .banner img {
         width: 100%;
-    }
-
-    .highlighted-projects h2 {
-        text-align: center;
-    }
-
-    .highlighted-projects ul {
-        padding-left: 20px; /* Ensures bullets are properly indented */
     }
 }
