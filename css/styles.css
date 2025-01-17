@@ -66,23 +66,40 @@ nav a:hover {
 /* Global Bullet Styling */
 ul {
     list-style-type: disc; /* Adds bullets to all unordered lists */
-    padding-left: 20px; /* Ensures proper indentation for bullets */
-    margin-top: 10px; /* Adds space above the list */
+    padding-left: 40px; /* Ensures proper indentation for bullets */
+    margin: 20px auto; /* Adds vertical spacing above and below lists */
+    width: 75%;
+    max-width: 1200px;
     text-align: left; /* Aligns the entire list and text to the left */
 }
 
 li {
     margin-bottom: 10px; /* Adds spacing between list items */
-    text-align: left; /* Ensures list item text is left-aligned */
+}
+
+/* Section Headers */
+section h1 {
+    font-size: 2rem; /* Adjust as necessary */
+    margin-bottom: 20px; /* Adds spacing below the title */
+    text-align: center; /* Centers the title */
 }
 
 /* Banner Image Styling */
 .banner img {
     width: 100%;
     max-width: 1200px; /* Adjust as needed */
+    max-height: 400px;
+    object-fit: cover;
     border-radius: 10px;
     display: block;
     margin: 20px auto;
+}
+
+figcaption {
+    text-align: center;
+    font-style: italic;
+    color: #FFD700;
+    margin-top: 5px;
 }
 
 /* Button Styling */
