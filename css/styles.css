@@ -155,6 +155,11 @@ section {
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
     gap: 20px;
+    width: 100%; /* Full-width container */
+    max-width: 1200px; /* Limit maximum width */
+    aspect-ratio: 2 / 1; /* Makes the container height 50% of the width */
+    margin: 0 auto;
+    overflow: hidden; /* Ensures content doesn't spill out */
 }
 
 .bottom-image-container .photo {
