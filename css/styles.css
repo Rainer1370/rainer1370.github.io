@@ -21,9 +21,9 @@ header, footer {
 
 /* Footer Enhancements */
 footer {
-    max-width: 90%; /* Keeps the footer responsive with a smaller width */
-    margin: 0 auto 20px auto; /* Adds a buffer on the bottom and centers horizontally */
-    padding: 15px 20px; /* Adds internal spacing */
+    max-width: 100%; /* Keeps the footer responsive */
+    margin: 0 20px; /* Adds a buffer on the left and right */
+    padding: 10px 20px; /* Adds internal spacing */
     background-color: #003366; /* Matches the header */
     color: white;
     text-align: center;
@@ -33,10 +33,9 @@ footer {
 
 /* Footer Contact Section */
 footer #contact {
-    max-width: 600px; /* Restricts the content width for better readability */
+    max-width: 800px; /* Restricts the content width for better readability */
     margin: 0 auto;
-    text-align: left; /* Aligns all text to the left for better structure */
-    line-height: 1.6; /* Improves readability */
+    text-align: center; /* Ensures all text is centered */
 }
 
 /* Footer Links */
@@ -67,13 +66,14 @@ nav a:hover {
 /* Global Bullet Styling */
 ul {
     list-style-type: disc; /* Adds bullets to all unordered lists */
-    padding-left: 40px; /* Adds more indentation for bullets */
-    margin: 10px 0; /* Adds space above and below lists */
+    padding-left: 20px; /* Ensures proper indentation for bullets */
+    margin-top: 10px; /* Adds space above the list */
+    text-align: left; /* Aligns the entire list and text to the left */
 }
 
 li {
     margin-bottom: 10px; /* Adds spacing between list items */
-    text-align: left; /* Ensures bullet text aligns to the left */
+    text-align: left; /* Ensures list item text is left-aligned */
 }
 
 /* Banner Image Styling */
@@ -157,6 +157,6 @@ section {
     }
 
     ul {
-        padding-left: 20px; /* Ensures bullets are properly indented on smaller screens */
+        padding-left: 20px; /* Ensures bullets are properly indented */
     }
 }
