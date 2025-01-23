@@ -2,92 +2,143 @@
 body {
     background: linear-gradient(135deg, #004085, #28a745);
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Updated to Roboto */
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Ensures content starts from the top */
+    justify-content: flex-start;
     min-height: 100vh;
+    animation: fadeIn 2s ease-in-out; /* Smooth fade-in effect */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Header and Footer Styling */
-header, footer {
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #003366;
+    padding: 10px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px 0; /* Adjust height of the header and footer */
-    background-color: #003366; /* Ensures a distinct background color */
 }
 
-/* Footer Enhancements */
 footer {
-    max-width: 100%; /* Keeps the footer responsive */
-    margin: 0 20px; /* Adds a buffer on the left and right */
-    padding: 10px 20px; /* Adds internal spacing */
-    background-color: #003366; /* Matches the header */
+    max-width: 100%;
+    margin: 0 20px;
+    padding: 10px 20px;
+    background-color: #003366;
     color: white;
     text-align: center;
-    border-radius: 10px; /* Adds rounded corners */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
-}
-
-/* Footer Contact Section */
-footer #contact {
-    max-width: 800px; /* Restricts the content width for better readability */
-    margin: 0 auto;
-    text-align: center; /* Ensures all text is centered */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer Links */
 footer a {
-    color: #FFD700; /* Uses a golden color for links */
+    color: #FFD700;
     text-decoration: none;
-    font-weight: bold; /* Makes links stand out */
+    font-weight: bold;
 }
 
 footer a:hover {
     text-decoration: underline;
-    color: #FF8C00; /* Changes link color on hover */
+    color: #FF8C00;
 }
 
 /* Navigation Links */
 nav a {
     color: white;
-    margin: 0 15px; /* Increased margin for better spacing between links */
+    margin: 0 15px;
     text-decoration: none;
-    font-weight: bold; /* Makes links more prominent */
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
     text-decoration: underline;
-    color: #FFD700;
+    color: #FF8C00;
 }
 
 /* Global Bullet Styling */
 ul {
-    list-style-type: disc; /* Adds bullets to all unordered lists */
-    padding-left: 40px; /* Ensures proper indentation for bullets */
-    margin: 20px auto; /* Adds vertical spacing above and below lists */
+    list-style-type: disc;
+    padding-left: 40px;
+    margin: 20px auto;
     width: 75%;
     max-width: 1200px;
-    text-align: left; /* Aligns the entire list and text to the left */
+    text-align: left;
 }
 
 li {
-    margin-bottom: 10px; /* Adds spacing between list items */
+    margin-bottom: 10px;
+}
+
+/* Section Styling */
+section {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideUp 1s ease-in-out; /* Slide-up effect */
+    width: 75%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Section Headers */
-section h1 {
-    font-size: 2rem; /* Adjust as necessary */
-    margin-bottom: 20px; /* Adds spacing below the title */
-    text-align: center; /* Centers the title */
+section h1, section h2, h3 {
+    font-family: 'Lora', serif;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Profile Picture Styling */
+.profile-pic {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 20px auto;
 }
 
 /* Banner Image Styling */
 .banner img {
     width: 100%;
-    max-width: 1200px; /* Adjust as needed */
+    max-width: 1200px;
     max-height: 400px;
     object-fit: cover;
     border-radius: 10px;
@@ -110,70 +161,49 @@ figcaption {
     color: black;
     text-decoration: none;
     border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button:hover {
     background-color: #FF8C00;
+    transform: scale(1.05);
 }
 
-/* Profile Picture Styling */
-.profile-pic {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-    display: block;
-    margin: 20px auto;
-}
-
-/* Upper Text Container Styling */
-section {
-    margin: 20px auto; /* Adds spacing and centers horizontally */
-    width: 75%;
-    max-width: 1200px; /* Limits width for larger screens */
-    text-align: center;
-}
-
-/* Bottom Image and Text Container */
+/* Bottom Image Container Styling */
 .bottom-image-container {
-    display: block; /* Stacks photo and text vertically */
-    width: 75%; /* Restricts container width */
-    max-width: 1200px; /* Limits the width */
+    display: block;
+    width: 75%;
+    max-width: 1200px;
     margin: 20px auto;
 }
 
-.bottom-image-container .photo {
-    width: 100%; /* Makes the photo take full width */
-    margin-bottom: 20px; /* Adds spacing below the photo */
-}
-
-.bottom-image-container .text {
-    width: 100%; /* Makes the text container take full width */
-    text-align: center; /* Centers the text */
-}
-
-/* Bottom Image Container Images */
 .bottom-image-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px; /* Adds a subtle roundness to images */
+    border-radius: 10px;
 }
 
-/* Adjusting for smaller screen sizes */
+/* Responsive Layout */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    section {
-        width: 90%; /* Adjust section width for smaller screens */
+    header {
         text-align: center;
     }
 
-    .banner img {
-        width: 100%;
+    nav ul {
+        flex-direction: column;
+    }
+
+    .profile-pic {
+        width: 100px;
+    }
+
+    section {
+        padding: 10px;
+        margin: 10px auto;
+        width: 90%;
     }
 
     ul {
-        padding-left: 20px; /* Ensures bullets are properly indented */
+        padding-left: 20px;
     }
 }
