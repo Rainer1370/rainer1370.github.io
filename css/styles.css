@@ -2,7 +2,7 @@
 body {
     background: linear-gradient(135deg, #004085, #28a745);
     color: white;
-    font-family: 'Roboto', sans-serif; /* Updated to Roboto */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,7 +10,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    animation: fadeIn 2s ease-in-out; /* Smooth fade-in effect */
+    animation: fadeIn 2s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -22,26 +22,28 @@ body {
     }
 }
 
-/* Header and Footer Styling */
+/* Full-Width Header and Footer Styling */
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
     background-color: #003366;
     padding: 10px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-radius: 0; /* Removes rounded corners */
 }
 
 footer {
-    max-width: 100%;
-    margin: 0 20px;
-    padding: 10px 20px;
+    width: 100%; /* Full width */
+    margin: 0;
+    padding: 10px 0;
     background-color: #003366;
     color: white;
     text-align: center;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0; /* Removes rounded corners */
 }
 
 /* Footer Links */
@@ -89,9 +91,8 @@ section {
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
     padding: 20px;
     margin: 20px auto;
-    border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideUp 1s ease-in-out; /* Slide-up effect */
+    animation: slideUp 1s ease-in-out;
     width: 75%;
     max-width: 1200px;
     text-align: center;
@@ -141,7 +142,6 @@ h3 {
     max-width: 1200px;
     max-height: 400px;
     object-fit: cover;
-    border-radius: 10px;
     display: block;
     margin: 20px auto;
 }
@@ -180,7 +180,6 @@ figcaption {
 .bottom-image-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
 }
 
 /* Responsive Layout */
