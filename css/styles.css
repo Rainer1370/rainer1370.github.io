@@ -27,7 +27,7 @@ header {
     top: 0;
     z-index: 1000;
     width: 100%; /* Ensures the header spans the full width of the viewport */
-    background-color: #003366;
+    background-color: #2c2f33; /* Charcoal gray */
     padding: 15px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -37,7 +37,7 @@ footer {
     width: 100%; /* Ensures the footer spans the full width of the viewport */
     margin: 0;
     padding: 15px 0;
-    background-color: #003366;
+    background-color: #2c2f33; /* Charcoal gray */
     color: white;
     text-align: center;
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
