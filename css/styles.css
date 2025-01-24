@@ -27,23 +27,21 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    width: 100%;
+    width: 100vw%;
     background-color: #003366;
     padding: 10px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border-radius: 0; /* Removes rounded corners */
 }
 
 footer {
-    width: 100%; /* Full width */
+    width: 100vw%; /* Full width */
     margin: 0;
     padding: 10px 0;
     background-color: #003366;
     color: white;
     text-align: center;
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 0; /* Removes rounded corners */
 }
 
 /* Footer Links */
