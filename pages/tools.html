@@ -4,11 +4,12 @@
     <title>Tools</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/UTC.css">
+    <!-- Adjusted paths for external resources -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/UTC.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="/js/scripts.js" defer></script>
-    <script src="/js/UTC.js" defer></script>
+    <script src="../js/scripts.js" defer></script>
+    <script src="../js/UTC.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -30,24 +31,21 @@
             <p>
                 The <strong>Network Time Protocol (NTP)</strong> ensures accurate time synchronization across devices by referencing atomic clocks. 
                 <strong>Coordinated Universal Time (UTC)</strong> is the standard for global timekeeping. 
-                This tool displays the current UTC time and your local time (accounting for your timezone).
+                This tool displays the current UTC time, your local time (accounting for your timezone), and the Unix timestamp.
                 <a href="https://en.wikipedia.org/wiki/Network_Time_Protocol" target="_blank">Learn more about NTP</a>
                 and <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time" target="_blank">UTC</a>.
             </p>
             <div class="utc-container">
-                <div>
+                <!-- Left Section -->
+                <div class="utc-left">
                     <p><strong>Current UTC Time:</strong> <span id="utcTime"></span></p>
+                    <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp"></span></p>
                 </div>
-                <div>
+                <!-- Right Section -->
+                <div class="utc-right">
                     <p><strong>Local Time (Your Timezone):</strong> <span id="localTime"></span> (<span id="timezone"></span>)</p>
                 </div>
             </div>
-            <p>
-                <strong>How to enable NTP synchronization:</strong> Ensure your device's operating system is configured to use an NTP server.
-                - On Linux, use the `timedatectl` command to check and enable NTP (e.g., `sudo timedatectl set-ntp true`).
-                - On Windows, check the "Date and Time" settings and sync with an Internet time server.
-                - On macOS, enable "Set date and time automatically" in the System Preferences.
-            </p>
         </section>
 
         <!-- 8b10b Encoder -->
