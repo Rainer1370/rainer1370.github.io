@@ -128,9 +128,12 @@ function encodeBinary() {
 
 // Function to clear the running disparity
 function clearDisparity() {
-    runningDisparity = 0;
+    runningDisparity = 0; // Reset the disparity
     const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML += "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
+    resultDiv.innerHTML += `
+        <p style="color: green;"><strong>Running Disparity cleared!</strong></p>
+        <p><strong>Running Disparity:</strong> 0</p>
+    `;
 }
 
 // Function to display error messages
