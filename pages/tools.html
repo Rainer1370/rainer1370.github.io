@@ -31,6 +31,7 @@
                 operate with Event Generator/Event Reader configurations.
             </p>
             <div class="container">
+                <!-- Input Fields -->
                 <div>
                     <label for="binaryInput">Enter Binary (8 bits):</label>
                     <input type="text" id="binaryInput" placeholder="E.g., 11010101">
@@ -46,11 +47,14 @@
                     <input type="text" id="base10Input" placeholder="E.g., 165">
                 </div>
 
+                <!-- Buttons -->
                 <div>
                     <button id="encodeButton">Encode</button>
+                    <button id="clearDisparityButton">Clear Disparity</button>
                 </div>
 
-                <div id="result"></div>
+                <!-- Result Section -->
+                <div id="result" class="result"></div>
             </div>
         </section>
 
