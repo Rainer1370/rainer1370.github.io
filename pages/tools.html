@@ -33,8 +33,8 @@ document.getElementById("clearDisparityButton").addEventListener("click", clearD
 // Conversion functions
 function convertFromBase10() {
     const base10Input = document.getElementById("base10Input").value.trim();
-    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 9999) {
-        displayError("Invalid Decimal input! Must be between 0 and 9999.");
+    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 255) {
+        displayError("Invalid Decimal input! Must be between 0 and 255.");
         return;
     }
     const decimal = parseInt(base10Input);
@@ -43,29 +43,21 @@ function convertFromBase10() {
 
 function convertFromHex() {
     const hexInput = document.getElementById("hexInput").value.trim().toUpperCase();
-    if (!hexInput || !/^[0-9A-F]+$/.test(hexInput)) {
-        displayError("Invalid Hexadecimal input! Must be a valid hex number.");
+    if (!hexInput || !/^[0-9A-F]{1,2}$/.test(hexInput)) {
+        displayError("Invalid Hexadecimal input! Must be 1 or 2 hex digits.");
         return;
     }
     const decimal = parseInt(hexInput, 16);
-    if (decimal > 9999) {
-        displayError("Hexadecimal input must represent a value between 0 and 9999.");
-        return;
-    }
     updateFields(decimal);
 }
 
 function convertFromOctal() {
     const octalInput = document.getElementById("octalInput").value.trim();
-    if (!octalInput || !/^[0-7]+$/.test(octalInput)) {
-        displayError("Invalid Octal input! Must be a valid octal number.");
+    if (!octalInput || !/^[0-7]{1,3}$/.test(octalInput)) {
+        displayError("Invalid Octal input! Must be 1 to 3 octal digits.");
         return;
     }
     const decimal = parseInt(octalInput, 8);
-    if (decimal > 9999) {
-        displayError("Octal input must represent a value between 0 and 9999.");
-        return;
-    }
     updateFields(decimal);
 }
 
@@ -81,21 +73,17 @@ function convertFromAscii() {
 
 function convertFromBinary() {
     const binaryInput = document.getElementById("binaryInput").value.trim();
-    if (!binaryInput || !/^[01]+$/.test(binaryInput)) {
-        displayError("Invalid Binary input! Must be a valid binary number.");
+    if (!binaryInput || binaryInput.length > 8 || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Must be up to 8 bits.");
         return;
     }
     const decimal = parseInt(binaryInput, 2);
-    if (decimal > 9999) {
-        displayError("Binary input must represent a value between 0 and 9999.");
-        return;
-    }
     updateFields(decimal);
 }
 
 // Function to update all fields based on a decimal value
 function updateFields(decimal) {
-    const binary = decimal.toString(2);
+    const binary = decimal.toString(2).padStart(8, "0");
     const octal = decimal.toString(8);
     const hex = decimal.toString(16).toUpperCase();
     const ascii = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
@@ -113,13 +101,10 @@ function encodeBinary() {
     const binaryInput = document.getElementById("binaryInput").value.trim();
     const resultDiv = document.getElementById("result");
 
-    const decimal = parseInt(binaryInput, 2);
-    if (decimal < 0 || decimal > 255) {
-        displayError("Binary input is out of range for 8b10b encoding (must be 0-255).");
+    if (!binaryInput || binaryInput.length !== 8 || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Please enter 8 bits (e.g., 11010101).");
         return;
     }
-
-    const paddedBinary = binaryInput.padStart(8, "0");
 
     // Complete Encoding Tables
     const fiveToSixTable = {
@@ -137,8 +122,8 @@ function encodeBinary() {
         "100": "0011", "101": "1010", "110": "0110", "111": "1110"
     };
 
-    const msb = paddedBinary.slice(0, 5);
-    const lsb = paddedBinary.slice(5);
+    const msb = binaryInput.slice(0, 5);
+    const lsb = binaryInput.slice(5);
 
     const msbEncoded = fiveToSixTable[msb];
     const lsbEncoded = threeToFourTable[lsb];
@@ -153,7 +138,7 @@ function encodeBinary() {
     runningDisparity += disparityChange;
 
     resultDiv.innerHTML = `
-        <p><strong>Binary Input:</strong> ${paddedBinary}</p>
+        <p><strong>Binary Input:</strong> ${binaryInput}</p>
         <p><strong>10-bit Output:</strong> <u>${tenBitOutput}</u></p>
         <p><strong>Running Disparity:</strong> ${runningDisparity >= 0 ? "+" : ""}${runningDisparity}</p>
     `;
