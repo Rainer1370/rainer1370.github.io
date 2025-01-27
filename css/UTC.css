@@ -1,0 +1,28 @@
+/* Container for UTC and local time */
+.utc-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+/* Style for each section (UTC and Local Time) */
+.utc-container div {
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+}
+
+/* Title and text alignment */
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.utc-container p {
+    font-size: 16px;
+    margin: 10px 0;
+}
