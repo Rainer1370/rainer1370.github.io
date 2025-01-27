@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/8b10b.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="/js/scripts.js" defer></script>
-    <script src="/js/8b10b.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -16,14 +14,23 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Tools Logo Section -->
+        <!-- Image Section -->
+        <section class="banner">
+            <figure>
+                <img src="/assets/tools.jpg" alt="Tools Section Logo" style="width: 100%; max-height: 400px; object-fit: cover;">
+                <figcaption style="text-align: center; font-style: italic; margin-top: 5px;">
+                    Interactive utilities for encoding, analysis, and more — designed for solving complex problems efficiently.
+                </figcaption>
+            </figure>
+        </section>
+
+        <!-- Tools Introduction -->
         <section>
-            <div class="tools-logo-container">
-                <img src="/assets/tools.jpg" alt="Tools Logo" class="tools-logo">
-            </div>
-            <p>
-                Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, and more. 
-                These tools are designed to aid in learning and solving complex problems efficiently.
+            <h1 style="text-align: center; margin: 20px 0;">Tools Section</h1>
+            <p style="text-align: center; margin: 0 15px;">
+                Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, 
+                and other technical tasks. These tools are designed to assist in learning and solving complex problems efficiently. 
+                Explore the features below to enhance your workflow and understanding.
             </p>
         </section>
 
@@ -55,47 +62,59 @@
             <p>
                 Convert numbers between different formats and encode binary values using the 8b10b standard.
             </p>
-            <div class="conversion-table-container">
-                <table class="conversion-table">
-                    <tr>
-                        <td><label for="base10Input">Base 10:</label></td>
-                        <td><input type="text" id="base10Input" placeholder="E.g., 56"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="hexInput">Hexadecimal:</label></td>
-                        <td><input type="text" id="hexInput" placeholder="E.g., 38"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="octalInput">Octal:</label></td>
-                        <td><input type="text" id="octalInput" placeholder="E.g., 70"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="asciiInput">ASCII:</label></td>
-                        <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="binaryInput">Binary:</label></td>
-                        <td><input type="text" id="binaryInput" placeholder="E.g., 00111000"></td>
-                    </tr>
-                </table>
-                <div class="buttons">
-                    <button id="encodeButton">Encode</button>
-                    <button id="clearDisparityButton">Clear Disparity</button>
-                </div>
-                <div id="result" class="result"></div>
-            </div>
+            <table style="width: 100%; max-width: 600px; margin: 0 auto;">
+                <tr>
+                    <td><label for="base10Input">Base 10:</label></td>
+                    <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
+                </tr>
+                <tr>
+                    <td><label for="hexInput">Hexadecimal:</label></td>
+                    <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
+                </tr>
+                <tr>
+                    <td><label for="octalInput">Octal:</label></td>
+                    <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
+                </tr>
+                <tr>
+                    <td><label for="asciiInput">ASCII:</label></td>
+                    <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
+                </tr>
+                <tr>
+                    <td><label for="binaryInput">Binary:</label></td>
+                    <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <button id="encodeButton">Encode</button>
+                        <button id="clearDisparityButton">Clear Disparity</button>
+                    </td>
+                </tr>
+            </table>
+            <div id="result" class="result" style="margin-top: 15px; text-align: center;"></div>
         </section>
 
         <!-- Room for Future Tools -->
         <section>
             <h2>Coming Soon</h2>
-            <p>
+            <p style="text-align: center;">
                 More tools will be added here to expand functionality and support for your projects. Stay tuned!
             </p>
         </section>
     </main>
 
     <!-- Footer -->
-    <div id="footer"></div>
+    <footer id="footer">
+        <p>Contact: <a href="mailto:rainer1370@gmail.com">rainer1370@gmail.com</a></p>
+        <p>
+            Connect with me: 
+            <a href="https://www.linkedin.com" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com" target="_blank">GitHub</a>
+        </p>
+        <p>&copy; 2025 Rob Rainer. All rights reserved.</p>
+    </footer>
+
+    <!-- External Scripts -->
+    <script src="/js/UTC.js" defer></script>
+    <script src="/js/8b10b.js" defer></script>
 </body>
 </html>
