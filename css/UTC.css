@@ -3,29 +3,17 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #333; /* Charcoal gray */
+    color: #fff; /* White text for contrast */
     margin-bottom: 20px;
-    align-items: center; /* Centers content vertically */
 }
 
-/* Left section (UTC and Unix timestamp stacked vertically) */
-.utc-container .utc-left {
+/* Style for each section (UTC and Local Time) */
+.utc-container div {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-right: 20px;
-    border-right: 1px solid #ccc; /* Separator between UTC and Local Time */
-}
-
-/* Right section (Local Time displayed) */
-.utc-container .utc-right {
-    flex: 1;
-    text-align: left;
-    padding-left: 20px;
+    text-align: center;
+    margin: 0 10px;
 }
 
 /* Title and text alignment */
@@ -39,22 +27,12 @@ h2 {
     margin: 10px 0;
 }
 
-/* Make the container responsive for smaller screens */
-@media (max-width: 768px) {
-    .utc-container {
-        flex-direction: column; /* Stacks both sections vertically */
-        align-items: flex-start;
-    }
+/* Optional - Adjust link styles for visibility on dark background */
+.utc-container a {
+    color: #add8e6; /* Light blue */
+    text-decoration: none;
+}
 
-    .utc-container .utc-left {
-        border-right: none;
-        padding-right: 0;
-        border-bottom: 1px solid #ccc; /* Add separator between sections */
-        padding-bottom: 20px;
-    }
-
-    .utc-container .utc-right {
-        padding-left: 0;
-        margin-top: 20px;
-    }
+.utc-container a:hover {
+    text-decoration: underline;
 }
