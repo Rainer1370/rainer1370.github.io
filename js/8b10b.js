@@ -93,8 +93,8 @@ function encodeBinary() {
         return;
     }
 
-    const fiveToSixTable = { ... }; // Encoding table
-    const threeToFourTable = { ... }; // Encoding table
+    const fiveToSixTable = { /* Add encoding table here */ };
+    const threeToFourTable = { /* Add encoding table here */ };
 
     const msb = binaryInput.slice(0, 5);
     const lsb = binaryInput.slice(5);
