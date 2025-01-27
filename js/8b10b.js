@@ -2,18 +2,31 @@
 let runningDisparity = 0;
 
 // Add event listeners for inputs
-document.querySelectorAll(".conversion-table input").forEach((input) => {
+document.querySelectorAll("input").forEach((input) => {
     input.addEventListener("keyup", (e) => {
         if (e.key === "Enter") {
             const id = e.target.id;
-            if (id === "base10Input") convertFromBase10();
-            else if (id === "hexInput") convertFromHex();
-            else if (id === "octalInput") convertFromOctal();
-            else if (id === "asciiInput") convertFromAscii();
-            else if (id === "binaryInput") convertFromBinary();
+            switch (id) {
+                case "base10Input":
+                    convertFromBase10();
+                    break;
+                case "hexInput":
+                    convertFromHex();
+                    break;
+                case "octalInput":
+                    convertFromOctal();
+                    break;
+                case "asciiInput":
+                    convertFromAscii();
+                    break;
+                case "binaryInput":
+                    convertFromBinary();
+                    break;
+            }
         }
     });
 });
+
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
@@ -93,8 +106,15 @@ function encodeBinary() {
         return;
     }
 
-    const fiveToSixTable = { /* Add encoding table here */ };
-    const threeToFourTable = { /* Add encoding table here */ };
+    // Example Encoding Tables (Add your specific values here)
+    const fiveToSixTable = {
+        "00000": "100111", "00001": "011101", "00010": "101101", "00011": "110001",
+        // Add the remaining values here...
+    };
+    const threeToFourTable = {
+        "000": "1011", "001": "1001", "010": "0101", "011": "1100",
+        // Add the remaining values here...
+    };
 
     const msb = binaryInput.slice(0, 5);
     const lsb = binaryInput.slice(5);
