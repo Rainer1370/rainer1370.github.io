@@ -16,10 +16,10 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Logo Section -->
+        <!-- Tools Logo Section -->
         <section>
             <div class="tools-logo-container">
-                <img id="toolsLogo" src="../assets/tools.jpg" alt="Tools Logo">
+                <img src="../assets/tools.jpg" alt="Tools Logo" class="tools-logo">
             </div>
             <p>
                 Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, and more. 
@@ -55,32 +55,40 @@
             <p>
                 Convert numbers between different formats and encode binary values using the 8b10b standard.
             </p>
-            <div class="conversion-container">
+            <div class="container">
                 <!-- Input Fields with Labels -->
-                <div class="conversion-labels">
-                    <label for="base10Input">Decimal (Base 10):</label>
-                    <label for="hexInput">Hexadecimal:</label>
-                    <label for="octalInput">Octal:</label>
-                    <label for="asciiInput">ASCII:</label>
-                    <label for="binaryInput">Binary (8 bits):</label>
+                <div class="conversion-container">
+                    <div class="conversion-row">
+                        <label for="base10Input">Decimal (Base 10):</label>
+                        <input type="text" id="base10Input" placeholder="E.g., 165">
+                    </div>
+                    <div class="conversion-row">
+                        <label for="hexInput">Hexadecimal:</label>
+                        <input type="text" id="hexInput" placeholder="E.g., A5">
+                    </div>
+                    <div class="conversion-row">
+                        <label for="octalInput">Octal:</label>
+                        <input type="text" id="octalInput" placeholder="E.g., 245">
+                    </div>
+                    <div class="conversion-row">
+                        <label for="asciiInput">ASCII:</label>
+                        <input type="text" id="asciiInput" placeholder="E.g., A">
+                    </div>
+                    <div class="conversion-row">
+                        <label for="binaryInput">Binary (8 bits):</label>
+                        <input type="text" id="binaryInput" placeholder="E.g., 11010101">
+                    </div>
                 </div>
-                <div class="conversion-fields">
-                    <input type="text" id="base10Input" placeholder="e.g., 165">
-                    <input type="text" id="hexInput" placeholder="e.g., A5">
-                    <input type="text" id="octalInput" placeholder="e.g., 245">
-                    <input type="text" id="asciiInput" placeholder="e.g., A">
-                    <input type="text" id="binaryInput" placeholder="e.g., 11010101">
+
+                <!-- Buttons -->
+                <div class="buttons">
+                    <button id="encodeButton">Encode</button>
+                    <button id="clearDisparityButton">Clear Disparity</button>
                 </div>
-            </div>
 
-            <!-- Buttons -->
-            <div class="buttons">
-                <button id="encodeButton">Encode</button>
-                <button id="clearDisparityButton">Clear Disparity</button>
+                <!-- Result Section -->
+                <div id="result" class="result"></div>
             </div>
-
-            <!-- Result Section -->
-            <div id="result" class="result"></div>
         </section>
 
         <!-- Room for Future Tools -->
