@@ -1,120 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Tools</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="/js/scripts.js" defer></script>
-</head>
-<body>
-    <!-- Header -->
-    <div id="header"></div>
+// Global variable for running disparity
+let runningDisparity = 0;
 
-    <!-- Main Content -->
-    <main>
-        <!-- Image Section -->
-        <section class="banner">
-            <figure>
-                <img src="/assets/tools.jpg" alt="Tools Section Logo" style="width: 100%; max-height: 400px; object-fit: cover;">
-                <figcaption style="text-align: center; font-style: italic; margin-top: 5px;">
-                    Interactive utilities for encoding, analysis, and more — designed for solving complex problems efficiently.
-                </figcaption>
-            </figure>
-        </section>
+// Add event listeners for inputs
+document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+            const id = e.target.id;
+            switch (id) {
+                case "base10Input":
+                    convertFromBase10();
+                    break;
+                case "hexInput":
+                    convertFromHex();
+                    break;
+                case "octalInput":
+                    convertFromOctal();
+                    break;
+                case "asciiInput":
+                    convertFromAscii();
+                    break;
+                case "binaryInput":
+                    convertFromBinary();
+                    break;
+            }
+        }
+    });
+});
 
-        <!-- Tools Introduction -->
-        <section>
-            <h1 style="text-align: center; margin: 20px 0;">Tools Section</h1>
-            <p style="text-align: center; margin: 0 15px;">
-                Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, 
-                and other technical tasks. These tools are designed to assist in learning and solving complex problems efficiently. 
-                Explore the features below to enhance your workflow and understanding.
-            </p>
-        </section>
+document.getElementById("encodeButton").addEventListener("click", encodeBinary);
+document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
-        <!-- NTP and UTC Date-Time Display -->
-        <section>
-            <h2>UTC, Local Time, and Unix Timestamp</h2>
-            <p>
-                The <strong>Network Time Protocol (NTP)</strong> ensures accurate time synchronization across devices by referencing atomic clocks. 
-                <strong>Coordinated Universal Time (UTC)</strong> is the global standard for timekeeping, while 
-                <strong>Unix Timestamp</strong> represents the number of seconds since 
-                <a href="https://en.wikipedia.org/wiki/Epoch_time" target="_blank">Epoch Time</a> (January 1, 1970, 00:00:00 UTC). 
-                These formats are crucial for time synchronization and computing tasks.
-                <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Learn more about Unix time</a>.
-            </p>
-            <div class="utc-container">
-                <div class="utc-left">
-                    <p><strong>Current UTC Time:</strong> <span id="utcTime"></span></p>
-                    <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp"></span></p>
-                </div>
-                <div class="utc-right">
-                    <p><strong>Local Time (Your Timezone):</strong> <span id="localTime"></span> (<span id="timezone"></span>)</p>
-                </div>
-            </div>
-        </section>
+// Conversion functions
+function convertFromBase10() {
+    const base10Input = document.getElementById("base10Input").value.trim();
+    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 9999) {
+        displayError("Invalid Decimal input! Must be between 0 and 9999.");
+        return;
+    }
+    const decimal = parseInt(base10Input);
+    updateFields(decimal);
+}
 
-        <!-- Conversion and Encoding -->
-        <section>
-            <h2>Conversion and 8b10b Encoding</h2>
-            <p>
-                Convert numbers between different formats and encode binary values using the 8b10b standard.
-            </p>
-            <table style="width: 100%; max-width: 600px; margin: 0 auto;">
-                <tr>
-                    <td><label for="base10Input">Base 10:</label></td>
-                    <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
-                </tr>
-                <tr>
-                    <td><label for="hexInput">Hexadecimal:</label></td>
-                    <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
-                </tr>
-                <tr>
-                    <td><label for="octalInput">Octal:</label></td>
-                    <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
-                </tr>
-                <tr>
-                    <td><label for="asciiInput">ASCII:</label></td>
-                    <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
-                </tr>
-                <tr>
-                    <td><label for="binaryInput">Binary:</label></td>
-                    <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center;">
-                        <button id="encodeButton">Encode</button>
-                        <button id="clearDisparityButton">Clear Disparity</button>
-                    </td>
-                </tr>
-            </table>
-            <div id="result" class="result" style="margin-top: 15px; text-align: center;"></div>
-        </section>
+function convertFromHex() {
+    const hexInput = document.getElementById("hexInput").value.trim().toUpperCase();
+    if (!hexInput || !/^[0-9A-F]+$/.test(hexInput)) {
+        displayError("Invalid Hexadecimal input! Must be a valid hex number.");
+        return;
+    }
+    const decimal = parseInt(hexInput, 16);
+    if (decimal > 9999) {
+        displayError("Hexadecimal input must represent a value between 0 and 9999.");
+        return;
+    }
+    updateFields(decimal);
+}
 
-        <!-- Room for Future Tools -->
-        <section>
-            <h2>Coming Soon</h2>
-            <p style="text-align: center;">
-                More tools will be added here to expand functionality and support for your projects. Stay tuned!
-            </p>
-        </section>
-    </main>
+function convertFromOctal() {
+    const octalInput = document.getElementById("octalInput").value.trim();
+    if (!octalInput || !/^[0-7]+$/.test(octalInput)) {
+        displayError("Invalid Octal input! Must be a valid octal number.");
+        return;
+    }
+    const decimal = parseInt(octalInput, 8);
+    if (decimal > 9999) {
+        displayError("Octal input must represent a value between 0 and 9999.");
+        return;
+    }
+    updateFields(decimal);
+}
 
-    <!-- Footer -->
-    <footer id="footer">
-        <p>Contact: <a href="mailto:rainer1370@gmail.com">rainer1370@gmail.com</a></p>
-        <p>
-            Connect with me: 
-            <a href="https://www.linkedin.com" target="_blank">LinkedIn</a> | 
-            <a href="https://github.com" target="_blank">GitHub</a>
-        </p>
-        <p>&copy; 2025 Rob Rainer. All rights reserved.</p>
-    </footer>
+function convertFromAscii() {
+    const asciiInput = document.getElementById("asciiInput").value.trim();
+    if (!asciiInput || asciiInput.length !== 1) {
+        displayError("Invalid ASCII input! Must be a single character.");
+        return;
+    }
+    const decimal = asciiInput.charCodeAt(0);
+    updateFields(decimal);
+}
 
-    <!-- External Scripts -->
-    <script src="/js/UTC.js" defer></script>
-    <script src="/js/8b10b.js" defer></script>
-</body>
-</html>
+function convertFromBinary() {
+    const binaryInput = document.getElementById("binaryInput").value.trim();
+    if (!binaryInput || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Must be a valid binary number.");
+        return;
+    }
+    const decimal = parseInt(binaryInput, 2);
+    if (decimal > 9999) {
+        displayError("Binary input must represent a value between 0 and 9999.");
+        return;
+    }
+    updateFields(decimal);
+}
+
+// Function to update all fields based on a decimal value
+function updateFields(decimal) {
+    const binary = decimal.toString(2);
+    const octal = decimal.toString(8);
+    const hex = decimal.toString(16).toUpperCase();
+    const ascii = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
+
+    document.getElementById("base10Input").value = decimal;
+    document.getElementById("hexInput").value = hex;
+    document.getElementById("octalInput").value = octal;
+    document.getElementById("asciiInput").value = ascii;
+    document.getElementById("binaryInput").value = binary;
+    clearError();
+}
+
+// Function to encode binary to 8b10b
+function encodeBinary() {
+    const binaryInput = document.getElementById("binaryInput").value.trim();
+    const resultDiv = document.getElementById("result");
+
+    const decimal = parseInt(binaryInput, 2);
+    if (decimal < 0 || decimal > 255) {
+        displayError("Binary input is out of range for 8b10b encoding (must be 0-255).");
+        return;
+    }
+
+    const paddedBinary = binaryInput.padStart(8, "0");
+
+    // Complete Encoding Tables
+    const fiveToSixTable = {
+        "00000": "100111", "00001": "011101", "00010": "101101", "00011": "110001",
+        "00100": "110101", "00101": "101001", "00110": "011001", "00111": "111000",
+        "01000": "111001", "01001": "100101", "01010": "010101", "01011": "110100",
+        "01100": "001101", "01101": "101100", "01110": "011100", "01111": "010111",
+        "10000": "101011", "10001": "110011", "10010": "100011", "10011": "110010",
+        "10100": "010011", "10101": "110001", "10110": "011011", "10111": "100110",
+        "11000": "010110", "11001": "001011", "11010": "111010", "11011": "011010",
+        "11100": "101010", "11101": "011110", "11110": "101110", "11111": "111011"
+    };
+    const threeToFourTable = {
+        "000": "1011", "001": "1001", "010": "0101", "011": "1100",
+        "100": "0011", "101": "1010", "110": "0110", "111": "1110"
+    };
+
+    const msb = paddedBinary.slice(0, 5);
+    const lsb = paddedBinary.slice(5);
+
+    const msbEncoded = fiveToSixTable[msb];
+    const lsbEncoded = threeToFourTable[lsb];
+
+    if (!msbEncoded || !lsbEncoded) {
+        displayError("Encoding failed due to invalid input.");
+        return;
+    }
+
+    const tenBitOutput = msbEncoded + lsbEncoded;
+    const disparityChange = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
+    runningDisparity += disparityChange;
+
+    resultDiv.innerHTML = `
+        <p><strong>Binary Input:</strong> ${paddedBinary}</p>
+        <p><strong>10-bit Output:</strong> <u>${tenBitOutput}</u></p>
+        <p><strong>Running Disparity:</strong> ${runningDisparity >= 0 ? "+" : ""}${runningDisparity}</p>
+    `;
+}
+
+// Function to clear running disparity
+function clearDisparity() {
+    runningDisparity = 0;
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
+}
+
+// Function to display error messages
+function displayError(message) {
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = `<p style='color: red;'>${message}</p>`;
+}
+
+// Function to clear error messages
+function clearError() {
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
+}
