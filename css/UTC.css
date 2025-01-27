@@ -7,13 +7,25 @@
     border-radius: 5px;
     background-color: #f9f9f9;
     margin-bottom: 20px;
+    align-items: center; /* Centers content vertically */
 }
 
-/* Style for each section (UTC and Local Time) */
-.utc-container div {
+/* Left section (UTC and Unix timestamp stacked vertically) */
+.utc-container .utc-left {
     flex: 1;
-    text-align: center;
-    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 20px;
+    border-right: 1px solid #ccc; /* Separator between UTC and Local Time */
+}
+
+/* Right section (Local Time displayed) */
+.utc-container .utc-right {
+    flex: 1;
+    text-align: left;
+    padding-left: 20px;
 }
 
 /* Title and text alignment */
@@ -25,4 +37,24 @@ h2 {
 .utc-container p {
     font-size: 16px;
     margin: 10px 0;
+}
+
+/* Make the container responsive for smaller screens */
+@media (max-width: 768px) {
+    .utc-container {
+        flex-direction: column; /* Stacks both sections vertically */
+        align-items: flex-start;
+    }
+
+    .utc-container .utc-left {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid #ccc; /* Add separator between sections */
+        padding-bottom: 20px;
+    }
+
+    .utc-container .utc-right {
+        padding-left: 0;
+        margin-top: 20px;
+    }
 }
