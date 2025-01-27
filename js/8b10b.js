@@ -1,65 +1,88 @@
 // Global variable for running disparity
 let runningDisparity = 0;
 
-// Add event listeners for inputs and buttons
+// Add event listeners for inputs
 document.getElementById("binaryInput").addEventListener("change", convertFromBinary);
-document.getElementById("hexInput").addEventListener("change", convertFromHex);
+document.getElementById("octalInput").addEventListener("change", convertFromOctal);
 document.getElementById("base10Input").addEventListener("change", convertFromBase10);
+document.getElementById("hexInput").addEventListener("change", convertFromHex);
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
-// Function to convert from binary
+// Function to convert from Binary
 function convertFromBinary() {
     const binaryInput = document.getElementById("binaryInput").value.trim();
-    if (!binaryInput || binaryInput.length !== 8 || !/^[01]+$/.test(binaryInput)) {
-        displayError("Invalid Binary input! Please enter 8 bits (e.g., 11010101).");
+    if (!binaryInput || binaryInput.length > 8 || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Must be up to 8 bits.");
         return;
     }
 
     const decimal = parseInt(binaryInput, 2);
-    const hex = decimal.toString(16).toUpperCase();
+    if (decimal > 255) {
+        displayError("Binary input must represent a value between 0 and 255.");
+        return;
+    }
 
-    // Update other fields
-    document.getElementById("hexInput").value = hex;
-    document.getElementById("base10Input").value = decimal;
+    updateFields(decimal);
 }
 
-// Function to convert from hex
+// Function to convert from Octal
+function convertFromOctal() {
+    const octalInput = document.getElementById("octalInput").value.trim();
+    if (!octalInput || !/^[0-7]{1,3}$/.test(octalInput)) {
+        displayError("Invalid Octal input! Must be 1 to 3 octal digits.");
+        return;
+    }
+
+    const decimal = parseInt(octalInput, 8);
+    if (decimal > 255) {
+        displayError("Octal input must represent a value between 0 and 255.");
+        return;
+    }
+
+    updateFields(decimal);
+}
+
+// Function to convert from Base 10
+function convertFromBase10() {
+    const base10Input = document.getElementById("base10Input").value.trim();
+    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 255) {
+        displayError("Invalid Decimal input! Must be between 0 and 255.");
+        return;
+    }
+
+    const decimal = parseInt(base10Input);
+    updateFields(decimal);
+}
+
+// Function to convert from Hexadecimal
 function convertFromHex() {
     const hexInput = document.getElementById("hexInput").value.trim().toUpperCase();
     if (!hexInput || !/^[0-9A-F]{1,2}$/.test(hexInput)) {
-        displayError("Invalid Hex input! Please enter up to 2 hex digits (e.g., A5).");
+        displayError("Invalid Hexadecimal input! Must be 1 or 2 hex digits.");
         return;
     }
 
     const decimal = parseInt(hexInput, 16);
     if (decimal > 255) {
-        displayError("Hex input must represent a value between 0 and 255.");
+        displayError("Hexadecimal input must represent a value between 0 and 255.");
         return;
     }
 
-    const binary = decimal.toString(2).padStart(8, "0");
-
-    // Update other fields
-    document.getElementById("binaryInput").value = binary;
-    document.getElementById("base10Input").value = decimal;
+    updateFields(decimal);
 }
 
-// Function to convert from base 10
-function convertFromBase10() {
-    const base10Input = document.getElementById("base10Input").value.trim();
-    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 255) {
-        displayError("Invalid Base 10 input! Please enter a number between 0 and 255.");
-        return;
-    }
-
-    const decimal = parseInt(base10Input);
+// Function to update all fields based on a decimal value
+function updateFields(decimal) {
     const binary = decimal.toString(2).padStart(8, "0");
+    const octal = decimal.toString(8);
     const hex = decimal.toString(16).toUpperCase();
 
-    // Update other fields
     document.getElementById("binaryInput").value = binary;
+    document.getElementById("octalInput").value = octal;
+    document.getElementById("base10Input").value = decimal;
     document.getElementById("hexInput").value = hex;
+    clearError();
 }
 
 // Function to encode binary to 8b10b
@@ -121,25 +144,24 @@ function encodeBinary() {
         <p><strong>Least Significant Bits (LSB):</strong> ${lsb} → ${lsbEncoded}</p>
         <p><strong>10-bit Output:</strong> ${msbEncoded}+${lsbEncoded} → <u>${tenBitOutput}</u></p>
         <p><strong>Running Disparity:</strong> ${runningDisparity >= 0 ? "+" : ""}${runningDisparity}</p>
-        <p><a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a></p>
-        <p><a href="/downloads/8b10b.py" download="8b10b.py">Click here to download the PyQt version to run locally</a></p>
     `;
 }
 
-// Function to clear the running disparity
+// Function to clear running disparity
 function clearDisparity() {
-    runningDisparity = 0; // Reset the disparity
+    runningDisparity = 0;
     const resultDiv = document.getElementById("result");
-    
-    // Clear existing content and display a single message
-    resultDiv.innerHTML = `
-        <p style="color: green;"><strong>Running Disparity cleared!</strong></p>
-        <p><strong>Running Disparity:</strong> 0</p>
-    `;
+    resultDiv.innerHTML += "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
 }
 
 // Function to display error messages
 function displayError(message) {
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = `<p style='color: red;'>${message}</p>`;
+}
+
+// Function to clear error messages
+function clearError() {
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
 }
