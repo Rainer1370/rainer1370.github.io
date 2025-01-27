@@ -10,49 +10,23 @@ document.getElementById("encodeButton").addEventListener("click", () => {
 
     // Predefined encoding tables
     const fiveToSixTable = {
-        "00000": "100111",
-        "00001": "011101",
-        "00010": "101101",
-        "00011": "110001",
-        "00100": "110101",
-        "00101": "101001",
-        "00110": "011001",
-        "00111": "111000",
-        "01000": "111001",
-        "01001": "100101",
-        "01010": "010101",
-        "01011": "110100",
-        "01100": "001101",
-        "01101": "101100",
-        "01110": "011100",
-        "01111": "010111",
-        "10000": "101011",
-        "10001": "110011",
-        "10010": "100011",
-        "10011": "110010",
-        "10100": "010011",
-        "10101": "110001",
-        "10110": "011011",
-        "10111": "100110",
-        "11000": "010110",
-        "11001": "001011",
-        "11010": "111010",
-        "11011": "011010",
-        "11100": "101010",
-        "11101": "011110",
-        "11110": "101110",
-        "11111": "111011"
+        "00000": "100111", "00001": "011101", "00010": "101101",
+        "00011": "110001", "00100": "110101", "00101": "101001",
+        "00110": "011001", "00111": "111000", "01000": "111001",
+        "01001": "100101", "01010": "010101", "01011": "110100",
+        "01100": "001101", "01101": "101100", "01110": "011100",
+        "01111": "010111", "10000": "101011", "10001": "110011",
+        "10010": "100011", "10011": "110010", "10100": "010011",
+        "10101": "110001", "10110": "011011", "10111": "100110",
+        "11000": "010110", "11001": "001011", "11010": "111010",
+        "11011": "011010", "11100": "101010", "11101": "011110",
+        "11110": "101110", "11111": "111011"
     };
 
     const threeToFourTable = {
-        "000": "1011",
-        "001": "1001",
-        "010": "0101",
-        "011": "1100",
-        "100": "0011",
-        "101": "1010",
-        "110": "0110",
-        "111": "1110"
+        "000": "1011", "001": "1001", "010": "0101",
+        "011": "1100", "100": "0011", "101": "1010",
+        "110": "0110", "111": "1110"
     };
 
     // Split into MSB (5 bits) and LSB (3 bits)
@@ -71,14 +45,18 @@ document.getElementById("encodeButton").addEventListener("click", () => {
     // Combine into 10-bit output
     const tenBitOutput = msbEncoded + lsbEncoded;
 
+    // Safeguard for undefined output
+    if (!tenBitOutput) {
+        resultDiv.innerHTML = "<p style='color: red;'>Encoding failed due to undefined output.</p>";
+        return;
+    }
+
     // Calculate running disparity
     const disparity = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
 
-    // Format result
+    // Display the results
     resultDiv.innerHTML = `
         <p><strong>Binary Input:</strong> ${binaryInput}</p>
-        <p><strong>Hex Input:</strong> ${parseInt(binaryInput, 2).toString(16).toUpperCase()}</p>
-        <p><strong>Base 10 Input:</strong> ${parseInt(binaryInput, 2)}</p>
         <p><strong>Most Significant Bits (MSB):</strong> ${msb} → ${msbEncoded}</p>
         <p><strong>Least Significant Bits (LSB):</strong> ${lsb} → ${lsbEncoded}</p>
         <p><strong>10-bit Output:</strong> ${msbEncoded}+${lsbEncoded} → <u>${tenBitOutput}</u></p>
