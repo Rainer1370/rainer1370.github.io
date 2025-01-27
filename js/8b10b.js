@@ -1,3 +1,6 @@
+// Global variable for running disparity
+let runningDisparity = 0;
+
 // Add event listeners for inputs
 document.getElementById("binaryInput").addEventListener("change", convertFromBinary);
 document.getElementById("hexInput").addEventListener("change", convertFromHex);
@@ -106,8 +109,9 @@ function encodeBinary() {
     // Combine into 10-bit output
     const tenBitOutput = msbEncoded + lsbEncoded;
 
-    // Calculate running disparity
-    const disparity = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
+    // Update running disparity
+    const disparityChange = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
+    runningDisparity += disparityChange;
 
     // Display the results
     resultDiv.innerHTML = `
@@ -115,8 +119,9 @@ function encodeBinary() {
         <p><strong>Most Significant Bits (MSB):</strong> ${msb} → ${msbEncoded}</p>
         <p><strong>Least Significant Bits (LSB):</strong> ${lsb} → ${lsbEncoded}</p>
         <p><strong>10-bit Output:</strong> ${msbEncoded}+${lsbEncoded} → <u>${tenBitOutput}</u></p>
-        <p><strong>Running Disparity:</strong> ${disparity >= 0 ? "+" : ""}${disparity}</p>
+        <p><strong>Running Disparity:</strong> ${runningDisparity >= 0 ? "+" : ""}${runningDisparity}</p>
         <p><a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a></p>
+        <p><a href="/downloads/8b10b.py" download="8b10b.py">Click here to download the PyQt version to run locally</a></p>
     `;
 }
 
