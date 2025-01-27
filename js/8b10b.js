@@ -1,11 +1,12 @@
 // Global variable for running disparity
 let runningDisparity = 0;
 
-// Add event listeners for inputs
+// Add event listeners for inputs and buttons
 document.getElementById("binaryInput").addEventListener("change", convertFromBinary);
 document.getElementById("hexInput").addEventListener("change", convertFromHex);
 document.getElementById("base10Input").addEventListener("change", convertFromBase10);
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
+document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
 // Function to convert from binary
 function convertFromBinary() {
@@ -123,6 +124,13 @@ function encodeBinary() {
         <p><a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a></p>
         <p><a href="/downloads/8b10b.py" download="8b10b.py">Click here to download the PyQt version to run locally</a></p>
     `;
+}
+
+// Function to clear the running disparity
+function clearDisparity() {
+    runningDisparity = 0;
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML += "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
 }
 
 // Function to display error messages
