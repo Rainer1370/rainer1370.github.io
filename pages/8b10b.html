@@ -1,1 +1,60 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>8b10b Encoder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section>
+            <h1>8b10b Encoder</h1>
+            <p>
+                The 8b10b encoder is a fundamental mechanism in data communication that ensures DC balance and error detection 
+                through encoding data into a 10-bit format. This interactive tool allows you to experiment with binary inputs 
+                and observe their encoded outputs, helping you understand the encoding process.
+            </p>
+
+            <!-- Input and Results Section -->
+            <div class="container">
+                <label for="binaryInput">Enter Binary (8 bits):</label>
+                <input type="text" id="binaryInput" placeholder="E.g., 11010101">
+                <button id="encodeButton">Encode</button>
+                <div class="result" id="result"></div>
+            </div>
+        </section>
+        
+        <!-- Learn More Section -->
+        <section>
+            <h2>About 8b10b Encoding</h2>
+            <p>
+                8b10b encoding is used in high-speed communication protocols, such as Ethernet, Fibre Channel, and Serial ATA. 
+                It ensures that each 8-bit data block is mapped to a 10-bit code, maintaining a neutral running disparity 
+                and preventing long strings of 1s or 0s in the data stream. This ensures robust signal integrity and clock recovery.
+            </p>
+            <ul>
+                <li><strong>DC Balance:</strong> Maintains an equal number of 1s and 0s.</li>
+                <li><strong>Error Detection:</strong> Encoded data allows for immediate detection of invalid codes.</li>
+                <li><strong>Clock Recovery:</strong> Ensures continuous transitions for synchronization.</li>
+            </ul>
+            
+            <!-- Separation Bar -->
+            <hr class="separator">
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- External Script -->
+    <script src="/js/8b10b.js" defer></script>
+</body>
+</html>
