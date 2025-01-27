@@ -6,6 +6,7 @@ document.getElementById("binaryInput").addEventListener("change", convertFromBin
 document.getElementById("octalInput").addEventListener("change", convertFromOctal);
 document.getElementById("base10Input").addEventListener("change", convertFromBase10);
 document.getElementById("hexInput").addEventListener("change", convertFromHex);
+document.getElementById("asciiInput").addEventListener("change", convertFromAscii);
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
@@ -72,16 +73,35 @@ function convertFromHex() {
     updateFields(decimal);
 }
 
+// Function to convert from ASCII
+function convertFromAscii() {
+    const asciiInput = document.getElementById("asciiInput").value.trim();
+    if (!asciiInput || asciiInput.length !== 1) {
+        displayError("Invalid ASCII input! Must be a single character.");
+        return;
+    }
+
+    const decimal = asciiInput.charCodeAt(0);
+    if (decimal > 255) {
+        displayError("ASCII input must represent a value between 0 and 255.");
+        return;
+    }
+
+    updateFields(decimal);
+}
+
 // Function to update all fields based on a decimal value
 function updateFields(decimal) {
     const binary = decimal.toString(2).padStart(8, "0");
     const octal = decimal.toString(8);
     const hex = decimal.toString(16).toUpperCase();
+    const ascii = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
 
     document.getElementById("binaryInput").value = binary;
     document.getElementById("octalInput").value = octal;
     document.getElementById("base10Input").value = decimal;
     document.getElementById("hexInput").value = hex;
+    document.getElementById("asciiInput").value = ascii;
     clearError();
 }
 
@@ -151,7 +171,7 @@ function encodeBinary() {
 function clearDisparity() {
     runningDisparity = 0;
     const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML += "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
+    resultDiv.innerHTML = "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
 }
 
 // Function to display error messages
