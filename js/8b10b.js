@@ -130,6 +130,8 @@ function encodeBinary() {
 function clearDisparity() {
     runningDisparity = 0; // Reset the disparity
     const resultDiv = document.getElementById("result");
+    
+    // Clear existing content and display a single message
     resultDiv.innerHTML = `
         <p style="color: green;"><strong>Running Disparity cleared!</strong></p>
         <p><strong>Running Disparity:</strong> 0</p>
