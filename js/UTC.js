@@ -1,23 +1,24 @@
-// Function to update UTC and local time
-function updateDateTime() {
-    // Get current time
+// Function to update UTC, local time, and Unix timestamp
+function updateTime() {
     const now = new Date();
 
-    // Format UTC time
-    const utcTime = now.toISOString().slice(0, 19).replace("T", " "); // YYYY-MM-DD HH:mm:ss format
-
-    // Format local time and timezone
-    const localTime = now.toLocaleString(); // Local time in user's format
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the timezone
-
-    // Update DOM elements
+    // UTC Time
+    const utcTime = now.toISOString().split("T").join(" ").split(".")[0];
     document.getElementById("utcTime").textContent = utcTime;
+
+    // Local Time and Timezone
+    const localTime = now.toLocaleString();
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById("localTime").textContent = localTime;
     document.getElementById("timezone").textContent = timezone;
+
+    // Unix Timestamp
+    const unixTimestamp = Math.floor(now.getTime() / 1000);
+    document.getElementById("unixTimestamp").textContent = unixTimestamp;
 }
 
-// Call the function every second
-setInterval(updateDateTime, 1000);
+// Update time every second
+setInterval(updateTime, 1000);
 
-// Initialize on page load
-updateDateTime();
+// Initialize immediately
+updateTime();
