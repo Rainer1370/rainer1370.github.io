@@ -2,20 +2,20 @@
 let runningDisparity = 0;
 
 // Add event listeners for inputs
-document.getElementById("base10Input").addEventListener("keyup", (e) => handleKeyUp(e, convertFromBase10));
-document.getElementById("hexInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromHex));
-document.getElementById("octalInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromOctal));
-document.getElementById("asciiInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromAscii));
-document.getElementById("binaryInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromBinary));
+document.querySelectorAll(".conversion-table input").forEach((input) => {
+    input.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+            const id = e.target.id;
+            if (id === "base10Input") convertFromBase10();
+            else if (id === "hexInput") convertFromHex();
+            else if (id === "octalInput") convertFromOctal();
+            else if (id === "asciiInput") convertFromAscii();
+            else if (id === "binaryInput") convertFromBinary();
+        }
+    });
+});
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
-
-// Helper function to detect Enter key and call the appropriate conversion function
-function handleKeyUp(event, conversionFunction) {
-    if (event.key === "Enter") {
-        conversionFunction();
-    }
-}
 
 // Conversion functions
 function convertFromBase10() {
