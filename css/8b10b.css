@@ -22,47 +22,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-input, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.result {
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.result p {
-    margin: 8px 0;
-}
-
-.result u {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-/* Conversion Table Styling */
 .conversion-table-container {
     display: flex;
     justify-content: center;
@@ -72,7 +31,7 @@ button:hover {
 .conversion-table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .conversion-table td {
@@ -104,20 +63,4 @@ button:hover {
 
 .conversion-table button:hover {
     background-color: #0056b3;
-}
-
-/* Optional: Styling for a two-column input field layout */
-.conversion-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.conversion-labels {
-    text-align: right;
-    padding-right: 10px;
-}
-
-.conversion-fields {
-    text-align: left;
 }
