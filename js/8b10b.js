@@ -1,8 +1,8 @@
-
 document.getElementById("encodeButton").addEventListener("click", () => {
     const binaryInput = document.getElementById("binaryInput").value.trim();
     const resultDiv = document.getElementById("result");
 
+    // Validate binary input
     if (!binaryInput || binaryInput.length !== 8 || !/^[01]+$/.test(binaryInput)) {
         resultDiv.innerHTML = "<p style='color: red;'>Invalid input! Please enter 8 bits (e.g., 11010101).</p>";
         return;
@@ -68,13 +68,21 @@ document.getElementById("encodeButton").addEventListener("click", () => {
         return;
     }
 
+    // Combine into 10-bit output
     const tenBitOutput = msbEncoded + lsbEncoded;
 
-    // Display the results
+    // Calculate running disparity
+    const disparity = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
+
+    // Format result
     resultDiv.innerHTML = `
         <p><strong>Binary Input:</strong> ${binaryInput}</p>
+        <p><strong>Hex Input:</strong> ${parseInt(binaryInput, 2).toString(16).toUpperCase()}</p>
+        <p><strong>Base 10 Input:</strong> ${parseInt(binaryInput, 2)}</p>
         <p><strong>Most Significant Bits (MSB):</strong> ${msb} → ${msbEncoded}</p>
         <p><strong>Least Significant Bits (LSB):</strong> ${lsb} → ${lsbEncoded}</p>
-        <p><strong>10-bit Output:</strong> ${tenBitOutput}</p>
+        <p><strong>10-bit Output:</strong> ${msbEncoded}+${lsbEncoded} → <u>${tenBitOutput}</u></p>
+        <p><strong>Running Disparity:</strong> ${disparity >= 0 ? "+" : ""}${disparity}</p>
+        <p><a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a></p>
     `;
 });
