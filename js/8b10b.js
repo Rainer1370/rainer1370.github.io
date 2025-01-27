@@ -1,10 +1,71 @@
-document.getElementById("encodeButton").addEventListener("click", () => {
+// Add event listeners for inputs
+document.getElementById("binaryInput").addEventListener("change", convertFromBinary);
+document.getElementById("hexInput").addEventListener("change", convertFromHex);
+document.getElementById("base10Input").addEventListener("change", convertFromBase10);
+document.getElementById("encodeButton").addEventListener("click", encodeBinary);
+
+// Function to convert from binary
+function convertFromBinary() {
+    const binaryInput = document.getElementById("binaryInput").value.trim();
+    if (!binaryInput || binaryInput.length !== 8 || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Please enter 8 bits (e.g., 11010101).");
+        return;
+    }
+
+    const decimal = parseInt(binaryInput, 2);
+    const hex = decimal.toString(16).toUpperCase();
+
+    // Update other fields
+    document.getElementById("hexInput").value = hex;
+    document.getElementById("base10Input").value = decimal;
+}
+
+// Function to convert from hex
+function convertFromHex() {
+    const hexInput = document.getElementById("hexInput").value.trim().toUpperCase();
+    if (!hexInput || !/^[0-9A-F]{1,2}$/.test(hexInput)) {
+        displayError("Invalid Hex input! Please enter up to 2 hex digits (e.g., A5).");
+        return;
+    }
+
+    const decimal = parseInt(hexInput, 16);
+    if (decimal > 255) {
+        displayError("Hex input must represent a value between 0 and 255.");
+        return;
+    }
+
+    const binary = decimal.toString(2).padStart(8, "0");
+
+    // Update other fields
+    document.getElementById("binaryInput").value = binary;
+    document.getElementById("base10Input").value = decimal;
+}
+
+// Function to convert from base 10
+function convertFromBase10() {
+    const base10Input = document.getElementById("base10Input").value.trim();
+    if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 255) {
+        displayError("Invalid Base 10 input! Please enter a number between 0 and 255.");
+        return;
+    }
+
+    const decimal = parseInt(base10Input);
+    const binary = decimal.toString(2).padStart(8, "0");
+    const hex = decimal.toString(16).toUpperCase();
+
+    // Update other fields
+    document.getElementById("binaryInput").value = binary;
+    document.getElementById("hexInput").value = hex;
+}
+
+// Function to encode binary to 8b10b
+function encodeBinary() {
     const binaryInput = document.getElementById("binaryInput").value.trim();
     const resultDiv = document.getElementById("result");
 
     // Validate binary input
     if (!binaryInput || binaryInput.length !== 8 || !/^[01]+$/.test(binaryInput)) {
-        resultDiv.innerHTML = "<p style='color: red;'>Invalid input! Please enter 8 bits (e.g., 11010101).</p>";
+        displayError("Invalid Binary input! Please enter 8 bits (e.g., 11010101).");
         return;
     }
 
@@ -38,18 +99,12 @@ document.getElementById("encodeButton").addEventListener("click", () => {
     const lsbEncoded = threeToFourTable[lsb];
 
     if (!msbEncoded || !lsbEncoded) {
-        resultDiv.innerHTML = "<p style='color: red;'>Encoding failed due to invalid input.</p>";
+        displayError("Encoding failed due to invalid input.");
         return;
     }
 
     // Combine into 10-bit output
     const tenBitOutput = msbEncoded + lsbEncoded;
-
-    // Safeguard for undefined output
-    if (!tenBitOutput) {
-        resultDiv.innerHTML = "<p style='color: red;'>Encoding failed due to undefined output.</p>";
-        return;
-    }
 
     // Calculate running disparity
     const disparity = tenBitOutput.split("").reduce((acc, bit) => acc + (bit === "1" ? 1 : -1), 0);
@@ -63,4 +118,10 @@ document.getElementById("encodeButton").addEventListener("click", () => {
         <p><strong>Running Disparity:</strong> ${disparity >= 0 ? "+" : ""}${disparity}</p>
         <p><a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a></p>
     `;
-});
+}
+
+// Function to display error messages
+function displayError(message) {
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = `<p style='color: red;'>${message}</p>`;
+}
