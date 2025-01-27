@@ -62,6 +62,50 @@ button:hover {
     text-decoration: underline;
 }
 
+/* Conversion Table Styling */
+.conversion-table-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.conversion-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+}
+
+.conversion-table td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.conversion-table label {
+    font-weight: bold;
+}
+
+.conversion-table input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.conversion-table button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.conversion-table button:hover {
+    background-color: #0056b3;
+}
+
 /* Optional: Styling for a two-column input field layout */
 .conversion-container {
     display: grid;
