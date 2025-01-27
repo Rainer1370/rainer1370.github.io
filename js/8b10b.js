@@ -2,49 +2,22 @@
 let runningDisparity = 0;
 
 // Add event listeners for inputs
-document.getElementById("binaryInput").addEventListener("change", convertFromBinary);
-document.getElementById("octalInput").addEventListener("change", convertFromOctal);
-document.getElementById("base10Input").addEventListener("change", convertFromBase10);
-document.getElementById("hexInput").addEventListener("change", convertFromHex);
-document.getElementById("asciiInput").addEventListener("change", convertFromAscii);
+document.getElementById("base10Input").addEventListener("keyup", (e) => handleKeyUp(e, convertFromBase10));
+document.getElementById("hexInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromHex));
+document.getElementById("octalInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromOctal));
+document.getElementById("asciiInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromAscii));
+document.getElementById("binaryInput").addEventListener("keyup", (e) => handleKeyUp(e, convertFromBinary));
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
-// Function to convert from Binary
-function convertFromBinary() {
-    const binaryInput = document.getElementById("binaryInput").value.trim();
-    if (!binaryInput || binaryInput.length > 8 || !/^[01]+$/.test(binaryInput)) {
-        displayError("Invalid Binary input! Must be up to 8 bits.");
-        return;
+// Helper function to detect Enter key and call the appropriate conversion function
+function handleKeyUp(event, conversionFunction) {
+    if (event.key === "Enter") {
+        conversionFunction();
     }
-
-    const decimal = parseInt(binaryInput, 2);
-    if (decimal > 255) {
-        displayError("Binary input must represent a value between 0 and 255.");
-        return;
-    }
-
-    updateFields(decimal);
 }
 
-// Function to convert from Octal
-function convertFromOctal() {
-    const octalInput = document.getElementById("octalInput").value.trim();
-    if (!octalInput || !/^[0-7]{1,3}$/.test(octalInput)) {
-        displayError("Invalid Octal input! Must be 1 to 3 octal digits.");
-        return;
-    }
-
-    const decimal = parseInt(octalInput, 8);
-    if (decimal > 255) {
-        displayError("Octal input must represent a value between 0 and 255.");
-        return;
-    }
-
-    updateFields(decimal);
-}
-
-// Function to convert from Base 10
+// Conversion functions
 function convertFromBase10() {
     const base10Input = document.getElementById("base10Input").value.trim();
     if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 255) {
@@ -56,7 +29,6 @@ function convertFromBase10() {
     updateFields(decimal);
 }
 
-// Function to convert from Hexadecimal
 function convertFromHex() {
     const hexInput = document.getElementById("hexInput").value.trim().toUpperCase();
     if (!hexInput || !/^[0-9A-F]{1,2}$/.test(hexInput)) {
@@ -73,7 +45,22 @@ function convertFromHex() {
     updateFields(decimal);
 }
 
-// Function to convert from ASCII
+function convertFromOctal() {
+    const octalInput = document.getElementById("octalInput").value.trim();
+    if (!octalInput || !/^[0-7]{1,3}$/.test(octalInput)) {
+        displayError("Invalid Octal input! Must be 1 to 3 octal digits.");
+        return;
+    }
+
+    const decimal = parseInt(octalInput, 8);
+    if (decimal > 255) {
+        displayError("Octal input must represent a value between 0 and 255.");
+        return;
+    }
+
+    updateFields(decimal);
+}
+
 function convertFromAscii() {
     const asciiInput = document.getElementById("asciiInput").value.trim();
     if (!asciiInput || asciiInput.length !== 1) {
@@ -90,6 +77,22 @@ function convertFromAscii() {
     updateFields(decimal);
 }
 
+function convertFromBinary() {
+    const binaryInput = document.getElementById("binaryInput").value.trim();
+    if (!binaryInput || binaryInput.length > 8 || !/^[01]+$/.test(binaryInput)) {
+        displayError("Invalid Binary input! Must be up to 8 bits.");
+        return;
+    }
+
+    const decimal = parseInt(binaryInput, 2);
+    if (decimal > 255) {
+        displayError("Binary input must represent a value between 0 and 255.");
+        return;
+    }
+
+    updateFields(decimal);
+}
+
 // Function to update all fields based on a decimal value
 function updateFields(decimal) {
     const binary = decimal.toString(2).padStart(8, "0");
@@ -97,11 +100,11 @@ function updateFields(decimal) {
     const hex = decimal.toString(16).toUpperCase();
     const ascii = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
 
-    document.getElementById("binaryInput").value = binary;
-    document.getElementById("octalInput").value = octal;
     document.getElementById("base10Input").value = decimal;
     document.getElementById("hexInput").value = hex;
+    document.getElementById("octalInput").value = octal;
     document.getElementById("asciiInput").value = ascii;
+    document.getElementById("binaryInput").value = binary;
     clearError();
 }
 
