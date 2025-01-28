@@ -4,11 +4,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     const toolsBasePath = "/pages/tools/";
 
     // Function to load content dynamically
-    async function loadComponent(id, filePath) {
+    async function loadComponent(id, filePath, callback = null) {
         try {
             const response = await fetch(filePath);
             if (!response.ok) throw new Error(`Failed to load ${id}: ${response.statusText}`);
             document.getElementById(id).innerHTML = await response.text();
+
+            // Call callback function if provided (e.g., initialize UTC.js)
+            if (callback) callback();
         } catch (error) {
             console.error(`${id} Error:`, error);
             document.getElementById(id).innerHTML = `<p>${id} could not be loaded.</p>`;
@@ -24,9 +27,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Dynamic loading for tools
     const toolContainer = document.getElementById("toolContainer");
     if (toolContainer) {
-        const toolName = toolContainer.dataset.tool; // e.g., 'utc-converter'
+        const toolName = toolContainer.dataset.tool; // e.g., 'utc'
         if (toolName) {
-            loadComponent("toolContainer", toolsBasePath + `${toolName}.html`);
+            loadComponent("toolContainer", toolsBasePath + `${toolName}.html`, () => {
+                if (toolName === "utc") updateTime(); // Reinitialize UTC.js
+            });
         }
     }
 });
