@@ -7,6 +7,7 @@
     background-color: #333; /* Charcoal gray */
     color: #fff; /* White text for contrast */
     margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Style for each section (UTC and Local Time) */
@@ -20,11 +21,14 @@
 h2 {
     text-align: center;
     margin-bottom: 15px;
+    font-size: 24px;
+    color: #222;
 }
 
 .utc-container p {
     font-size: 16px;
     margin: 10px 0;
+    line-height: 1.5;
 }
 
 /* Optional - Adjust link styles for visibility on dark background */
