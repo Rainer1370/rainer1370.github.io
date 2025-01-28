@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (toolContainer) {
         const toolName = toolContainer.dataset.tool; // e.g., 'utc'
         if (toolName) {
-            loadComponent("toolContainer", toolsBasePath + `${toolName}.html`, () => {
+            loadComponent("toolContainer", toolsBasePath/'${toolName}.html', () => {
                 if (toolName === "utc") updateTime(); // Reinitialize UTC.js
             });
         }
