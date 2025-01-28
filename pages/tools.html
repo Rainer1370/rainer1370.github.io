@@ -23,7 +23,7 @@
                 Explore the features below to enhance your workflow and understanding.
             </p>
         </section>
-        
+
         <!-- Image Section -->
         <section class="banner">
             <figure>
@@ -35,66 +35,7 @@
         </section>
 
         <!-- NTP and UTC Date-Time Display -->
-        <section>
-            <h2>UTC, Local Time, and Unix Timestamp</h2>
-            <p>
-                The <strong>Network Time Protocol (NTP)</strong> ensures accurate time synchronization across devices by referencing atomic clocks. 
-                <strong>Coordinated Universal Time (UTC)</strong> is the global standard for timekeeping, while 
-                <strong>Unix Timestamp</strong> represents the number of seconds since 
-                <a href="https://en.wikipedia.org/wiki/Epoch_time" target="_blank">Epoch Time</a> (January 1, 1970, 00:00:00 UTC). 
-                These formats are crucial for time synchronization and computing tasks.
-                <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Learn more about Unix time</a>.
-            </p>
-            <div class="utc-container">
-                <div class="utc-left">
-                    <p><strong>Current UTC Time:</strong> <span id="utcTime"></span></p>
-                    <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp"></span></p>
-                </div>
-                <div class="utc-right">
-                    <p><strong>Local Time (Your Timezone):</strong> <span id="localTime"></span> (<span id="timezone"></span>)</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conversion and Encoding -->
-        <section>
-            <h2>Conversion and 8b10b Encoding</h2>
-            <p>
-                Convert different numbers between 0 and 9999 base 10. For numbers under 255 base 10, click "Encode" 
-                to see its 8b10b encoding. 8b10b encoding is commonly used in accelerator timing systems to 
-                efficiently encode data with balanced disparity. 
-                <a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a>.
-            </p>
-            <table style="width: 100%; max-width: 600px; margin: 0 auto;">
-                <tr>
-                    <td><label for="base10Input">Base 10:</label></td>
-                    <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
-                </tr>
-                <tr>
-                    <td><label for="hexInput">Hexadecimal:</label></td>
-                    <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
-                </tr>
-                <tr>
-                    <td><label for="octalInput">Octal:</label></td>
-                    <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
-                </tr>
-                <tr>
-                    <td><label for="asciiInput">ASCII:</label></td>
-                    <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
-                </tr>
-                <tr>
-                    <td><label for="binaryInput">Binary:</label></td>
-                    <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center;">
-                        <button id="encodeButton">Encode</button>
-                        <button id="clearDisparityButton">Clear Disparity</button>
-                    </td>
-                </tr>
-            </table>
-            <div id="result" class="result" style="margin-top: 15px; text-align: center;"></div>
-        </section>
+        <section id="utcTool"></section>
 
         <!-- Room for Future Tools -->
         <section>
@@ -110,6 +51,6 @@
 
     <!-- External Scripts -->
     <script src="/js/UTC.js" defer></script>
-    <script src="/js/8b10b.js" defer></script>
+    <script src="/js/scripts.js" defer></script>
 </body>
 </html>
