@@ -42,7 +42,7 @@ The **Tools Section** features utilities for data encoding, engineering calculat
 7. [ASCII/Unicode Art Generator](https://rainer1370.github.io/pages/tools/ascii-art-generator.html)
 8. [Beam Dynamics Calculator](https://rainer1370.github.io/pages/tools/beam-dynamics-calculator.html)
 
-Visit the [Tools Section](https://rainer1370.github.io/pages/tools.html) to explore these utilities.
+Visit the [Tools Section](https://rainer1370.com/pages/tools.html) to explore these utilities.
 
 ---
 
