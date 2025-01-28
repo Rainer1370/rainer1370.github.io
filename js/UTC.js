@@ -1,7 +1,7 @@
 // Function to update UTC, local time, and Unix timestamp
 function updateTime() {
     try {
-        const now = new Date();
+        console.log("updateTime() called");
 
         // Ensure elements exist before trying to update them
         const utcElem = document.getElementById("utcTime");
@@ -10,18 +10,22 @@ function updateTime() {
         const unixElem = document.getElementById("unixTimestamp");
 
         if (utcElem && localElem && timezoneElem && unixElem) {
-            utcElem.textContent = now.toISOString().split("T").join(" ").split(".")[0];
-            localElem.textContent = now.toLocaleString();
+            utcElem.textContent = new Date().toISOString().split("T").join(" ").split(".")[0];
+            localElem.textContent = new Date().toLocaleString();
             timezoneElem.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            unixElem.textContent = Math.floor(now.getTime() / 1000);
+            unixElem.textContent = Math.floor(new Date().getTime() / 1000);
+            console.log("updateTime() executed successfully");
+        } else {
+            console.warn("updateTime() elements not found, retrying...");
+            setTimeout(updateTime, 500); // Retry after 500ms
         }
     } catch (error) {
         console.error("Error updating time:", error);
     }
 }
 
-// Update time every second
-setInterval(updateTime, 1000);
-
-// Initialize immediately if script is already present
-document.addEventListener("DOMContentLoaded", updateTime);
+// Initialize when the tool content is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOMContentLoaded event in UTC.js");
+    updateTime();
+});
