@@ -23,6 +23,7 @@ h2 {
     margin-bottom: 15px;
     font-size: 24px;
     color: #222;
+    font-weight: bold;
 }
 
 .utc-container p {
@@ -35,6 +36,7 @@ h2 {
 .utc-container a {
     color: #add8e6; /* Light blue */
     text-decoration: none;
+    font-weight: bold;
 }
 
 .utc-container a:hover {
