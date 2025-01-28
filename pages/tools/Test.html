@@ -1,1 +1,22 @@
-test
+
+<h2>UTC, Local Time, and Unix Timestamp</h2>
+<p>
+    The <strong>Network Time Protocol (NTP)</strong> ensures accurate time synchronization across devices by referencing atomic clocks. 
+    <strong>Coordinated Universal Time (UTC)</strong> is the global standard for timekeeping, while 
+    <strong>Unix Timestamp</strong> represents the number of seconds since 
+    <a href="https://en.wikipedia.org/wiki/Epoch_time" target="_blank">Epoch Time</a> (January 1, 1970, 00:00:00 UTC). 
+    These formats are crucial for time synchronization and computing tasks.
+    <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Learn more about Unix time</a>.
+</p>
+<div class="utc-container">
+    <div class="utc-left">
+        <p><strong>Current UTC Time:</strong> <span id="utcTime">Loading...</span></p>
+        <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp">Loading...</span></p>
+    </div>
+    <div class="utc-right">
+        <p><strong>Local Time (Your Timezone):</strong> <span id="localTime">Loading...</span> (<span id="timezone">Loading...</span>)</p>
+    </div>
+</div>
+
+<!-- Include JavaScript for UTC functionality -->
+<script src="/js/UTC.js" defer></script>
