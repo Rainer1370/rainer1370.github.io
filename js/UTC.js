@@ -3,19 +3,18 @@ function updateTime() {
     try {
         const now = new Date();
 
-        // UTC Time
-        const utcTime = now.toISOString().split("T").join(" ").split(".")[0];
-        document.getElementById("utcTime").textContent = utcTime;
+        // Ensure elements exist before trying to update them
+        const utcElem = document.getElementById("utcTime");
+        const localElem = document.getElementById("localTime");
+        const timezoneElem = document.getElementById("timezone");
+        const unixElem = document.getElementById("unixTimestamp");
 
-        // Local Time and Timezone
-        const localTime = now.toLocaleString();
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        document.getElementById("localTime").textContent = localTime;
-        document.getElementById("timezone").textContent = timezone;
-
-        // Unix Timestamp
-        const unixTimestamp = Math.floor(now.getTime() / 1000);
-        document.getElementById("unixTimestamp").textContent = unixTimestamp;
+        if (utcElem && localElem && timezoneElem && unixElem) {
+            utcElem.textContent = now.toISOString().split("T").join(" ").split(".")[0];
+            localElem.textContent = now.toLocaleString();
+            timezoneElem.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            unixElem.textContent = Math.floor(now.getTime() / 1000);
+        }
     } catch (error) {
         console.error("Error updating time:", error);
     }
@@ -24,5 +23,5 @@ function updateTime() {
 // Update time every second
 setInterval(updateTime, 1000);
 
-// Initialize immediately
+// Initialize immediately if script is already present
 document.addEventListener("DOMContentLoaded", updateTime);
