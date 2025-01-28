@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch(filePath);
             if (!response.ok) throw new Error(`Failed to load ${id}: ${response.statusText}`);
-            
+
             const content = await response.text();
             document.getElementById(id).innerHTML = content;
             console.log(`${id} loaded successfully`);
@@ -37,12 +37,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     const toolContainer = document.getElementById("toolContainer");
     if (toolContainer) {
         const toolName = toolContainer.dataset.tool; // e.g., 'utc'
+        console.log(`Detected tool: ${toolName}`);
+
         if (toolName) {
-            console.log(`Detected tool: ${toolName}`);
-            loadComponent("toolContainer", toolsBasePath + `${toolName}.html`, () => {
+            loadComponent("toolContainer", `${toolsBasePath}${toolName}.html`, () => {
                 console.log("Calling updateTime() after toolContainer is loaded");
-                updateTime(); // Reinitialize UTC.js
+                if (typeof updateTime === "function") {
+                    updateTime();
+                } else {
+                    console.error("updateTime() function is not defined!");
+                }
             });
+        } else {
+            console.warn("No tool detected for dynamic loading.");
         }
     }
 });
