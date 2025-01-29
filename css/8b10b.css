@@ -1,9 +1,41 @@
+/* Container for Inputs and Output */
+.conversion-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+/* Section for Inputs */
+.input-section {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Section for Output */
+.output-section {
+    flex: 1;
+    text-align: center;
+    border-left: 2px solid #ccc; /* Adds a dividing line */
+    padding-left: 20px;
+}
+
+/* Title for Output Section */
+.output-section h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007BFF;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 /* Conversion Table Styling */
 .conversion-table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
+    max-width: 450px;
+    margin: 0 auto;
 }
 
 .conversion-table td {
@@ -37,37 +69,7 @@
     background-color: #0056b3;
 }
 
-/* Layout for Conversion and Output */
-.conversion-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-/* Keep input fields on the left */
-.input-section {
-    flex: 1;
-    padding-right: 20px;
-}
-
-/* Move 8b10b Encoding Output to the Right */
-.output-section {
-    flex: 1;
-    text-align: center;
-    border-left: 2px solid #ddd;
-    padding-left: 20px;
-}
-
-/* Label for Output */
-.output-section h3 {
-    font-size: 18px;
-    color: #007BFF;
-    margin-bottom: 10px;
-}
-
-/* Encoding Result Styling */
+/* Encoding Output Styling */
 .result {
     text-align: center;
     margin-top: 10px;
