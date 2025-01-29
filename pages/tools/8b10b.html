@@ -5,35 +5,47 @@
     efficiently encode data with balanced disparity. 
     <a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a>.
 </p>
-<table class="conversion-table">
-    <tr>
-        <td><label for="base10Input">Base 10:</label></td>
-        <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
-    </tr>
-    <tr>
-        <td><label for="hexInput">Hexadecimal:</label></td>
-        <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
-    </tr>
-    <tr>
-        <td><label for="octalInput">Octal:</label></td>
-        <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
-    </tr>
-    <tr>
-        <td><label for="asciiInput">ASCII:</label></td>
-        <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
-    </tr>
-    <tr>
-        <td><label for="binaryInput">Binary:</label></td>
-        <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
-    </tr>
-    <tr>
-        <td colspan="2" style="text-align: center;">
-            <button id="encodeButton">Encode</button>
-            <button id="clearDisparityButton">Clear Disparity</button>
-        </td>
-    </tr>
-</table>
-<div id="result" class="result"></div>
+
+<!-- Conversion and Output Layout -->
+<div class="conversion-container">
+    <!-- Input Section -->
+    <div class="input-section">
+        <table class="conversion-table">
+            <tr>
+                <td><label for="base10Input">Base 10:</label></td>
+                <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
+            </tr>
+            <tr>
+                <td><label for="hexInput">Hexadecimal:</label></td>
+                <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
+            </tr>
+            <tr>
+                <td><label for="octalInput">Octal:</label></td>
+                <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
+            </tr>
+            <tr>
+                <td><label for="asciiInput">ASCII:</label></td>
+                <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
+            </tr>
+            <tr>
+                <td><label for="binaryInput">Binary:</label></td>
+                <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button id="encodeButton">Encode</button>
+                    <button id="clearDisparityButton">Clear Disparity</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section">
+        <h3>8b10b Encoding Output</h3> <!-- Added Label -->
+        <div id="result" class="result"></div>
+    </div>
+</div>
 
 <!-- Load JavaScript for 8b10b functionality -->
 <script src="/js/8b10b.js" defer></script>
