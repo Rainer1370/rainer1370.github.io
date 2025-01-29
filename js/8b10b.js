@@ -1,36 +1,54 @@
 // Global variable for running disparity
 let runningDisparity = 0;
 
-// Add event listeners for inputs
-document.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") {
-            const id = e.target.id;
-            switch (id) {
-                case "base10Input":
-                    convertFromBase10();
-                    break;
-                case "hexInput":
-                    convertFromHex();
-                    break;
-                case "octalInput":
-                    convertFromOctal();
-                    break;
-                case "asciiInput":
-                    convertFromAscii();
-                    break;
-                case "binaryInput":
-                    convertFromBinary();
-                    break;
+// Ensure the script runs only after DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ 8b10b.js initialized");
+
+    // Add event listeners for keypress (Enter) and input validation
+    document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                console.log(`⏩ Enter pressed in ${e.target.id}, processing input...`);
+                handleInput(e.target.id);
+                e.preventDefault(); // Prevent default behavior (especially on mobile)
             }
-        }
+        });
+
+        input.addEventListener("blur", function (e) {
+            handleInput(e.target.id); // Process input when leaving the field
+        });
     });
+
+    // Bind event listeners to buttons
+    document.getElementById("encodeButton").addEventListener("click", encodeBinary);
+    document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 });
 
-document.getElementById("encodeButton").addEventListener("click", encodeBinary);
-document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
+// Function to handle input based on ID
+function handleInput(id) {
+    switch (id) {
+        case "base10Input":
+            convertFromBase10();
+            break;
+        case "hexInput":
+            convertFromHex();
+            break;
+        case "octalInput":
+            convertFromOctal();
+            break;
+        case "asciiInput":
+            convertFromAscii();
+            break;
+        case "binaryInput":
+            convertFromBinary();
+            break;
+        default:
+            console.warn(`⚠️ Unrecognized input field: ${id}`);
+    }
+}
 
-// Conversion functions
+// Conversion functions remain unchanged
 function convertFromBase10() {
     const base10Input = document.getElementById("base10Input").value.trim();
     if (!base10Input || isNaN(base10Input) || parseInt(base10Input) < 0 || parseInt(base10Input) > 9999) {
@@ -121,7 +139,7 @@ function encodeBinary() {
 
     const paddedBinary = binaryInput.padStart(8, "0");
 
-    // Complete Encoding Tables
+    // Encoding Tables
     const fiveToSixTable = {
         "00000": "100111", "00001": "011101", "00010": "101101", "00011": "110001",
         "00100": "110101", "00101": "101001", "00110": "011001", "00111": "111000",
