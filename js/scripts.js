@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 function startUpdatingTime() {
                     if (typeof updateTime === "function") {
                         console.log("Calling updateTime() and starting 1Hz interval.");
-                        updateTime();
-                        setInterval(updateTime, 1000); // Start 1Hz update loop
+                        updateTime(); // Run immediately
                     } else {
                         console.error("updateTime() function is not defined!");
                     }
