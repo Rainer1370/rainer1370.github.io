@@ -36,12 +36,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Load UTC Tool
     const toolContainer = document.getElementById("toolContainer");
     if (toolContainer) {
-        const toolName = toolContainer.dataset.tool;
-        if (toolName) {
-            loadComponent("toolContainer", `${toolsBasePath}${toolName}.html`, () => {
+        const utcToolName = toolContainer.dataset.tool;
+        if (utcToolName) {
+            loadComponent("toolContainer", `${toolsBasePath}${utcToolName}.html`, () => {
                 console.log("Calling updateTime() after toolContainer is loaded");
                 if (typeof updateTime === "function") {
                     updateTime();
+                    setInterval(updateTime, 1000); // Ensure 1Hz updates
                 } else {
                     console.error("updateTime() function is not defined!");
                 }
@@ -50,11 +51,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Load 8b10b Tool
-    const tool8b10b = document.getElementById("tool8b10b");
-    if (tool8b10b) {
-        const toolName = tool8b10b.dataset.tool;
-        if (toolName) {
-            loadComponent("tool8b10b", `${toolsBasePath}${toolName}.html`, () => {
+    const tool8b10bContainer = document.getElementById("tool8b10b");
+    if (tool8b10bContainer) {
+        const b10bToolName = tool8b10bContainer.dataset.tool;
+        if (b10bToolName) {
+            loadComponent("tool8b10b", `${toolsBasePath}${b10bToolName}.html`, () => {
                 console.log("8b10b tool loaded, initializing...");
             });
         }
