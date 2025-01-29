@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     console.log("✅ scripts.js loaded and running");
 
-    // Base URLs for components and tools
     const componentBasePath = "/components/";
     const toolsBasePath = "/pages/tools/";
 
@@ -33,10 +32,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         loadComponent("footer", componentBasePath + "footer.html"),
     ]);
 
-    // Dynamic loading for tools
+    // Dynamic loading for UTC tool
     const toolContainer = document.getElementById("toolContainer");
     if (toolContainer) {
-        const toolName = toolContainer.dataset.tool; // e.g., 'utc'
+        const toolName = toolContainer.dataset.tool;
         console.log(`🔍 Detected tool: ${toolName}`);
 
         if (toolName) {
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         console.log("🚀 Calling updateTime() and starting 1Hz interval.");
                         updateTime(); // Run immediately
                         if (typeof utcInterval === "undefined") {
-                            window.utcInterval = setInterval(updateTime, 1000); // Ensure only one instance
+                            window.utcInterval = setInterval(updateTime, 1000);
                             console.log("⏳ 1Hz update interval started.");
                         }
                     } else {
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 } else {
                     console.warn("⚠️ updateTime() function not found, dynamically loading UTC.js...");
                     
-                    // Dynamically load UTC.js if it's missing
+                    // Dynamically load UTC.js if missing
                     const script = document.createElement("script");
                     script.src = "/js/UTC.js";
                     script.defer = true;
@@ -73,7 +72,31 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
             });
         } else {
-            console.warn("⚠️ No tool detected for dynamic loading.");
+            console.warn("⚠️ No UTC tool detected for dynamic loading.");
+        }
+    }
+
+    // Dynamic loading for 8b10b tool
+    const tool8b10bContainer = document.getElementById("tool8b10b");
+    if (tool8b10bContainer) {
+        const toolName = tool8b10bContainer.dataset.tool;
+        console.log(`🔍 Detected tool: ${toolName}`);
+
+        if (toolName) {
+            loadComponent("tool8b10b", `${toolsBasePath}${toolName}.html`, () => {
+                console.log("✅ 8b10b tool content loaded. Checking for encoding functions...");
+
+                // Dynamically load 8b10b.js
+                const script = document.createElement("script");
+                script.src = "/js/8b10b.js";
+                script.defer = true;
+                script.onload = () => {
+                    console.log("✅ 8b10b.js script loaded dynamically.");
+                };
+                document.body.appendChild(script);
+            });
+        } else {
+            console.warn("⚠️ No 8b10b tool detected for dynamic loading.");
         }
     }
 });
