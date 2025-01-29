@@ -50,4 +50,25 @@
 </div>
 
 <!-- JavaScript for Functionality -->
-<script src="/js/8b10b.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("✅ 8b10b.js is being initialized");
+
+        // Load the script dynamically if not already present
+        if (!document.getElementById("8b10b-script")) {
+            const script = document.createElement("script");
+            script.id = "8b10b-script";
+            script.src = "/js/8b10b.js";
+            script.defer = true;
+            script.onload = function () {
+                console.log("✅ 8b10b.js loaded successfully.");
+            };
+            script.onerror = function () {
+                console.error("❌ Error loading 8b10b.js!");
+            };
+            document.body.appendChild(script);
+        } else {
+            console.log("🔍 8b10b.js already loaded.");
+        }
+    });
+</script>
