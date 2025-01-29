@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             document.getElementById(id).innerHTML = content;
             console.log(`${id} loaded successfully`);
 
-            // Call callback function if provided (e.g., initialize UTC.js)
+            // Call callback function if provided
             if (callback) {
                 console.log(`Executing callback for ${id}`);
                 callback();
@@ -41,11 +41,27 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         if (toolName) {
             loadComponent("toolContainer", `${toolsBasePath}${toolName}.html`, () => {
-                console.log("Calling updateTime() after toolContainer is loaded");
+                console.log("Tool content loaded. Checking for updateTime function...");
+
                 if (typeof updateTime === "function") {
+                    console.log("Calling updateTime() after toolContainer is loaded.");
                     updateTime();
                 } else {
-                    console.error("updateTime() function is not defined!");
+                    console.warn("updateTime() function not found, dynamically loading UTC.js...");
+                    
+                    // Dynamically load UTC.js if it's missing
+                    const script = document.createElement("script");
+                    script.src = "/js/UTC.js";
+                    script.defer = true;
+                    script.onload = () => {
+                        console.log("UTC.js script loaded dynamically.");
+                        if (typeof updateTime === "function") {
+                            updateTime();
+                        } else {
+                            console.error("updateTime() is still undefined after loading UTC.js!");
+                        }
+                    };
+                    document.body.appendChild(script);
                 }
             });
         } else {
