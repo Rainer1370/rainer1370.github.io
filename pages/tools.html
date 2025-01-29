@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tools</title>
+    <title>Rob Rainer Portfolio</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Rob Rainer's portfolio featuring expertise in EPICS development, accelerator timing systems, Python-based application development, and AI-driven solutions.">
+    <meta name="author" content="Rob Rainer">
+    <meta name="keywords" content="Rob Rainer, EPICS, accelerator timing, AI, Python, controls engineering">
+    
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="/js/scripts.js" defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <div id="header"></div>
+    <!-- Header Section -->
+    <header id="header"></header>    
 
     <!-- Main Content -->
     <main>
-        <!-- Tools Introduction -->
-        <section>
-            <h1 style="text-align: center; margin: 20px 0;">Tools Section</h1>
-            <p style="text-align: center; margin: 0 15px;">
-                Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, 
-                and other technical tasks. These tools are designed to assist in learning and solving complex problems efficiently. 
-                Explore the features below to enhance your workflow and understanding.
-            </p>
-            <p style="text-align: center;">
-                All source code is available on 
-                <a href="https://github.com/Rainer1370/rainer1370.github.io.git" target="_blank">GitHub</a>.
+        <!-- Banner Section -->
+        <section class="banner" style="margin-bottom: 10px;">
+            <img src="/assets/NSLS2CR.jpg" alt="NSLS-II Control Room" style="width:100%; max-width: 1200px; height:auto; display:block; margin:0 auto;">
+            <p style="text-align: center; margin-top: 5px;">
+                <a href="https://www.bnl.gov/nsls2/" style="color: #FFD700; text-decoration: none;">NSLS II Control Room</a>
             </p>
         </section>
 
-        <!-- Image Section -->
-        <section class="banner">
-            <figure>
-                <img src="/assets/tools.jpg" alt="Tools Section Logo" style="width: 100%; max-height: 400px; object-fit: cover;">
-                <figcaption style="text-align: center; font-style: italic; margin-top: 5px;">
-                    Interactive utilities for encoding, analysis, and more — designed for solving complex problems efficiently.
-                </figcaption>
-            </figure>
+        <!-- Welcome Section -->
+        <section>
+            <h1 style="text-align: center;">Welcome!</h1>
+            <p style="text-align: center; margin-bottom: 10px;">
+                I'm Rob Rainer. Explore my professional journey as a Controls Engineer and scientist, where cutting-edge solutions meet precision and 
+                innovation. I specialize in accelerator control systems, EPICS integration, Python-based application 
+                development, and AI-driven solutions.
+            </p>
+        
+            <!-- Separation Bar -->
+            <hr class="separator">
         </section>
 
-        <!-- NTP and UTC Date-Time Display -->
-        <section id="toolContainer" data-tool="utc"></section>
-
-        <!-- Conversion and 8b10b Encoding -->
-        <section id="tool8b10b" data-tool="8b10b"></section>
-
-        <!-- Room for Future Tools -->
+        <!-- Highlighted Projects Section -->
         <section>
-            <h2>Coming Soon</h2>
-            <p style="text-align: center;">
-                More tools will be added here to expand functionality and support for your projects. Stay tuned!
-            </p>
+            <h2>Highlighted Projects</h2>
+            <ul>
+                <li>
+                    <strong>AI-Assisted Accelerator Timing System:</strong> Achieved picosecond resolution, updated and optimized performance through AI-driven optimization techniques.
+                </li>
+                <li>
+                    <strong>EPICS-Based Area Radiation Monitor (ARM) Modernization:</strong> 
+                    <ul>
+                        <li>Updated the EPICS device driver to accommodate new hardware, using AI to optimize the refactoring process.</li>
+                        <li>Modernized the way ARMs, which are a part of the Personnel Protection System (PPS), transmit data streams over the network through network hardware and configuration upgrades, improving reliability and scalability.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>SBM Top-Off Application:</strong> Enhanced machine efficiency by enabling uniform beam injection and implementing ML techniques for optimization.
+                </li>
+            </ul>
+
+            <!-- Separation Bar -->
+            <hr class="separator">
         </section>
     </main>
 
-    <!-- Footer -->
-    <div id="footer"></div>
+    <!-- Footer Section -->
+    <footer id="footer"></footer>    
 </body>
 </html>
