@@ -47,6 +47,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     if (typeof updateTime === "function") {
                         console.log("🚀 Calling updateTime() and starting 1Hz interval.");
                         updateTime(); // Run immediately
+                        if (typeof utcInterval === "undefined") {
+                            window.utcInterval = setInterval(updateTime, 1000); // Ensure only one instance
+                            console.log("⏳ 1Hz update interval started.");
+                        }
                     } else {
                         console.error("❌ updateTime() function is not defined!");
                     }
