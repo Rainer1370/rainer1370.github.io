@@ -39,13 +39,22 @@ document.addEventListener("DOMContentLoaded", async function () {
         const utcToolName = toolContainer.dataset.tool;
         if (utcToolName) {
             loadComponent("toolContainer", `${toolsBasePath}${utcToolName}.html`, () => {
-                console.log("Calling updateTime() after toolContainer is loaded");
-                if (typeof updateTime === "function") {
-                    updateTime();
-                    setInterval(updateTime, 1000); // Ensure 1Hz updates
-                } else {
-                    console.error("updateTime() function is not defined!");
-                }
+                console.log("UTC tool loaded. Now loading UTC.js...");
+
+                // Dynamically load UTC.js
+                const utcScript = document.createElement("script");
+                utcScript.src = "/js/UTC.js";
+                utcScript.defer = true;
+                utcScript.onload = () => {
+                    console.log("UTC.js loaded dynamically.");
+                    if (typeof updateTime === "function") {
+                        updateTime();
+                        setInterval(updateTime, 1000); // Ensure 1Hz updates
+                    } else {
+                        console.error("updateTime() function still not defined!");
+                    }
+                };
+                document.body.appendChild(utcScript);
             });
         }
     }
@@ -57,6 +66,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (b10bToolName) {
             loadComponent("tool8b10b", `${toolsBasePath}${b10bToolName}.html`, () => {
                 console.log("8b10b tool loaded, initializing...");
+
+                // Dynamically load 8b10b.js
+                const b10bScript = document.createElement("script");
+                b10bScript.src = "/js/8b10b.js";
+                b10bScript.defer = true;
+                b10bScript.onload = () => {
+                    console.log("8b10b.js loaded dynamically.");
+                };
+                document.body.appendChild(b10bScript);
             });
         }
     }
