@@ -5,18 +5,24 @@ let runningDisparity = 0;
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ 8b10b.js initialized");
 
-    // Add event listeners for keypress (Enter) and input validation
+    // Add event listeners for input fields
     document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", function (e) {
+            console.log(`✍️ Input changed in ${e.target.id}, processing...`);
+            handleInput(e.target.id);
+        });
+
         input.addEventListener("keypress", function (e) {
             if (e.key === "Enter") {
                 console.log(`⏩ Enter pressed in ${e.target.id}, processing input...`);
                 handleInput(e.target.id);
-                e.preventDefault(); // Prevent default behavior (especially on mobile)
+                e.preventDefault(); // Prevents unwanted form submissions or focus loss
             }
         });
 
         input.addEventListener("blur", function (e) {
-            handleInput(e.target.id); // Process input when leaving the field
+            console.log(`📤 Input field ${e.target.id} lost focus, processing...`);
+            handleInput(e.target.id);
         });
     });
 
@@ -27,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to handle input based on ID
 function handleInput(id) {
+    if (!id) return;
     switch (id) {
         case "base10Input":
             convertFromBase10();
@@ -175,13 +182,6 @@ function encodeBinary() {
         <p><strong>10-bit Output:</strong> <u>${tenBitOutput}</u></p>
         <p><strong>Running Disparity:</strong> ${runningDisparity >= 0 ? "+" : ""}${runningDisparity}</p>
     `;
-}
-
-// Function to clear running disparity
-function clearDisparity() {
-    runningDisparity = 0;
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
 }
 
 // Function to display error messages
