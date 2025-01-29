@@ -1,3 +1,4 @@
+/* Conversion Table Styling */
 .conversion-table {
     border-collapse: collapse;
     width: 100%;
@@ -36,8 +37,60 @@
     background-color: #0056b3;
 }
 
+/* Layout for Conversion and Output */
+.conversion-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Keep input fields on the left */
+.input-section {
+    flex: 1;
+    padding-right: 20px;
+}
+
+/* Move 8b10b Encoding Output to the Right */
+.output-section {
+    flex: 1;
+    text-align: center;
+    border-left: 2px solid #ddd;
+    padding-left: 20px;
+}
+
+/* Label for Output */
+.output-section h3 {
+    font-size: 18px;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+/* Encoding Result Styling */
 .result {
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
+    padding: 10px;
+    background: #eef;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Error Messages */
+.result p {
+    margin: 5px 0;
+}
+
+.result p strong {
+    color: #333;
+}
+
+.result p[style*="color: red;"] {
+    color: red;
+}
+
+.result p[style*="color: green;"] {
+    color: green;
 }
