@@ -43,9 +43,18 @@ document.addEventListener("DOMContentLoaded", async function () {
             loadComponent("toolContainer", `${toolsBasePath}${toolName}.html`, () => {
                 console.log("Tool content loaded. Checking for updateTime function...");
 
+                function startUpdatingTime() {
+                    if (typeof updateTime === "function") {
+                        console.log("Calling updateTime() and starting 1Hz interval.");
+                        updateTime();
+                        setInterval(updateTime, 1000); // Start 1Hz update loop
+                    } else {
+                        console.error("updateTime() function is not defined!");
+                    }
+                }
+
                 if (typeof updateTime === "function") {
-                    console.log("Calling updateTime() after toolContainer is loaded.");
-                    updateTime();
+                    startUpdatingTime();
                 } else {
                     console.warn("updateTime() function not found, dynamically loading UTC.js...");
                     
@@ -55,11 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     script.defer = true;
                     script.onload = () => {
                         console.log("UTC.js script loaded dynamically.");
-                        if (typeof updateTime === "function") {
-                            updateTime();
-                        } else {
-                            console.error("updateTime() is still undefined after loading UTC.js!");
-                        }
+                        startUpdatingTime();
                     };
                     document.body.appendChild(script);
                 }
