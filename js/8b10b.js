@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         input.addEventListener("blur", function (e) {
-            console.log(`📤 Input field ${e.target.id} lost focus, processing...`);
+            console.log(`📤 Input field ${e.target.id} lost focus (Next button/tab), processing...`);
             handleInput(e.target.id);
         });
     });
@@ -184,14 +184,4 @@ function encodeBinary() {
     `;
 }
 
-// Function to display error messages
-function displayError(message) {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = `<p style='color: red;'>${message}</p>`;
-}
-
-// Function to clear error messages
-function clearError() {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "";
-}
+console.log("✅ 8b10b.js modifications complete.");
