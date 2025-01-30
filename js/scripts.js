@@ -29,6 +29,19 @@ document.addEventListener("DOMContentLoaded", async function () {
         loadComponent("footer", componentBasePath + "footer.html"),
     ]);
 
+    // Function to load scripts only once
+    function loadScriptOnce(scriptPath) {
+        if (!document.querySelector(`script[src="${scriptPath}"]`)) {
+            const script = document.createElement("script");
+            script.src = scriptPath;
+            script.defer = true;
+            document.body.appendChild(script);
+            console.log(`📥 ${scriptPath} loaded dynamically.`);
+        } else {
+            console.log(`⚡ ${scriptPath} already loaded, skipping.`);
+        }
+    }
+
     // Dynamically load tools
     const tools = {
         "toolContainer": "utc",
@@ -44,11 +57,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 
                 // Load respective scripts if needed
                 if (tools[id] === "plc") {
-                    const script = document.createElement("script");
-                    script.src = "/js/plc.js";
-                    script.defer = true;
-                    document.body.appendChild(script);
-                    console.log("📥 plc.js loaded dynamically.");
+                    loadScriptOnce("/js/plc.js");
                 }
             });
         }
