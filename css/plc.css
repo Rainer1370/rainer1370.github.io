@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tools</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Tools Introduction -->
+        <section>
+            <h1 style="text-align: center; margin: 20px 0;">Tools Section</h1>
+            <p style="text-align: center; margin: 0 15px;">
+                Welcome to the tools section! Below, you'll find interactive utilities for data encoding, analysis, 
+                and other technical tasks. These tools are designed to assist in learning and solving complex problems efficiently. 
+                Explore the features below to enhance your workflow and understanding.
+            </p>
+            <p style="text-align: center;">
+                All source code is available on 
+                <a href="https://github.com/Rainer1370/rainer1370.github.io.git" target="_blank">GitHub</a>.
+            </p>
+        </section>
+
+        <!-- Image Section -->
+        <section class="banner">
+            <figure>
+                <img src="/assets/tools.jpg" alt="Tools Section Logo" style="width: 100%; max-height: 400px; object-fit: cover;">
+                <figcaption style="text-align: center; font-style: italic; margin-top: 5px;">
+                    Interactive utilities for encoding, analysis, and more — designed for solving complex problems efficiently.
+                </figcaption>
+            </figure>
+        </section>
+
+        <!-- NTP and UTC Date-Time Display -->
+        <section id="toolContainer" data-tool="utc"></section>
+
+        <!-- Conversion and 8b10b Encoding -->
+        <section id="tool8b10b" data-tool="8b10b"></section>
+
+        <!-- PLC Code Viewer -->
+        <section id="toolPLC" data-tool="plc"></section>
+
+        <!-- Room for Future Tools -->
+        <section>
+            <h2>Coming Soon</h2>
+            <p style="text-align: center;">
+                More tools will be added here to expand functionality and support for your projects. Stay tuned!
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Load Tools Dynamically -->
+    <script>
+        function loadTool(id, file) {
+            fetch(file)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById(id).innerHTML = html;
+                })
+                .catch(error => console.error("Error loading tool:", error));
+        }
+
+        // Load all tools
+        loadTool("toolContainer", "/pages/tool/utc.html");
+        loadTool("tool8b10b", "/pages/tool/8b10b.html");
+        loadTool("toolPLC", "/pages/tool/plc.html");
+    </script>
+</body>
+</html>
