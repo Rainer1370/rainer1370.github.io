@@ -29,16 +29,19 @@ document.addEventListener("DOMContentLoaded", async function () {
         loadComponent("footer", componentBasePath + "footer.html"),
     ]);
 
-    // Function to load scripts only once
-    function loadScriptOnce(scriptPath) {
+    function loadScriptOnce(scriptPath, callback = null) {
         if (!document.querySelector(`script[src="${scriptPath}"]`)) {
             const script = document.createElement("script");
             script.src = scriptPath;
             script.defer = true;
+            script.onload = () => {
+                console.log(`📥 ${scriptPath} loaded dynamically.`);
+                if (callback) callback();
+            };
             document.body.appendChild(script);
-            console.log(`📥 ${scriptPath} loaded dynamically.`);
         } else {
             console.log(`⚡ ${scriptPath} already loaded, skipping.`);
+            if (callback) callback();
         }
     }
 
@@ -54,10 +57,32 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (toolContainer) {
             loadComponent(id, `${toolsBasePath}${tools[id]}.html`, () => {
                 console.log(`✅ ${tools[id]} tool content loaded.`);
-                
-                // Load respective scripts if needed
+
+                if (tools[id] === "utc") {
+                    loadScriptOnce("/js/UTC.js", () => {
+                        console.log("🔄 Checking for `updateTime()` function...");
+                        if (typeof updateTime === "function") {
+                            console.log("🚀 Calling `updateTime()` and starting 1Hz interval.");
+                            updateTime();
+                            if (typeof utcInterval === "undefined") {
+                                window.utcInterval = setInterval(updateTime, 1000);
+                                console.log("⏳ 1Hz update interval started.");
+                            }
+                        } else {
+                            console.error("❌ `updateTime()` function not found!");
+                        }
+                    });
+                }
+
                 if (tools[id] === "plc") {
-                    loadScriptOnce("/js/plc.js");
+                    loadScriptOnce("/js/plc.js", () => {
+                        console.log("🔄 Reinitializing PLC event listeners...");
+                        if (typeof switchPLCCode === "function") {
+                            console.log("✅ PLC script initialized.");
+                        } else {
+                            console.warn("⚠️ PLC script not yet initialized.");
+                        }
+                    });
                 }
             });
         }
