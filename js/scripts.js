@@ -30,20 +30,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     ]);
 
     // Function to load scripts only once
-    function loadScriptOnce(scriptPath, callback = null) {
+    function loadScriptOnce(scriptPath) {
         if (!document.querySelector(`script[src="${scriptPath}"]`)) {
             const script = document.createElement("script");
             script.src = scriptPath;
             script.defer = true;
-            script.onload = () => {
-                console.log(`✅ ${scriptPath} script loaded dynamically.`);
-                if (callback) callback(); // Run callback if provided
-            };
             document.body.appendChild(script);
-            console.log(`📥 Loading ${scriptPath} dynamically.`);
+            console.log(`📥 ${scriptPath} loaded dynamically.`);
         } else {
             console.log(`⚡ ${scriptPath} already loaded, skipping.`);
-            if (callback) callback();
         }
     }
 
@@ -59,17 +54,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (toolContainer) {
             loadComponent(id, `${toolsBasePath}${tools[id]}.html`, () => {
                 console.log(`✅ ${tools[id]} tool content loaded.`);
-
+                
                 // Load respective scripts if needed
                 if (tools[id] === "plc") {
-                    loadScriptOnce("/js/plc.js", () => {
-                        if (typeof switchPLCCode === "function") {
-                            switchPLCCode(); // Ensure the function runs after script loads
-                            console.log("✅ switchPLCCode() executed after PLC tool load.");
-                        } else {
-                            console.error("❌ switchPLCCode() not found after plc.js load.");
-                        }
-                    });
+                    loadScriptOnce("/js/plc.js");
                 }
             });
         }
