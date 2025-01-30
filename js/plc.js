@@ -1,63 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("✅ plc.js loaded!");
+    console.log("✅ plc.js loaded");
 
+    // Ensure PLC code switching works
     window.switchPLCCode = function () {
-        console.log("🔄 Switching PLC Code...");
-
-        const selectedLang = document.getElementById("plcSelector")?.value;
-        if (!selectedLang) {
-            console.error("❌ plcSelector not found!");
-            return;
-        }
-
-        const codeBlocks = document.querySelectorAll(".plc-code");
-        codeBlocks.forEach(block => {
+        const selectedLang = document.getElementById("plcSelector").value;
+        document.querySelectorAll(".plc-code").forEach(block => {
             block.style.display = "none"; // Hide all code blocks
         });
 
-        const selectedCodeBlock = document.getElementById(selectedLang);
-        if (selectedCodeBlock) {
-            selectedCodeBlock.style.display = "block"; // Show selected code block
-            console.log(`✅ Displaying ${selectedLang} code`);
-        } else {
-            console.error(`❌ No matching code block found for ${selectedLang}`);
-        }
+        document.getElementById(selectedLang).style.display = "block"; // Show selected one
+        console.log(`✅ PLC display updated to: ${selectedLang}`);
     };
 
-    // Bind event listener after dropdown is loaded
-    function attachDropdownListener() {
-        const plcSelector = document.getElementById("plcSelector");
-        if (plcSelector) {
-            plcSelector.addEventListener("change", switchPLCCode);
-            console.log("✅ Event listener added to plcSelector.");
-        } else {
-            console.warn("⚠️ plcSelector not found on initial load.");
-        }
-    }
-
-    // Ensure function runs after tools.html loads
-    if (document.getElementById("plcSelector")) {
-        attachDropdownListener();
-        switchPLCCode(); // Initialize with the default selection
-    } else {
-        setTimeout(attachDropdownListener, 1000); // Delay to wait for tools.html loading
-    }
-
-    // Logic Gate Simulation
+    // Ensure logic gate simulator works
     window.simulateLogic = function () {
-        console.log("🔄 Running Logic Simulation...");
-        
-        const inputA = document.getElementById("inputA")?.checked;
-        const inputB = document.getElementById("inputB")?.checked;
+        console.log("🔄 Running logic gate simulation...");
 
-        if (inputA === undefined || inputB === undefined) {
-            console.error("❌ Logic inputs not found!");
-            return;
-        }
+        const inputA = document.getElementById("inputA").checked;
+        const inputB = document.getElementById("inputB").checked;
 
         document.getElementById("andResult").textContent = inputA && inputB ? "ON" : "OFF";
         document.getElementById("orResult").textContent = inputA || inputB ? "ON" : "OFF";
         document.getElementById("notAResult").textContent = !inputA ? "ON" : "OFF";
-        console.log("✅ Logic Simulation Updated!");
+
+        console.log(`🟢 AND: ${inputA && inputB ? "ON" : "OFF"}`);
+        console.log(`🟢 OR: ${inputA || inputB ? "ON" : "OFF"}`);
+        console.log(`🟢 NOT A: ${!inputA ? "ON" : "OFF"}`);
     };
+
+    console.log("✅ PLC functionality is now active.");
 });
