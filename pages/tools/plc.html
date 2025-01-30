@@ -1,0 +1,46 @@
+<h2>PLC Code Viewer</h2>
+<p>Select a PLC programming language to view an example:</p>
+
+<select id="plcSelector" onchange="switchPLCCode()">
+    <option value="ladder">Ladder Logic (LD)</option>
+    <option value="structured_text">Structured Text (ST)</option>
+    <option value="fbd">Function Block Diagram (FBD)</option>
+</select>
+
+<pre id="ladder" class="plc-code"><code class="language-text">
+    // Simple Start/Stop Circuit (Ladder Logic)
+    ( )  --[ ]--( )  Start Button
+    ( )  --[\]--( )  Stop Button
+    ( )  --[ ]--( )  Motor Output
+</code></pre>
+
+<pre id="structured_text" class="plc-code" style="display:none;"><code class="language-text">
+    // Equivalent Structured Text (ST)
+    IF Start_Button THEN
+        Motor := TRUE;
+    END_IF;
+
+    IF Stop_Button THEN
+        Motor := FALSE;
+    END_IF;
+</code></pre>
+
+<pre id="fbd" class="plc-code" style="display:none;"><code class="language-text">
+    // Function Block Diagram (FBD)
+    (Start_Button) ---> [ OR ] ---> (Motor)
+    (Motor)        ---> [ AND ] ---> (Motor)
+    (Stop_Button)  ---> [ NOT ] ---> (AND)
+</code></pre>
+
+<script>
+    function switchPLCCode() {
+        const selectedLang = document.getElementById("plcSelector").value;
+        const codeBlocks = document.querySelectorAll(".plc-code");
+
+        codeBlocks.forEach(block => {
+            block.style.display = "none"; // Hide all code blocks
+        });
+
+        document.getElementById(selectedLang).style.display = "block"; // Show selected code block
+    }
+</script>
