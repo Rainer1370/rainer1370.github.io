@@ -61,10 +61,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 if (tools[id] === "utc") {
                     loadScriptOnce("/js/UTC.js", () => {
-                        console.log("🔄 Ensuring UTC updates in tools.html");
+                        console.log("🔄 Reinitializing UTC clock inside tools.html...");
                         if (typeof updateTime === "function") {
-                            console.log("🚀 Running `updateTime()` and ensuring 1Hz updates.");
-                            updateTime();
+                            updateTime();  // Ensure it runs immediately
                             if (!window.utcInterval) {
                                 window.utcInterval = setInterval(updateTime, 1000);
                                 console.log("⏳ 1Hz update interval started.");
@@ -86,9 +85,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    // 🟢 FINAL FIX: Ensure updateTime() runs after the page fully loads
+    // FINAL FIX: Ensure updateTime() runs after everything loads
     window.addEventListener("load", () => {
-        console.log("🔄 FINAL ENSURE: Running updateTime() after everything loads.");
+        console.log("🔄 FINAL CHECK: Running updateTime() after full page load.");
         if (typeof updateTime === "function") {
             updateTime();
             if (!window.utcInterval) {
