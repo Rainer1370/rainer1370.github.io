@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             if (callback) {
                 console.log(`⚡ Executing callback for ${id}`);
-                setTimeout(callback, 500); // Ensure elements exist before running scripts
+                setTimeout(callback, 500);
             }
         } catch (error) {
             console.error(`❌ ${id} Error:`, error);
@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Function to load external scripts dynamically (ensuring they run only once)
     function loadScriptOnce(scriptPath, callback = null) {
         if (!document.querySelector(`script[src="${scriptPath}"]`)) {
             const script = document.createElement("script");
@@ -62,9 +61,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 if (tools[id] === "utc") {
                     loadScriptOnce("/js/UTC.js", () => {
-                        console.log("🔄 Checking for `updateTime()` function...");
+                        console.log("🔄 Ensuring UTC updates in tools.html");
                         if (typeof updateTime === "function") {
-                            console.log("🚀 Running `updateTime()` and ensuring 1Hz updates.");
                             updateTime();
                             if (!window.utcInterval) {
                                 window.utcInterval = setInterval(updateTime, 1000);
@@ -79,18 +77,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 if (tools[id] === "plc") {
                     loadScriptOnce("/js/plc.js", () => {
                         console.log("✅ PLC Simulator script loaded.");
-                        if (typeof switchPLCCode === "function") {
-                            switchPLCCode(); // Initialize PLC display
-                        }
-                        if (typeof simulateLogic === "function") {
-                            simulateLogic(); // Ensure logic gate simulator updates live
-                        }
-                    });
-                }
-
-                if (tools[id] === "8b10b") {
-                    loadScriptOnce("/js/8b10b.js", () => {
-                        console.log("✅ 8b10b script loaded.");
+                        if (typeof switchPLCCode === "function") switchPLCCode();
+                        if (typeof simulateLogic === "function") simulateLogic();
                     });
                 }
             });
