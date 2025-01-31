@@ -1,32 +1,30 @@
 // Global variable for running disparity
 let runningDisparity = 0;
 
-// Add event listeners for inputs
+// Add event listeners for inputs (live updates)
 document.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") {
-            const id = e.target.id;
-            switch (id) {
-                case "base10Input":
-                    convertFromBase10();
-                    break;
-                case "hexInput":
-                    convertFromHex();
-                    break;
-                case "octalInput":
-                    convertFromOctal();
-                    break;
-                case "asciiInput":
-                    convertFromAscii();
-                    break;
-                case "binaryInput":
-                    convertFromBinary();
-                    break;
-            }
+    input.addEventListener("input", () => {
+        switch (input.id) {
+            case "base10Input":
+                convertFromBase10();
+                break;
+            case "hexInput":
+                convertFromHex();
+                break;
+            case "octalInput":
+                convertFromOctal();
+                break;
+            case "asciiInput":
+                convertFromAscii();
+                break;
+            case "binaryInput":
+                convertFromBinary();
+                break;
         }
     });
 });
 
+// Button event listeners
 document.getElementById("encodeButton").addEventListener("click", encodeBinary);
 document.getElementById("clearDisparityButton").addEventListener("click", clearDisparity);
 
@@ -37,8 +35,7 @@ function convertFromBase10() {
         displayError("Invalid Decimal input! Must be between 0 and 9999.");
         return;
     }
-    const decimal = parseInt(base10Input);
-    updateFields(decimal);
+    updateFields(parseInt(base10Input));
 }
 
 function convertFromHex() {
@@ -47,12 +44,7 @@ function convertFromHex() {
         displayError("Invalid Hexadecimal input! Must be a valid hex number.");
         return;
     }
-    const decimal = parseInt(hexInput, 16);
-    if (decimal > 9999) {
-        displayError("Hexadecimal input must represent a value between 0 and 9999.");
-        return;
-    }
-    updateFields(decimal);
+    updateFields(parseInt(hexInput, 16));
 }
 
 function convertFromOctal() {
@@ -61,12 +53,7 @@ function convertFromOctal() {
         displayError("Invalid Octal input! Must be a valid octal number.");
         return;
     }
-    const decimal = parseInt(octalInput, 8);
-    if (decimal > 9999) {
-        displayError("Octal input must represent a value between 0 and 9999.");
-        return;
-    }
-    updateFields(decimal);
+    updateFields(parseInt(octalInput, 8));
 }
 
 function convertFromAscii() {
@@ -75,8 +62,7 @@ function convertFromAscii() {
         displayError("Invalid ASCII input! Must be a single character.");
         return;
     }
-    const decimal = asciiInput.charCodeAt(0);
-    updateFields(decimal);
+    updateFields(asciiInput.charCodeAt(0));
 }
 
 function convertFromBinary() {
@@ -85,30 +71,24 @@ function convertFromBinary() {
         displayError("Invalid Binary input! Must be a valid binary number.");
         return;
     }
-    const decimal = parseInt(binaryInput, 2);
-    if (decimal > 9999) {
-        displayError("Binary input must represent a value between 0 and 9999.");
-        return;
-    }
-    updateFields(decimal);
+    updateFields(parseInt(binaryInput, 2));
 }
 
-// Function to update all fields based on a decimal value
+// Update all fields based on a decimal value
 function updateFields(decimal) {
-    const binary = decimal.toString(2);
-    const octal = decimal.toString(8);
-    const hex = decimal.toString(16).toUpperCase();
-    const ascii = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
-
+    if (decimal > 9999) {
+        displayError("Input value must be between 0 and 9999.");
+        return;
+    }
     document.getElementById("base10Input").value = decimal;
-    document.getElementById("hexInput").value = hex;
-    document.getElementById("octalInput").value = octal;
-    document.getElementById("asciiInput").value = ascii;
-    document.getElementById("binaryInput").value = binary;
+    document.getElementById("hexInput").value = decimal.toString(16).toUpperCase();
+    document.getElementById("octalInput").value = decimal.toString(8);
+    document.getElementById("asciiInput").value = decimal >= 32 && decimal <= 126 ? String.fromCharCode(decimal) : "N/A";
+    document.getElementById("binaryInput").value = decimal.toString(2);
     clearError();
 }
 
-// Function to encode binary to 8b10b
+// Encode binary to 8b10b
 function encodeBinary() {
     const binaryInput = document.getElementById("binaryInput").value.trim();
     const resultDiv = document.getElementById("result");
@@ -121,7 +101,6 @@ function encodeBinary() {
 
     const paddedBinary = binaryInput.padStart(8, "0");
 
-    // Complete Encoding Tables
     const fiveToSixTable = {
         "00000": "100111", "00001": "011101", "00010": "101101", "00011": "110001",
         "00100": "110101", "00101": "101001", "00110": "011001", "00111": "111000",
@@ -159,21 +138,16 @@ function encodeBinary() {
     `;
 }
 
-// Function to clear running disparity
+// Clear running disparity
 function clearDisparity() {
     runningDisparity = 0;
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
+    document.getElementById("result").innerHTML = "<p style='color: green;'><strong>Running Disparity cleared!</strong></p>";
 }
 
-// Function to display error messages
+// Error handling
 function displayError(message) {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = `<p style='color: red;'>${message}</p>`;
+    document.getElementById("result").innerHTML = `<p style='color: red;'>${message}</p>`;
 }
-
-// Function to clear error messages
 function clearError() {
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "";
+    document.getElementById("result").innerHTML = "";
 }
