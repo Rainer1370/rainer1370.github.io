@@ -30,19 +30,22 @@ Includes sections for:
 - Interactive tools for data analysis, simulation, and visualization.
 - Technical publications and key accomplishments.
 
-### **Interactive Tools**
+## **Interactive Tools**
 The **Tools Section** features utilities for data encoding, engineering calculations, waveform analysis, and more.  
-**Current Tools Include**:
-1. [UTC, Local Time, and Unix Timestamp Converter](https://rainer1370.github.io/pages/tools/utc-converter.html)
-2. [QR Code Generator](https://rainer1370.github.io/pages/tools/qr-generator.html)
-3. [8b10b Encoder and Number Converter](https://rainer1370.github.io/pages/tools/8b10b-encoder.html)
-4. [Temperature Converter](https://rainer1370.github.io/pages/tools/temp-converter.html)
-5. [Waveform Visualizer](https://rainer1370.github.io/pages/tools/waveform-visualizer.html)
-6. [PID Controller Simulator](https://rainer1370.github.io/pages/tools/pid-simulator.html)
-7. [ASCII/Unicode Art Generator](https://rainer1370.github.io/pages/tools/ascii-art-generator.html)
-8. [Beam Dynamics Calculator](https://rainer1370.github.io/pages/tools/beam-dynamics-calculator.html)
 
-Visit the [Tools Section](https://rainer1370.com/pages/tools.html) to explore these utilities.
+**Current and Future Tools Include**:
+1. [UTC, Local Time, and Unix Timestamp Converter](https://rainer1370.github.io/pages/tools/utc.html)
+2. [8b10b Encoder and Number Converter](https://rainer1370.github.io/pages/tools/8b10b.html)
+3. [PLC Simulator](https://rainer1370.github.io/pages/tools/plc.html)
+4. [PID Loop Visualizer](https://rainer1370.github.io/pages/tools/pid.html) *(NEW)*
+5. [Light Analysis Tool](https://rainer1370.github.io/pages/tools/light.html) *(NEW)*
+6. [Temperature Converter](https://rainer1370.github.io/pages/tools/temp.html)
+7. [Waveform Visualizer](https://rainer1370.github.io/pages/tools/waveform.html)
+8. [QR Code Generator](https://rainer1370.github.io/pages/tools/qr.html)
+9. [Beam Dynamics Calculator](https://rainer1370.github.io/pages/tools/beam.html)
+10. [ASCII/Unicode Art Generator](https://rainer1370.github.io/pages/tools/ascii.html)
+
+👉 Visit the [Tools Section](https://rainer1370.com/pages/tools.html) to explore these utilities.
 
 ---
 
