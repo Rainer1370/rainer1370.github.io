@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     loadScriptOnce("/js/UTC.js", () => {
                         console.log("🔄 Ensuring UTC updates in tools.html");
                         if (typeof updateTime === "function") {
+                            console.log("🚀 Running `updateTime()` and ensuring 1Hz updates.");
                             updateTime();
                             if (!window.utcInterval) {
                                 window.utcInterval = setInterval(updateTime, 1000);
@@ -82,6 +83,20 @@ document.addEventListener("DOMContentLoaded", async function () {
                     });
                 }
             });
+        }
+    });
+
+    // 🟢 FINAL FIX: Ensure updateTime() runs after the page fully loads
+    window.addEventListener("load", () => {
+        console.log("🔄 FINAL ENSURE: Running updateTime() after everything loads.");
+        if (typeof updateTime === "function") {
+            updateTime();
+            if (!window.utcInterval) {
+                window.utcInterval = setInterval(updateTime, 1000);
+                console.log("⏳ FINAL 1Hz update interval started.");
+            }
+        } else {
+            console.error("❌ FINAL CHECK: `updateTime()` still not found!");
         }
     });
 });
