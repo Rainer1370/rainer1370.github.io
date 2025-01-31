@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             if (callback) {
                 console.log(`⚡ Executing callback for ${id}`);
-                callback();
+                setTimeout(callback, 500); // Ensure elements exist before running scripts
             }
         } catch (error) {
             console.error(`❌ ${id} Error:`, error);
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // Function to load external scripts dynamically (only once)
+    // Function to load external scripts dynamically (ensuring they run only once)
     function loadScriptOnce(scriptPath, callback = null) {
         if (!document.querySelector(`script[src="${scriptPath}"]`)) {
             const script = document.createElement("script");
@@ -32,12 +32,12 @@ document.addEventListener("DOMContentLoaded", async function () {
             script.defer = true;
             script.onload = () => {
                 console.log(`📥 ${scriptPath} loaded dynamically.`);
-                if (callback) callback();
+                if (callback) setTimeout(callback, 500);
             };
             document.body.appendChild(script);
         } else {
             console.log(`⚡ ${scriptPath} already loaded, skipping.`);
-            if (callback) callback();
+            if (callback) setTimeout(callback, 500);
         }
     }
 
@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                     loadScriptOnce("/js/UTC.js", () => {
                         console.log("🔄 Checking for `updateTime()` function...");
                         if (typeof updateTime === "function") {
-                            console.log("🚀 Running `updateTime()` and starting 1Hz interval.");
+                            console.log("🚀 Running `updateTime()` and ensuring 1Hz updates.");
                             updateTime();
-                            if (typeof utcInterval === "undefined") {
+                            if (!window.utcInterval) {
                                 window.utcInterval = setInterval(updateTime, 1000);
                                 console.log("⏳ 1Hz update interval started.");
                             }
@@ -82,6 +82,15 @@ document.addEventListener("DOMContentLoaded", async function () {
                         if (typeof switchPLCCode === "function") {
                             switchPLCCode(); // Initialize PLC display
                         }
+                        if (typeof simulateLogic === "function") {
+                            simulateLogic(); // Ensure logic gate simulator updates live
+                        }
+                    });
+                }
+
+                if (tools[id] === "8b10b") {
+                    loadScriptOnce("/js/8b10b.js", () => {
+                        console.log("✅ 8b10b script loaded.");
                     });
                 }
             });
