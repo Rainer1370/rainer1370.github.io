@@ -35,11 +35,9 @@
 <!-- Logic Gate Simulator -->
 <h3>Logic Gate Simulator</h3>
 <p>Test basic AND, OR, and NOT gate logic:</p>
+
 <label>A: <input type="checkbox" id="inputA"></label>
 <label>B: <input type="checkbox" id="inputB"></label>
-
-<!-- Make sure the button has the correct ID -->
-<button id="simulateLogicButton">Run Simulation</button>
 
 <p><strong>AND Output:</strong> <span id="andResult">-</span></p>
 <p><strong>OR Output:</strong> <span id="orResult">-</span></p>
@@ -52,3 +50,27 @@
 </p>
 
 <script src="/js/plc.js" defer></script>
+<script>
+    // Ensure logic gate simulator updates live
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("✅ Initializing live logic gate simulator.");
+        
+        function simulateLogic() {
+            console.log("🔄 Running logic gate simulation...");
+            
+            const inputA = document.getElementById("inputA").checked;
+            const inputB = document.getElementById("inputB").checked;
+
+            document.getElementById("andResult").textContent = inputA && inputB ? "ON" : "OFF";
+            document.getElementById("orResult").textContent = inputA || inputB ? "ON" : "OFF";
+            document.getElementById("notAResult").textContent = !inputA ? "ON" : "OFF";
+        }
+
+        // Attach event listeners for live updates
+        document.getElementById("inputA").addEventListener("change", simulateLogic);
+        document.getElementById("inputB").addEventListener("change", simulateLogic);
+
+        // Run simulation on page load (in case checkboxes are preselected)
+        simulateLogic();
+    });
+</script>
