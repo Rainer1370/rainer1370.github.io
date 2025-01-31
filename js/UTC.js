@@ -17,7 +17,8 @@ function updateTime() {
             timezoneElem.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
             unixElem.textContent = Math.floor(now.getTime() / 1000);
         } else {
-            console.warn("⚠️ UTC elements not found. Is the tool fully loaded?");
+            console.warn("⚠️ UTC elements not found. Delaying execution...");
+            setTimeout(updateTime, 500); // Retry after 500ms
         }
     } catch (error) {
         console.error("❌ Error updating time:", error);
@@ -27,15 +28,15 @@ function updateTime() {
 // Debugging: Confirm script is loaded
 console.log("✅ UTC.js loaded.");
 
-// Try to run updateTime() immediately
+// Run updateTime() immediately after page loads
 document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ DOMContentLoaded event fired in UTC.js");
     updateTime();
 });
 
-// Start periodic updates (ensure only one setInterval runs)
-if (typeof utcInterval === "undefined") {
-    var utcInterval = setInterval(() => {
+// Ensure only one setInterval runs (Fixes "Loading..." issue)
+if (!window.utcInterval) {
+    window.utcInterval = setInterval(() => {
         console.log("⏳ Running updateTime() every 1 second...");
         updateTime();
     }, 1000);
