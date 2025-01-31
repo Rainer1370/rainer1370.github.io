@@ -4,7 +4,7 @@ function updateTime() {
         console.log("✅ updateTime() called.");
         const now = new Date();
 
-        // Ensure elements exist before trying to update them
+        // Ensure elements exist before updating them
         const utcElem = document.getElementById("utcTime");
         const localElem = document.getElementById("localTime");
         const timezoneElem = document.getElementById("timezone");
@@ -17,7 +17,7 @@ function updateTime() {
             timezoneElem.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
             unixElem.textContent = Math.floor(now.getTime() / 1000);
         } else {
-            console.warn("⚠️ UTC elements not found. Delaying execution...");
+            console.warn("⚠️ UTC elements not found. Retrying in 500ms...");
             setTimeout(updateTime, 500); // Retry after 500ms
         }
     } catch (error) {
@@ -28,16 +28,20 @@ function updateTime() {
 // Debugging: Confirm script is loaded
 console.log("✅ UTC.js loaded.");
 
-// Run updateTime() immediately after page loads
+// Ensure updateTime() runs after dynamic content loads
 document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ DOMContentLoaded event fired in UTC.js");
     updateTime();
+
+    // Ensure the interval starts only once
+    if (!window.utcInterval) {
+        window.utcInterval = setInterval(updateTime, 1000);
+        console.log("⏳ 1Hz update interval started.");
+    }
 });
 
-// Ensure only one setInterval runs (Fixes "Loading..." issue)
-if (!window.utcInterval) {
-    window.utcInterval = setInterval(() => {
-        console.log("⏳ Running updateTime() every 1 second...");
-        updateTime();
-    }, 1000);
-}
+// Ensure updateTime() re-runs after tools.html loads
+window.addEventListener("load", () => {
+    console.log("✅ Window loaded, ensuring UTC updates in embedded tools.html");
+    updateTime();
+});
