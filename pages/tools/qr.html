@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="/js/scripts.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <!-- Header (Loaded Dynamically) -->
@@ -26,6 +26,12 @@
             <div id="qrCode" class="qr-code-display"></div>
             <button id="downloadQR" style="display: none;">Download QR Code</button>
         </div>
+
+        <p style="text-align: center; margin-top: 20px;">
+            Learn more about 
+            <a href="https://www.qrcode.com/en/" target="_blank" style="color: #007BFF; text-decoration: none;">
+                QR codes and their applications</a>.
+        </p>
     </main>
 
     <!-- Footer (Loaded Dynamically) -->
@@ -40,7 +46,6 @@
             const generateQR = document.getElementById("generateQR");
             const qrCodeDiv = document.getElementById("qrCode");
             const downloadQR = document.getElementById("downloadQR");
-            let qrInstance = null;
 
             generateQR.addEventListener("click", function () {
                 const inputText = qrInput.value.trim();
@@ -53,7 +58,7 @@
                 qrCodeDiv.innerHTML = "";
 
                 // Generate QR Code
-                qrInstance = new QRCode(qrCodeDiv, {
+                new QRCode(qrCodeDiv, {
                     text: inputText,
                     width: 200,
                     height: 200,
@@ -68,20 +73,18 @@
             });
 
             downloadQR.addEventListener("click", function () {
-                if (!qrInstance) {
+                const qrCanvas = qrCodeDiv.querySelector("canvas");
+                if (!qrCanvas) {
                     alert("Please generate a QR code first.");
                     return;
                 }
 
-                const qrCanvas = qrCodeDiv.querySelector("canvas");
-                if (qrCanvas) {
-                    const qrImage = qrCanvas.toDataURL("image/png");
-                    const downloadLink = document.createElement("a");
-                    downloadLink.href = qrImage;
-                    downloadLink.download = "QRCode.png";
-                    downloadLink.click();
-                    console.log("⬇️ QR Code Downloaded");
-                }
+                const qrImage = qrCanvas.toDataURL("image/png");
+                const downloadLink = document.createElement("a");
+                downloadLink.href = qrImage;
+                downloadLink.download = "QRCode.png";
+                downloadLink.click();
+                console.log("⬇️ QR Code Downloaded");
             });
         });
     </script>
