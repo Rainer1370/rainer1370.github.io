@@ -1,98 +1,45 @@
-<div id="pid-container">
-    <h3>PID Controller Simulator</h3>
-    <p>Adjust the PID parameters and observe how the system responds.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PID Controller Simulator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header (Dynamically Loaded) -->
+    <div id="header"></div>
 
-    <div class="controls">
-        <label>Kp (Proportional):</label>
-        <input type="number" id="pid-kp" value="1" step="0.1">
-        <label>Ki (Integral):</label>
-        <input type="number" id="pid-ki" value="0" step="0.1">
-        <label>Kd (Derivative):</label>
-        <input type="number" id="pid-kd" value="0" step="0.1">
-        <br>
-        <label>Setpoint:</label>
-        <input type="number" id="pid-setpoint" value="10">
-        <button id="pid-start-btn">Start Simulation</button>
-    </div>
+    <!-- Main Content -->
+    <main class="content-container">
+        <h1 style="text-align: center;">PID Controller Simulator</h1>
+        <p style="text-align: center;">
+            Adjust the **PID parameters** and observe how the system responds in real-time.
+        </p>
 
-    <canvas id="pidChart"></canvas>
-</div>
+        <div id="pid-container">
+            <div class="controls">
+                <label>Kp (Proportional):</label>
+                <input type="number" id="pid-kp" value="1" step="0.1">
+                <label>Ki (Integral):</label>
+                <input type="number" id="pid-ki" value="0" step="0.1">
+                <label>Kd (Derivative):</label>
+                <input type="number" id="pid-kd" value="0" step="0.1">
+                <br>
+                <label>Setpoint:</label>
+                <input type="number" id="pid-setpoint" value="10">
+                <button id="pid-start-btn">Start Simulation</button>
+            </div>
 
-<script>
-    (function () {
-        console.log("✅ PID Simulator loaded inside tools.html");
+            <canvas id="pidChart"></canvas>
+        </div>
+    </main>
 
-        // Ensure Chart.js is loaded dynamically
-        if (typeof Chart === "undefined") {
-            let script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/chart.js";
-            script.defer = true;
-            script.onload = initializePID;
-            document.body.appendChild(script);
-        } else {
-            initializePID();
-        }
+    <!-- Footer (Dynamically Loaded) -->
+    <div id="footer"></div>
 
-        function initializePID() {
-            console.log("✅ Initializing PID Controller");
-
-            let ctx = document.getElementById("pidChart").getContext("2d");
-            let pidChart = new Chart(ctx, {
-                type: "line",
-                data: {
-                    labels: [],
-                    datasets: [
-                        {
-                            label: "System Response",
-                            borderColor: "blue",
-                            data: [],
-                            fill: false,
-                        }
-                    ]
-                },
-                options: {
-                    animation: false,
-                    responsive: true,
-                    scales: {
-                        x: { title: { display: true, text: "Time (s)" } },
-                        y: { title: { display: true, text: "Output Value" } }
-                    }
-                }
-            });
-
-            function pidController(setpoint, kp, ki, kd) {
-                let output = 0;
-                let integral = 0;
-                let prevError = 0;
-                let timeStep = 0.1;
-                let history = [];
-
-                for (let t = 0; t <= 10; t += timeStep) {
-                    let error = setpoint - output;
-                    integral += error * timeStep;
-                    let derivative = (error - prevError) / timeStep;
-                    output += kp * error + ki * integral + kd * derivative;
-                    prevError = error;
-                    history.push(output);
-                }
-
-                return history;
-            }
-
-            function startSimulation() {
-                let kp = parseFloat(document.getElementById("pid-kp").value);
-                let ki = parseFloat(document.getElementById("pid-ki").value);
-                let kd = parseFloat(document.getElementById("pid-kd").value);
-                let setpoint = parseFloat(document.getElementById("pid-setpoint").value);
-
-                let data = pidController(setpoint, kp, ki, kd);
-                pidChart.data.labels = [...Array(data.length).keys()];
-                pidChart.data.datasets[0].data = data;
-                pidChart.update();
-            }
-
-            // Attach event listener to Start button
-            document.getElementById("pid-start-btn").addEventListener("click", startSimulation);
-        }
-    })();
-</script>
+    <!-- JavaScript for PID Simulator -->
+    <script src="/js/pid.js" defer></script>
+</body>
+</html>
