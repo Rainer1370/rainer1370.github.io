@@ -1,20 +1,41 @@
-<h2>PLC Simulator</h2>
-<p>Select a PLC programming language to view an example:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PLC Simulator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header (Dynamically Loaded) -->
+    <div id="header"></div>
 
-<select id="plcSelector" onchange="switchPLCCode()">
-    <option value="ladder">Ladder Logic (LD)</option>
-    <option value="structured_text">Structured Text (ST)</option>
-    <option value="fbd">Function Block Diagram (FBD)</option>
-</select>
+    <!-- Main Content -->
+    <main class="content-container">
+        <h1 style="text-align: center;">PLC Simulator</h1>
+        <p style="text-align: center;">
+            Explore **Ladder Logic (LD)**, **Structured Text (ST)**, and **Function Block Diagram (FBD)** PLC programming.
+        </p>
 
-<pre id="ladder" class="plc-code"><code class="language-text">
+        <!-- PLC Language Selector -->
+        <div class="plc-section">
+            <h3>Select PLC Programming Language:</h3>
+            <select id="plcSelector" onchange="switchPLCCode()">
+                <option value="ladder">Ladder Logic (LD)</option>
+                <option value="structured_text">Structured Text (ST)</option>
+                <option value="fbd">Function Block Diagram (FBD)</option>
+            </select>
+
+            <div id="plcDisplay">
+                <pre id="ladder" class="plc-code"><code class="language-text">
     // Simple Start/Stop Circuit (Ladder Logic)
     ( )  --[ ]--( )  Start Button
     ( )  --[\]--( )  Stop Button
     ( )  --[ ]--( )  Motor Output
-</code></pre>
+                </code></pre>
 
-<pre id="structured_text" class="plc-code" style="display:none;"><code class="language-text">
+                <pre id="structured_text" class="plc-code" style="display:none;"><code class="language-text">
     // Equivalent Structured Text (ST)
     IF Start_Button THEN
         Motor := TRUE;
@@ -23,54 +44,99 @@
     IF Stop_Button THEN
         Motor := FALSE;
     END_IF;
-</code></pre>
+                </code></pre>
 
-<pre id="fbd" class="plc-code" style="display:none;"><code class="language-text">
+                <pre id="fbd" class="plc-code" style="display:none;"><code class="language-text">
     // Function Block Diagram (FBD)
     (Start_Button) ---> [ OR ] ---> (Motor)
     (Motor)        ---> [ AND ] ---> (Motor)
     (Stop_Button)  ---> [ NOT ] ---> (AND)
-</code></pre>
+                </code></pre>
+            </div>
+        </div>
 
-<!-- Logic Gate Simulator -->
-<h3>Logic Gate Simulator</h3>
-<p>Test basic AND, OR, and NOT gate logic:</p>
+        <!-- Logic Gate Simulator -->
+        <div class="logic-gate-section">
+            <h3>Logic Gate Simulator</h3>
+            <p>Test basic **AND, OR, and NOT** logic gates with up to **4 inputs**.</p>
 
-<label>A: <input type="checkbox" id="inputA"></label>
-<label>B: <input type="checkbox" id="inputB"></label>
+            <label>Number of Inputs:</label>
+            <select id="inputCount" onchange="generateInputs()">
+                <option value="2">2 Inputs</option>
+                <option value="3">3 Inputs</option>
+                <option value="4">4 Inputs</option>
+            </select>
 
-<p><strong>AND Output:</strong> <span id="andResult">-</span></p>
-<p><strong>OR Output:</strong> <span id="orResult">-</span></p>
-<p><strong>NOT A Output:</strong> <span id="notAResult">-</span></p>
+            <div id="logicInputs">
+                <label>A: <input type="checkbox" id="inputA"></label>
+                <label>B: <input type="checkbox" id="inputB"></label>
+            </div>
 
-<!-- External PLC Information Link -->
-<p style="margin-top: 20px; text-align: center;">
-    Learn more about <a href="https://www.paessler.com/it-explained/plc" target="_blank" style="color: #FFD700; text-decoration: none;">
-        PLCs and their applications</a>.
-</p>
+            <h4>Results:</h4>
+            <p><strong>AND Output:</strong> <span id="andResult">-</span></p>
+            <p><strong>OR Output:</strong> <span id="orResult">-</span></p>
+            <p><strong>NOT (A):</strong> <span id="notAResult">-</span></p>
+        </div>
+    </main>
 
-<script src="/js/plc.js" defer></script>
-<script>
-    // Ensure logic gate simulator updates live
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log("✅ Initializing live logic gate simulator.");
-        
-        function simulateLogic() {
-            console.log("🔄 Running logic gate simulation...");
-            
-            const inputA = document.getElementById("inputA").checked;
-            const inputB = document.getElementById("inputB").checked;
+    <!-- Footer (Dynamically Loaded) -->
+    <div id="footer"></div>
 
-            document.getElementById("andResult").textContent = inputA && inputB ? "ON" : "OFF";
-            document.getElementById("orResult").textContent = inputA || inputB ? "ON" : "OFF";
-            document.getElementById("notAResult").textContent = !inputA ? "ON" : "OFF";
+    <!-- JavaScript for PLC Simulator -->
+    <script src="/js/plc.js" defer></script>
+
+    <script>
+        // Function to switch PLC language display
+        function switchPLCCode() {
+            const selectedLang = document.getElementById("plcSelector").value;
+            document.querySelectorAll(".plc-code").forEach(block => {
+                block.style.display = "none";
+            });
+            document.getElementById(selectedLang).style.display = "block";
         }
 
-        // Attach event listeners for live updates
-        document.getElementById("inputA").addEventListener("change", simulateLogic);
-        document.getElementById("inputB").addEventListener("change", simulateLogic);
+        // Logic Gate Simulator: Dynamically generate inputs
+        function generateInputs() {
+            const count = parseInt(document.getElementById("inputCount").value);
+            const logicInputs = document.getElementById("logicInputs");
+            logicInputs.innerHTML = "";
 
-        // Run simulation on page load (in case checkboxes are preselected)
-        simulateLogic();
-    });
-</script>
+            for (let i = 0; i < count; i++) {
+                const label = document.createElement("label");
+                label.innerHTML = `${String.fromCharCode(65 + i)}: `;
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = `input${String.fromCharCode(65 + i)}`;
+                checkbox.addEventListener("change", simulateLogic);
+                label.appendChild(checkbox);
+                logicInputs.appendChild(label);
+            }
+
+            simulateLogic();
+        }
+
+        // Function to simulate logic gate operations dynamically
+        function simulateLogic() {
+            const count = parseInt(document.getElementById("inputCount").value);
+            let andResult = true;
+            let orResult = false;
+
+            for (let i = 0; i < count; i++) {
+                const input = document.getElementById(`input${String.fromCharCode(65 + i)}`).checked;
+                andResult = andResult && input;
+                orResult = orResult || input;
+            }
+
+            document.getElementById("andResult").textContent = andResult ? "ON" : "OFF";
+            document.getElementById("orResult").textContent = orResult ? "ON" : "OFF";
+            document.getElementById("notAResult").textContent = !document.getElementById("inputA").checked ? "ON" : "OFF";
+        }
+
+        // Initialize on load
+        document.addEventListener("DOMContentLoaded", function () {
+            switchPLCCode();
+            generateInputs();
+        });
+    </script>
+</body>
+</html>
