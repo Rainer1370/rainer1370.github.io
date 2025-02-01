@@ -22,23 +22,19 @@
         <section class="pid-explanation">
             <h2>📖 Understanding PID Gains</h2>
             <p>
-                A **PID Controller** (Proportional-Integral-Derivative) continuously calculates an error value 
+                A **PID Controller** continuously calculates an error value 
                 and applies corrections using three distinct gains:
             </p>
             <ul>
-                <li><strong>P (Proportional Gain)</strong>: Reacts to the present error. A higher **Kp** increases responsiveness but may cause overshoot.</li>
-                <li><strong>I (Integral Gain)</strong>: Accumulates past errors to eliminate steady-state error. A high **Ki** can reduce error but may cause instability.</li>
-                <li><strong>D (Derivative Gain)</strong>: Predicts future errors based on the error rate of change. A high **Kd** dampens oscillations but may slow response.</li>
+                <li><strong>P (Proportional Gain)</strong>: Reacts to the present error.</li>
+                <li><strong>I (Integral Gain)</strong>: Accumulates past errors to remove steady-state error.</li>
+                <li><strong>D (Derivative Gain)</strong>: Predicts future errors and smooths response.</li>
             </ul>
-            <p>
-                The right balance of these **gains** ensures smooth, accurate control.  
-                <a href="https://en.wikipedia.org/wiki/PID_controller" target="_blank" class="learn-more-link">Learn more about PID controllers</a>.
-            </p>
+            <a href="https://en.wikipedia.org/wiki/PID_controller" target="_blank" class="learn-more-link">Learn more about PID controllers</a>.
         </section>
 
         <section class="pid-schematic">
             <h2>🖥️ PID Block Diagram</h2>
-            <p>A schematic representation of a PID controller is shown below:</p>
             <img src="/assets/pid.jpg" alt="PID Control Block Diagram" class="pid-image">
         </section>
 
@@ -53,8 +49,12 @@
                 <br>
                 <label>Setpoint:</label>
                 <input type="number" id="pid-setpoint" value="10">
+            </div>
+
+            <!-- Start/Stop Buttons on a New Line -->
+            <div class="button-container">
                 <button id="pid-start-btn">Start Simulation</button>
-                <button id="pid-stop-btn" disabled>Stop Simulation</button>
+                <button id="pid-stop-btn">Stop Simulation</button>
             </div>
 
             <canvas id="pidChart"></canvas>
