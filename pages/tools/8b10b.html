@@ -1,74 +1,74 @@
-<h2>Conversion and 8b10b Encoding</h2>
-<p>
-    Convert different numbers between 0 and 9999 base 10. For numbers under 255 base 10, click "Encode" 
-    to see its 8b10b encoding. 8b10b encoding is commonly used in accelerator timing systems to 
-    efficiently encode data with balanced disparity. 
-    <a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a>.
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>8b10b Encoder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header (Dynamically Loaded) -->
+    <div id="header"></div>
 
-<!-- Container for Inputs and Output -->
-<div class="conversion-container">
-    
-    <!-- Left: Input Fields -->
-    <div class="input-section">
-        <table class="conversion-table">
-            <tr>
-                <td><label for="base10Input">Base 10:</label></td>
-                <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
-            </tr>
-            <tr>
-                <td><label for="hexInput">Hexadecimal:</label></td>
-                <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
-            </tr>
-            <tr>
-                <td><label for="octalInput">Octal:</label></td>
-                <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
-            </tr>
-            <tr>
-                <td><label for="asciiInput">ASCII:</label></td>
-                <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
-            </tr>
-            <tr>
-                <td><label for="binaryInput">Binary:</label></td>
-                <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <button id="encodeButton">Encode</button>
-                    <button id="clearDisparityButton">Clear Disparity</button>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <!-- Main Content -->
+    <main class="content-container">
+        <h1 style="text-align: center;">8b10b Encoding and Number Conversion</h1>
+        <p style="text-align: center;">
+            Convert different numbers between **0 and 9999 (Base 10)**.  
+            For numbers under **255**, click **"Encode"** to see its 8b10b encoding.  
+            8b10b encoding is commonly used in accelerator timing systems to efficiently encode data with balanced disparity.  
+            <a href="https://en.wikipedia.org/wiki/8b/10b_encoding" target="_blank">Learn more about 8b10b encoding</a>.
+        </p>
 
-    <!-- Right: Output Display -->
-    <div class="output-section">
-        <h3>8b10b Encoding Output</h3>
-        <div id="result" class="result"></div>
-    </div>
+        <!-- Container for Inputs and Output -->
+        <div class="conversion-container">
+            
+            <!-- Left: Input Fields -->
+            <div class="input-section">
+                <table class="conversion-table">
+                    <tr>
+                        <td><label for="base10Input">Base 10:</label></td>
+                        <td><input type="text" id="base10Input" placeholder="E.g., 156"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hexInput">Hexadecimal:</label></td>
+                        <td><input type="text" id="hexInput" placeholder="E.g., A5"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="octalInput">Octal:</label></td>
+                        <td><input type="text" id="octalInput" placeholder="E.g., 245"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="asciiInput">ASCII:</label></td>
+                        <td><input type="text" id="asciiInput" placeholder="E.g., A"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="binaryInput">Binary:</label></td>
+                        <td><input type="text" id="binaryInput" placeholder="E.g., 11010101"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <button id="encodeButton">Encode</button>
+                            <button id="clearDisparityButton">Clear Disparity</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-</div>
+            <!-- Right: Output Display -->
+            <div class="output-section">
+                <h3>8b10b Encoding Output</h3>
+                <div id="result" class="result"></div>
+            </div>
 
-<!-- JavaScript for Functionality -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log("✅ 8b10b.js is being initialized");
+        </div>
+    </main>
 
-        // Load the script dynamically if not already present
-        if (!document.getElementById("8b10b-script")) {
-            const script = document.createElement("script");
-            script.id = "8b10b-script";
-            script.src = "/js/8b10b.js";
-            script.defer = true;
-            script.onload = function () {
-                console.log("✅ 8b10b.js loaded successfully.");
-            };
-            script.onerror = function () {
-                console.error("❌ Error loading 8b10b.js!");
-            };
-            document.body.appendChild(script);
-        } else {
-            console.log("🔍 8b10b.js already loaded.");
-        }
-    });
-</script>
+    <!-- Footer (Dynamically Loaded) -->
+    <div id="footer"></div>
+
+    <!-- JavaScript for Functionality -->
+    <script src="/js/8b10b.js" defer></script>
+</body>
+</html>
