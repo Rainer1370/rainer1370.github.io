@@ -16,8 +16,7 @@
     <main class="content-container">
         <h1 style="text-align: center;">PID Controller Simulator</h1>
         <p style="text-align: center;">
-            Adjust the **PID gains** below and observe how the system responds in real-time.  
-            PID controllers are widely used in engineering and automation for precise control.
+            Adjust the **PID gains** below and observe how the system responds in real-time.
         </p>
 
         <section class="pid-explanation">
@@ -55,6 +54,7 @@
                 <label>Setpoint:</label>
                 <input type="number" id="pid-setpoint" value="10">
                 <button id="pid-start-btn">Start Simulation</button>
+                <button id="pid-stop-btn" disabled>Stop Simulation</button>
             </div>
 
             <canvas id="pidChart"></canvas>
