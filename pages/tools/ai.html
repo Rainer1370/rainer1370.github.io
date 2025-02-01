@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AI & Machine Learning Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/ai.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- TensorFlow.js -->
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header (Loaded Dynamically) -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main class="content-container">
+        <h1 style="text-align: center;">AI & Machine Learning Demo</h1>
+        <p style="text-align: center;">
+            This interactive demo showcases a **basic AI classifier** trained on simple data.  
+            Adjust parameters and see the model **learn in real-time**.
+        </p>
+
+        <section class="ai-demo-container">
+            <h2>Train a Simple AI Model</h2>
+            <p>Click "Train Model" to generate a simple neural network.</p>
+            <button id="trainModel">Train Model</button>
+
+            <h3>Prediction:</h3>
+            <input type="text" id="inputData" placeholder="Enter a value for AI to predict">
+            <button id="predictButton">Predict</button>
+            <p><strong>Output:</strong> <span id="predictionResult">Waiting...</span></p>
+
+            <h3>Training Progress:</h3>
+            <canvas id="trainingChart"></canvas>
+        </section>
+
+        <p style="text-align: center; margin-top: 10px;">
+            Learn more about AI & ML on  
+            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="learn-more-link">
+                Wikipedia</a>.
+        </p>
+    </main>
+
+    <!-- Footer (Loaded Dynamically) -->
+    <div id="footer"></div>
+
+    <!-- JavaScript for AI Demo -->
+    <script src="/js/ai.js" defer></script>
+</body>
+</html>
