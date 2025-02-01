@@ -5,82 +5,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="/js/scripts.js" defer></script>
 </head>
 <body>
-    <!-- Header (Dynamically Loaded) -->
+    <!-- Header (Loaded Dynamically) -->
     <div id="header"></div>
 
     <!-- Main Content -->
     <main class="content-container">
         <h1 style="text-align: center;">QR Code Generator</h1>
         <p style="text-align: center;">
-            Enter text or a URL below to generate a **QR code** that can be scanned with a mobile device.
-            QR codes are commonly used for quick access to websites, WiFi credentials, and contact information.
+            Enter a URL, text, or any data below to generate a QR Code.
         </p>
 
         <div class="qr-container">
-            <label for="qr-input">Enter Text or URL:</label>
-            <input type="text" id="qr-input" placeholder="https://example.com">
-            <button id="generate-qr">Generate QR Code</button>
-
-            <div class="qr-output">
-                <canvas id="qr-canvas"></canvas>
-                <a id="download-qr" href="#" download="qr-code.png" style="display:none;">Download QR Code</a>
-            </div>
+            <div id="qrCode" class="qr-code-display"></div>
+            <input type="text" id="qrInput" placeholder="Enter text or URL" class="qr-input">
+            <button id="generateQR">Generate QR Code</button>
         </div>
     </main>
 
-    <!-- Footer (Dynamically Loaded) -->
+    <!-- Footer (Loaded Dynamically) -->
     <div id="footer"></div>
 
-    <!-- JavaScript for QR Code Generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- JavaScript for Functionality -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Load header and footer dynamically
-            fetch("/components/header.html")
-                .then(response => response.text())
-                .then(html => document.getElementById("header").innerHTML = html)
-                .catch(error => console.error("❌ Header load failed:", error));
+            console.log("✅ QR Code Generator Loaded");
 
-            fetch("/components/footer.html")
-                .then(response => response.text())
-                .then(html => document.getElementById("footer").innerHTML = html)
-                .catch(error => console.error("❌ Footer load failed:", error));
+            const qrInput = document.getElementById("qrInput");
+            const generateQR = document.getElementById("generateQR");
+            const qrCodeDiv = document.getElementById("qrCode");
 
-            console.log("✅ QR Code Generator loaded.");
-
-            const qrInput = document.getElementById("qr-input");
-            const qrCanvas = document.getElementById("qr-canvas");
-            const generateBtn = document.getElementById("generate-qr");
-            const downloadBtn = document.getElementById("download-qr");
-
-            let qr = new QRCode(qrCanvas, {
-                text: "",
-                width: 200,
-                height: 200
-            });
-
-            generateBtn.addEventListener("click", function () {
-                const text = qrInput.value.trim();
-                if (text === "") {
+            generateQR.addEventListener("click", function () {
+                const inputText = qrInput.value.trim();
+                if (inputText === "") {
                     alert("Please enter text or a URL to generate a QR code.");
                     return;
                 }
 
-                qr.clear(); 
-                qr.makeCode(text);
+                // Clear previous QR code before generating a new one
+                qrCodeDiv.innerHTML = "";
 
-                // Enable download button
-                setTimeout(() => {
-                    const qrImage = qrCanvas.querySelector("img").src;
-                    downloadBtn.href = qrImage;
-                    downloadBtn.style.display = "block";
-                }, 500);
+                // Generate QR Code
+                new QRCode(qrCodeDiv, {
+                    text: inputText,
+                    width: 200,
+                    height: 200,
+                });
+
+                console.log("📷 QR Code Generated: " + inputText);
             });
         });
     </script>
+
+    <style>
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .qr-code-display {
+            width: 200px;
+            height: 200px;
+            margin: 10px auto;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-input {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </body>
 </html>
