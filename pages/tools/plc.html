@@ -80,9 +80,9 @@
             </div>
 
             <h4>Results:</h4>
-            <p><strong>AND Output:</strong> <span id="andResult">-</span></p>
-            <p><strong>OR Output:</strong> <span id="orResult">-</span></p>
-            <p><strong>NOT (A):</strong> <span id="notAResult">-</span></p>
+            <p><strong>AND Output:</strong> <span id="andResult" class="logic-output">-</span></p>
+            <p><strong>OR Output:</strong> <span id="orResult" class="logic-output">-</span></p>
+            <p><strong>NOT (A):</strong> <span id="notAResult" class="logic-output">-</span></p>
         </div>
 
         <!-- Logic Gates Learn More Link -->
@@ -140,9 +140,16 @@
                 orResult = orResult || input;
             }
 
-            document.getElementById("andResult").textContent = andResult ? "ON" : "OFF";
-            document.getElementById("orResult").textContent = orResult ? "ON" : "OFF";
-            document.getElementById("notAResult").textContent = !document.getElementById("inputA").checked ? "ON" : "OFF";
+            updateLogicDisplay("andResult", andResult);
+            updateLogicDisplay("orResult", orResult);
+            updateLogicDisplay("notAResult", !document.getElementById("inputA").checked);
+        }
+
+        // Helper function to update logic output text and color
+        function updateLogicDisplay(id, state) {
+            const element = document.getElementById(id);
+            element.textContent = state ? "ON" : "OFF";
+            element.style.color = state ? "green" : "red"; // 🟢 Green for ON, 🔴 Red for OFF
         }
 
         // Initialize on load
@@ -151,5 +158,14 @@
             generateInputs();
         });
     </script>
+
+    <style>
+        /* Style for logic gate output colors */
+        .logic-output {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+
 </body>
 </html>
