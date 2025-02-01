@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/pid.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="/js/scripts.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for Graphs -->
 </head>
 <body>
     <!-- Header (Dynamically Loaded) -->
@@ -15,8 +17,22 @@
     <!-- Main Content -->
     <main class="content-container">
         <h1 style="text-align: center;">PID Controller Simulator</h1>
+
         <p style="text-align: center;">
-            Adjust the **PID parameters** and observe how the system responds in real-time.
+            A **Proportional-Integral-Derivative (PID) controller** continuously calculates an error value as the difference 
+            between a **desired setpoint** and the **measured process variable**. The controller applies corrections using three terms:
+        </p>
+
+        <ul style="max-width: 800px; margin: auto; font-size: 16px;">
+            <li><strong>Proportional (Kp):</strong> Adjusts the output **proportionally** to the current error.</li>
+            <li><strong>Integral (Ki):</strong> Accounts for **past errors**, eliminating steady-state offset.</li>
+            <li><strong>Derivative (Kd):</strong> Predicts future errors by analyzing **rate of change**.</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 10px;">
+            Learn more about PID controllers on 
+            <a href="https://en.wikipedia.org/wiki/PID_controller" target="_blank" class="learn-more-link">
+                Wikipedia</a>.
         </p>
 
         <div id="pid-container">
