@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const tools = {
         "toolContainer": "utc",
         "tool8b10b": "8b10b",
-        "toolPLC": "plc"
+        "toolPLC": "plc",
+        "toolPID": "pid",
+        "toolLight": "light"
     };
 
     Object.keys(tools).forEach(id => {
@@ -59,21 +61,22 @@ document.addEventListener("DOMContentLoaded", async function () {
             loadComponent(id, `${toolsBasePath}${tools[id]}.html`, () => {
                 console.log(`✅ ${tools[id]} tool content loaded.`);
 
+                // Load UTC Clock
                 if (tools[id] === "utc") {
-                    loadScriptOnce("/js/UTC.js", () => {
-                        console.log("🔄 Reinitializing UTC clock inside tools.html...");
+                    loadScriptOnce("/js/utc.js", () => {
+                        console.log("🔄 Initializing UTC clock inside tools.html...");
                         if (typeof updateTime === "function") {
-                            updateTime();  // Ensure it runs immediately
-                            if (!window.utcInterval) {
-                                window.utcInterval = setInterval(updateTime, 1000);
-                                console.log("⏳ 1Hz update interval started.");
-                            }
+                            updateTime();
+                            clearInterval(window.utcInterval); // Prevent multiple intervals
+                            window.utcInterval = setInterval(updateTime, 1000);
+                            console.log("⏳ UTC clock running at 1Hz.");
                         } else {
                             console.error("❌ `updateTime()` function not found!");
                         }
                     });
                 }
 
+                // Load PLC Simulator
                 if (tools[id] === "plc") {
                     loadScriptOnce("/js/plc.js", () => {
                         console.log("✅ PLC Simulator script loaded.");
@@ -81,19 +84,32 @@ document.addEventListener("DOMContentLoaded", async function () {
                         if (typeof simulateLogic === "function") simulateLogic();
                     });
                 }
+
+                // Load PID Simulator
+                if (tools[id] === "pid") {
+                    loadScriptOnce("/js/pid.js", () => {
+                        console.log("✅ PID Simulator script initialized.");
+                    });
+                }
+
+                // Load Light Analysis Tool
+                if (tools[id] === "light") {
+                    loadScriptOnce("/js/light.js", () => {
+                        console.log("✅ Light Analysis Tool script initialized.");
+                    });
+                }
             });
         }
     });
 
-    // FINAL FIX: Ensure updateTime() runs after everything loads
+    // FINAL CHECK: Ensure updateTime() runs at 1Hz
     window.addEventListener("load", () => {
         console.log("🔄 FINAL CHECK: Running updateTime() after full page load.");
         if (typeof updateTime === "function") {
             updateTime();
-            if (!window.utcInterval) {
-                window.utcInterval = setInterval(updateTime, 1000);
-                console.log("⏳ FINAL 1Hz update interval started.");
-            }
+            clearInterval(window.utcInterval); // Ensure only one interval runs
+            window.utcInterval = setInterval(updateTime, 1000);
+            console.log("⏳ FINAL 1Hz UTC clock update started.");
         } else {
             console.error("❌ FINAL CHECK: `updateTime()` still not found!");
         }
