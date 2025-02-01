@@ -54,17 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("pid-start-btn").disabled = true;
         document.getElementById("pid-stop-btn").disabled = false;
 
-        let kp = parseFloat(document.getElementById("pid-kp").value);
-        let ki = parseFloat(document.getElementById("pid-ki").value);
-        let kd = parseFloat(document.getElementById("pid-kd").value);
-        let setpoint = parseFloat(document.getElementById("pid-setpoint").value);
-
         let time = 0;
         pidChart.data.labels = [];
         pidChart.data.datasets[0].data = [];
 
         interval = setInterval(() => {
             if (!simulationRunning) return;
+
+            let kp = parseFloat(document.getElementById("pid-kp").value);
+            let ki = parseFloat(document.getElementById("pid-ki").value);
+            let kd = parseFloat(document.getElementById("pid-kd").value);
+            let setpoint = parseFloat(document.getElementById("pid-setpoint").value);
 
             let data = pidController(setpoint, kp, ki, kd);
             let newValue = data[Math.min(time, data.length - 1)];
@@ -90,4 +90,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("pid-start-btn").addEventListener("click", startSimulation);
     document.getElementById("pid-stop-btn").addEventListener("click", stopSimulation);
+
+    // Allow dynamic updates while running
+    document.querySelectorAll("#pid-kp, #pid-ki, #pid-kd, #pid-setpoint").forEach(input => {
+        input.addEventListener("input", () => {
+            if (simulationRunning) {
+                clearInterval(interval);
+                startSimulation();
+            }
+        });
+    });
 });
