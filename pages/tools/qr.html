@@ -20,9 +20,11 @@
         </p>
 
         <div class="qr-container">
-            <div id="qrCode" class="qr-code-display"></div>
             <input type="text" id="qrInput" placeholder="Enter text or URL" class="qr-input">
             <button id="generateQR">Generate QR Code</button>
+            
+            <div id="qrCode" class="qr-code-display"></div>
+            <button id="downloadQR" style="display: none;">Download QR Code</button>
         </div>
     </main>
 
@@ -37,6 +39,8 @@
             const qrInput = document.getElementById("qrInput");
             const generateQR = document.getElementById("generateQR");
             const qrCodeDiv = document.getElementById("qrCode");
+            const downloadQR = document.getElementById("downloadQR");
+            let qrInstance = null;
 
             generateQR.addEventListener("click", function () {
                 const inputText = qrInput.value.trim();
@@ -49,13 +53,35 @@
                 qrCodeDiv.innerHTML = "";
 
                 // Generate QR Code
-                new QRCode(qrCodeDiv, {
+                qrInstance = new QRCode(qrCodeDiv, {
                     text: inputText,
                     width: 200,
                     height: 200,
                 });
 
                 console.log("📷 QR Code Generated: " + inputText);
+
+                // Show the download button
+                setTimeout(() => {
+                    downloadQR.style.display = "inline-block";
+                }, 500);
+            });
+
+            downloadQR.addEventListener("click", function () {
+                if (!qrInstance) {
+                    alert("Please generate a QR code first.");
+                    return;
+                }
+
+                const qrCanvas = qrCodeDiv.querySelector("canvas");
+                if (qrCanvas) {
+                    const qrImage = qrCanvas.toDataURL("image/png");
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = qrImage;
+                    downloadLink.download = "QRCode.png";
+                    downloadLink.click();
+                    console.log("⬇️ QR Code Downloaded");
+                }
             });
         });
     </script>
@@ -71,13 +97,15 @@
         }
 
         .qr-code-display {
-            width: 200px;
-            height: 200px;
+            width: 210px;
+            height: 210px;
             margin: 10px auto;
+            padding: 5px;
             border: 2px solid #333;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: white;
         }
 
         .qr-input {
@@ -86,6 +114,8 @@
             padding: 10px;
             font-size: 16px;
             text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
         button {
