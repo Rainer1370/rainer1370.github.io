@@ -1,22 +1,97 @@
-<!-- utc tool -->
-<h2>UTC, Local Time, and Unix Timestamp</h2>
-<p>
-    The <strong>Network Time Protocol (NTP)</strong> ensures accurate time synchronization across devices by referencing atomic clocks. 
-    <strong>Coordinated Universal Time (UTC) </strong> is the global standard for timekeeping, while 
-    <strong>Unix Timestamp</strong> represents the number of seconds since 
-    <a href="https://en.wikipedia.org/wiki/Epoch_time" target="_blank">Epoch Time</a> (January 1, 1970, 00:00:00 UTC). 
-    These formats are crucial for time synchronization and computing tasks.
-    <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Learn more about Unix time</a>.
-</p>
-<div class="utc-container">
-    <div class="utc-left">
-        <p><strong>Current UTC Time:</strong> <span id="utcTime">Loading...</span></p>
-        <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp">Loading...</span></p>
-    </div>
-    <div class="utc-right">
-        <p><strong>Local Time (Your Timezone):</strong> <span id="localTime">Loading...</span> (<span id="timezone">Loading...</span>)</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>UTC, Local Time, and Unix Timestamp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- Header (Dynamically Loaded) -->
+    <div id="header"></div>
 
-<!-- Include JavaScript for UTC functionality -->
-<script src="/js/UTC.js" defer></script>
+    <!-- Main Content -->
+    <main class="content-container">
+        <h1 style="text-align: center;">UTC, Local Time, and Unix Timestamp</h1>
+        <p style="text-align: center;">
+            The **Network Time Protocol (NTP)** ensures accurate time synchronization across devices using **atomic clocks**.  
+            **Coordinated Universal Time (UTC)** is the global standard for timekeeping, while  
+            **Unix Timestamp** represents the number of seconds since  
+            <a href="https://en.wikipedia.org/wiki/Epoch_time" target="_blank">Epoch Time</a> (January 1, 1970, 00:00:00 UTC).  
+            <a href="https://en.wikipedia.org/wiki/Unix_time" target="_blank">Learn more about Unix time</a>.
+        </p>
+
+        <!-- Time Display Section -->
+        <div class="utc-container">
+            <div class="utc-left">
+                <p><strong>Current UTC Time:</strong> <span id="utcTime">Loading...</span></p>
+                <p><strong>Unix Timestamp:</strong> <span id="unixTimestamp">Loading...</span></p>
+            </div>
+            <div class="utc-right">
+                <p><strong>Local Time:</strong> <span id="localTime">Loading...</span></p>
+                <label for="timezoneSelect"><strong>Select Timezone:</strong></label>
+                <select id="timezoneSelect">
+                    <option value="default">Auto-detect</option>
+                    <option value="UTC">UTC (Coordinated Universal Time)</option>
+                    <option value="America/New_York">Eastern Time (ET)</option>
+                    <option value="America/Chicago">Central Time (CT)</option>
+                    <option value="America/Denver">Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                    <option value="Europe/London">London (GMT)</option>
+                    <option value="Europe/Paris">Paris (CET)</option>
+                    <option value="Asia/Tokyo">Tokyo (JST)</option>
+                    <option value="Asia/Shanghai">Shanghai (CST)</option>
+                    <option value="Australia/Sydney">Sydney (AEST)</option>
+                </select>
+            </div>
+        </div>
+
+        <p style="text-align: center;">
+            Want to synchronize your time?  
+            <a href="https://www.ntppool.org/" target="_blank">Check out global NTP servers</a>.
+        </p>
+    </main>
+
+    <!-- Footer (Dynamically Loaded) -->
+    <div id="footer"></div>
+
+    <!-- JavaScript for UTC Tool -->
+    <script src="/js/utc.js" defer></script>
+
+    <script>
+        // Function to update UTC, Local Time, and Unix Timestamp
+        function updateTime() {
+            const now = new Date();
+
+            // UTC and Unix Time
+            document.getElementById("utcTime").textContent = now.toISOString().split("T").join(" ").split(".")[0];
+            document.getElementById("unixTimestamp").textContent = Math.floor(now.getTime() / 1000);
+
+            // Local Time with Timezone Selection
+            const selectedTimezone = document.getElementById("timezoneSelect").value;
+            if (selectedTimezone === "default") {
+                document.getElementById("localTime").textContent = now.toLocaleString();
+            } else {
+                try {
+                    document.getElementById("localTime").textContent = new Intl.DateTimeFormat("en-US", {
+                        timeZone: selectedTimezone,
+                        dateStyle: "medium",
+                        timeStyle: "medium"
+                    }).format(now);
+                } catch (error) {
+                    console.error("❌ Timezone conversion error:", error);
+                    document.getElementById("localTime").textContent = "Invalid Timezone";
+                }
+            }
+        }
+
+        // Auto-update time every second
+        setInterval(updateTime, 1000);
+        document.addEventListener("DOMContentLoaded", updateTime);
+
+        // Timezone change event
+        document.getElementById("timezoneSelect").addEventListener("change", updateTime);
+    </script>
+</body>
+</html>
