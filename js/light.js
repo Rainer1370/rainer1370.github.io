@@ -1,33 +1,43 @@
-(function () {
-    console.log("✅ Light Analysis Tool script loaded inside tools.html");
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ Light Analysis Tool Loaded");
 
-    function loadChartJs(callback) {
-        if (typeof Chart === "undefined") {
-            console.log("📥 Loading Chart.js dynamically...");
-            let script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/chart.js";
-            script.defer = true;
-            script.onload = callback;
-            document.body.appendChild(script);
-        } else {
-            console.log("⚡ Chart.js already loaded, initializing Light tool...");
-            callback();
+    const speedOfLight = 299792458; // m/s
+    const plancksConstant = 6.626e-34; // J·s
+    const electronCharge = 1.602e-19; // C
+
+    const analyzeButton = document.getElementById("analyzeLight");
+    const wavelengthInput = document.getElementById("wavelength");
+    const intensityInput = document.getElementById("intensity");
+    const pulseDurationInput = document.getElementById("pulseDuration");
+
+    analyzeButton.addEventListener("click", function () {
+        const wavelengthMeters = wavelengthInput.value * 1e-9;
+        const frequencyHz = speedOfLight / wavelengthMeters;
+        const photonEnergyJoules = plancksConstant * frequencyHz;
+        const photonEnergyEV = photonEnergyJoules / electronCharge;
+
+        document.getElementById("frequency").textContent = (frequencyHz / 1e12).toFixed(2);
+        document.getElementById("photonEnergy").textContent = photonEnergyEV.toFixed(2);
+
+        updateLightChart();
+    });
+
+    function updateLightChart() {
+        const ctx = document.getElementById("lightChart").getContext("2d");
+
+        if (window.lightChart) {
+            window.lightChart.destroy();
         }
-    }
 
-    function initializeLightTool() {
-        console.log("✅ Initializing Light Analysis Tool");
-
-        let ctx = document.getElementById("lightChart").getContext("2d");
-        let lightChart = new Chart(ctx, {
+        window.lightChart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: [],
+                labels: Array.from({ length: 20 }, (_, i) => i),
                 datasets: [{
-                    label: "Light Intensity (Lux)",
-                    borderColor: "gold",
-                    backgroundColor: "rgba(255, 215, 0, 0.5)",
-                    data: [],
+                    label: "Simulated Light Pulse",
+                    borderColor: "blue",
+                    backgroundColor: "rgba(0, 0, 255, 0.2)",
+                    data: Array.from({ length: 20 }, () => Math.random() * intensityInput.value),
                     fill: true
                 }]
             },
@@ -35,40 +45,10 @@
                 animation: false,
                 responsive: true,
                 scales: {
-                    x: { title: { display: true, text: "Time (s)" } },
-                    y: { title: { display: true, text: "Lux Level" } }
+                    x: { title: { display: true, text: "Time (ns)" } },
+                    y: { title: { display: true, text: "Intensity (lux)" } }
                 }
             }
         });
-
-        function updateLightSimulation() {
-            let brightness = parseInt(document.getElementById("light-brightness").value);
-            let color = document.getElementById("light-color").value;
-            document.getElementById("brightness-value").textContent = brightness + "%";
-
-            // Simulate Lux Calculation (arbitrary scaling)
-            let lux = Math.round((brightness / 100) * 500);
-            document.getElementById("lux-value").textContent = lux + " lux";
-
-            // Update Graph Data
-            let currentTime = new Date().getSeconds();
-            if (lightChart.data.labels.length > 20) {
-                lightChart.data.labels.shift();
-                lightChart.data.datasets[0].data.shift();
-            }
-            lightChart.data.labels.push(currentTime);
-            lightChart.data.datasets[0].data.push(lux);
-            lightChart.update();
-        }
-
-        // Attach event listeners
-        document.getElementById("light-brightness").addEventListener("input", updateLightSimulation);
-        document.getElementById("light-color").addEventListener("input", updateLightSimulation);
-
-        // Start real-time updates
-        setInterval(updateLightSimulation, 1000);
     }
-
-    // Load Chart.js first, then initialize the Light Analysis Tool
-    loadChartJs(initializeLightTool);
-})();
+});
