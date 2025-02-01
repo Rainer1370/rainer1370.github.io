@@ -6,43 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/scripts.js" defer></script>
 </head>
 <body>
-    <!-- Header (Dynamically Loaded) -->
+    <!-- Header (Loaded Dynamically) -->
     <div id="header"></div>
 
     <!-- Main Content -->
     <main class="content-container">
         <h1 style="text-align: center;">Light Analysis Tool</h1>
         <p style="text-align: center;">
-            Adjust brightness levels and analyze **light intensity**.  
-            Use the sliders below to change brightness and color, and observe the lux level over time.  
+            Enter light properties below to analyze and visualize **wavelength, frequency, and intensity**.
         </p>
 
-        <!-- Light Control & Display -->
-        <div id="light-container">
+        <div class="light-analysis-container">
+            <!-- Input Controls -->
             <div class="controls">
-                <label>Brightness (0-100%):</label>
-                <input type="range" id="light-brightness" min="0" max="100" value="50">
-                <span id="brightness-value">50%</span>
-                <br>
-
-                <label>RGB Color:</label>
-                <input type="color" id="light-color" value="#ffffff">
+                <label>Wavelength (nm):</label>
+                <input type="number" id="wavelength" value="650" step="1">
+                
+                <label>Intensity (lux):</label>
+                <input type="number" id="intensity" value="500" step="10">
+                
+                <label>Pulse Duration (ns):</label>
+                <input type="number" id="pulseDuration" value="10" step="1">
+                
+                <button id="analyzeLight">Analyze</button>
             </div>
 
-            <!-- Chart Display -->
-            <canvas id="lightChart"></canvas>
+            <!-- Output Display -->
+            <div class="output-section">
+                <p><strong>Frequency:</strong> <span id="frequency">Loading...</span> THz</p>
+                <p><strong>Energy per Photon:</strong> <span id="photonEnergy">Loading...</span> eV</p>
+            </div>
 
-            <p>Approximate Lux Level: <span id="lux-value">250 lux</span></p>
+            <!-- Light Visualization -->
+            <canvas id="lightChart"></canvas>
         </div>
+
+        <!-- Learn More Link -->
+        <p style="text-align: center; margin-top: 15px;">
+            Learn more about <a href="https://www.rp-photonics.com/pulse_characterization.html" target="_blank" style="color: #007BFF; text-decoration: none;">
+                light pulse measurement techniques</a>.
+        </p>
     </main>
 
-    <!-- Footer (Dynamically Loaded) -->
+    <!-- Footer (Loaded Dynamically) -->
     <div id="footer"></div>
 
-    <!-- JavaScript for Light Tool -->
+    <!-- JavaScript for Light Analysis -->
     <script src="/js/light.js" defer></script>
+
+    <style>
+        .light-analysis-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .output-section {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+
 </body>
 </html>
