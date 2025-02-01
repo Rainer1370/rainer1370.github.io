@@ -3,47 +3,73 @@
     max-width: 800px;
     margin: 20px auto;
     text-align: center;
-    background: #f4f4f4;
+    background: rgba(255, 255, 255, 0.1); /* Slight transparency */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .controls {
-    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Subtle transparency */
+    border-radius: 10px;
+    text-align: center;
 }
 
 .controls label {
     font-weight: bold;
-    margin-right: 10px;
+    color: #FFD700; /* Gold text for consistency */
 }
 
 .controls input {
-    width: 60px;
+    width: 70px;
+    padding: 8px;
+    font-size: 16px;
     text-align: center;
-    padding: 5px;
-    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f8f9fa;
+    color: #333;
 }
 
 button#pid-start-btn {
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 10px 15px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button#pid-start-btn:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
+/* PID Graph Styling */
 canvas {
     max-width: 100%;
     margin-top: 20px;
-    background: white;
-    border: 1px solid #ccc;
+    background: #ffffff;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Wikipedia Link Styling */
+.learn-more-link {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.learn-more-link:hover {
+    text-decoration: underline;
+    color: #FF8C00;
 }
