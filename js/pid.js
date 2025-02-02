@@ -24,9 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    let simulationInterval = null;
-    let timeStep = parseFloat(document.getElementById("time-interval").value);
-
+    let simulationInterval;
+    
     function pidController(setpoint, kp, ki, kd, timeStep) {
         let output = 0;
         let integral = 0;
@@ -45,39 +44,44 @@ document.addEventListener("DOMContentLoaded", function () {
         return history;
     }
 
-    function updateGraph() {
+    function startSimulation() {
         let kp = parseFloat(document.getElementById("pid-kp").value);
         let ki = parseFloat(document.getElementById("pid-ki").value);
         let kd = parseFloat(document.getElementById("pid-kd").value);
         let setpoint = parseFloat(document.getElementById("pid-setpoint").value);
-        timeStep = parseFloat(document.getElementById("time-interval").value);
-
-        let data = pidController(setpoint, kp, ki, kd, timeStep);
-        pidChart.data.labels = [...Array(data.length).keys()].map(i => (i * timeStep).toFixed(1));
-        pidChart.data.datasets[0].data = data;
-        pidChart.update();
-    }
-
-    function startSimulation() {
-        if (simulationInterval) clearInterval(simulationInterval);
+        let timeStep = parseFloat(document.getElementById("time-interval").value); // Get selected time step
 
         document.getElementById("pid-start-btn").disabled = true;
         document.getElementById("pid-stop-btn").disabled = false;
-        document.getElementById("clear-plot-btn").disabled = false;
+
+        function updateGraph() {
+            let data = pidController(setpoint, kp, ki, kd, timeStep);
+            pidChart.data.labels = [...Array(data.length).keys()].map(i => (i * timeStep).toFixed(1));
+            pidChart.data.datasets[0].data = data;
+            pidChart.update();
+        }
 
         updateGraph();
-        simulationInterval = setInterval(updateGraph, timeStep * 1000);
+        simulationInterval = setInterval(updateGraph, timeStep * 1000); // Convert to milliseconds
     }
 
     function stopSimulation() {
         clearInterval(simulationInterval);
-        simulationInterval = null;
-
         document.getElementById("pid-start-btn").disabled = false;
         document.getElementById("pid-stop-btn").disabled = true;
     }
 
-    function clearPlot() {
+    function clearSimulation() {
+        stopSimulation();
+
+        // Reset input fields
+        document.getElementById("pid-kp").value = 1;
+        document.getElementById("pid-ki").value = 0;
+        document.getElementById("pid-kd").value = 0;
+        document.getElementById("pid-setpoint").value = 10;
+        document.getElementById("time-interval").value = 0.5;
+
+        // Clear the graph
         pidChart.data.labels = [];
         pidChart.data.datasets[0].data = [];
         pidChart.update();
@@ -85,20 +89,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("pid-start-btn").addEventListener("click", startSimulation);
     document.getElementById("pid-stop-btn").addEventListener("click", stopSimulation);
-    document.getElementById("clear-plot-btn").addEventListener("click", clearPlot);
-
-    document.getElementById("time-interval").addEventListener("change", function () {
-        if (simulationInterval) {
-            clearInterval(simulationInterval);
-            startSimulation();
-        }
-    });
-
-    document.querySelectorAll("#pid-kp, #pid-ki, #pid-kd, #pid-setpoint").forEach(input => {
-        input.addEventListener("input", function () {
-            if (simulationInterval) {
-                updateGraph();
-            }
-        });
-    });
+    document.getElementById("clear-simulation-btn").addEventListener("click", clearSimulation);
 });
