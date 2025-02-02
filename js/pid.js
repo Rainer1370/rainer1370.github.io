@@ -25,23 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let simulationInterval;
+    let timeElapsed = 0;
     
-    function pidController(setpoint, kp, ki, kd, timeStep) {
-        let output = 0;
-        let integral = 0;
-        let prevError = 0;
-        let history = [];
-
-        for (let t = 0; t <= 10; t += timeStep) {
-            let error = setpoint - output;
-            integral += error * timeStep;
-            let derivative = (error - prevError) / timeStep;
-            output += kp * error + ki * integral + kd * derivative;
-            prevError = error;
-            history.push(output);
-        }
-
-        return history;
+    function pidController(setpoint, kp, ki, kd, output, integral, prevError, timeStep) {
+        let error = setpoint - output;
+        integral += error * timeStep;
+        let derivative = (error - prevError) / timeStep;
+        output += kp * error + ki * integral + kd * derivative;
+        return { output, integral, error };
     }
 
     function startSimulation() {
@@ -53,16 +44,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.getElementById("pid-start-btn").disabled = true;
         document.getElementById("pid-stop-btn").disabled = false;
+        
+        let output = 0, integral = 0, prevError = 0;
+        timeElapsed = 0;
 
         function updateGraph() {
-            let data = pidController(setpoint, kp, ki, kd, timeStep);
-            pidChart.data.labels = [...Array(data.length).keys()].map(i => (i * timeStep).toFixed(1));
-            pidChart.data.datasets[0].data = data;
+            let result = pidController(setpoint, kp, ki, kd, output, integral, prevError, timeStep);
+            output = result.output;
+            integral = result.integral;
+            prevError = result.error;
+
+            timeElapsed += timeStep;
+            pidChart.data.labels.push(timeElapsed.toFixed(1));
+            pidChart.data.datasets[0].data.push(output);
+            
+            if (pidChart.data.labels.length > 100) {
+                pidChart.data.labels.shift();
+                pidChart.data.datasets[0].data.shift();
+            }
+
             pidChart.update();
         }
 
         updateGraph();
-        simulationInterval = setInterval(updateGraph, timeStep * 1000); // Convert to milliseconds
+        simulationInterval = setInterval(updateGraph, timeStep * 1000);
     }
 
     function stopSimulation() {
@@ -81,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("pid-setpoint").value = 10;
         document.getElementById("time-interval").value = 0.5;
 
-        // Clear the graph
+        // Clear graph
         pidChart.data.labels = [];
         pidChart.data.datasets[0].data = [];
         pidChart.update();
