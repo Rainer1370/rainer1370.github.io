@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI & Machine Learning Demo</title>
-
-    <!-- Link to external CSS files -->
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/ai.css">
-
-    <!-- TensorFlow.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- TensorFlow.js -->
-
-    <!-- Main JavaScript files -->
     <script src="/js/scripts.js" defer></script>
 </head>
-
 <body>
-    <!-- Header section (dynamically loaded) -->
-    <div id="header"></div>
+    <!-- Header -->
+    <header>
+        <div id="header"></div>
+    </header>
 
-    <!-- Main content container -->
+    <!-- Main Content -->
     <main class="content-container">
-        <h1 class="text-center">AI & Machine Learning Demo</h1>
-        <p class="text-center">
-            This interactive demo showcases a **basic AI classifier** trained on simple data.  
-            Adjust parameters and see the model **learn in real-time**.
-        </p>
+        <h1>AI & Machine Learning Demo</h1>
+        <p>This interactive demo showcases a **basic AI classifier** trained on simple data. Adjust parameters and see the model **learn in real-time**.</p>
 
-        <!-- AI Demo Section -->
         <section class="ai-demo-container">
             <h2>Train a Simple AI Model</h2>
-            <p>Click "Train Model" to generate a simple neural network and start training.</p>
+            <p>Click "Train Model" to generate a simple neural network.</p>
             <button id="trainModel">Train Model</button>
 
             <h3>Prediction:</h3>
@@ -44,19 +34,17 @@
             <canvas id="trainingChart"></canvas>
         </section>
 
-        <!-- Additional Information Link -->
-        <p class="text-center mt-10">
+        <p style="text-align: center; margin-top: 10px;">
             Learn more about AI & ML on  
-            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="learn-more-link">
-                Wikipedia</a>.
+            <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank" class="learn-more-link">Wikipedia</a>.
         </p>
     </main>
 
-    <!-- Footer section (dynamically loaded) -->
-    <div id="footer"></div>
+    <!-- Footer -->
+    <footer>
+        <div id="footer"></div>
+    </footer>
 
-    <!-- JavaScript for AI demo -->
     <script src="/js/ai.js" defer></script>
 </body>
-
 </html>
