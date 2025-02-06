@@ -6,35 +6,37 @@ document.addEventListener("DOMContentLoaded", async function () {
     const inputData = document.getElementById("inputData");
     const predictionResult = document.getElementById("predictionResult");
     const failureReportElement = document.getElementById("failure-report");
-    let model;
-    let mode = 0; // Simulating mode change
 
-    // Sample data for anomaly detection and prediction
+    let model;
+    let mode = 0; // Initial mode: Sim Normal
+
+    // Simulate data paths for CSV files (you can adjust this to where your files are served)
     const MODE_TO_CSV = {
-        0: "simulated_data_normal.csv",
-        1: "simulated_data_predicted_failure.csv",
-        2: "simulated_data_failure.csv",
+        0: "/data/simulated_data_normal.csv", // Normal data
+        1: "/data/simulated_data_predicted_failure.csv", // Predicted failure data
+        2: "/data/simulated_data_failure.csv" // Actual failure data
     };
 
     async function createModel() {
         model = tf.sequential();
-        model.add(tf.layers.dense({ inputShape: [3], units: 8, activation: 'relu' })); // Input layer (3 features)
-        model.add(tf.layers.dense({ units: 1 })); // Output layer (1 prediction)
+        model.add(tf.layers.dense({ inputShape: [3], units: 8, activation: 'relu' })); // 3 features
+        model.add(tf.layers.dense({ units: 1 })); // Output layer
         model.compile({ optimizer: 'sgd', loss: 'meanSquaredError' });
 
         console.log("✅ Model Created");
 
-        // Example data (for simplicity, using mock data here)
-        const xs = tf.tensor2d([
-            [98, 25, 1e-6], // Water flow, Temperature, Pressure
-            [100, 26, 1.1e-6],
-            [95, 28, 1.2e-6],
-            [80, 30, 2.0e-6],
-            [85, 35, 2.5e-6]
-        ]);
-        const ys = tf.tensor2d([1, 0, 0, 1, 1], [5, 1]); // Labels for anomaly detection
+        // Fetch data from CSV (simulating by using a preloaded mode)
+        await loadDataAndTrain();
+    }
 
-        // Train the model
+    async function loadDataAndTrain() {
+        const dataFile = MODE_TO_CSV[mode];
+        const data = await fetchCSVData(dataFile);
+
+        // Prepare features and labels (assuming columns: time, water_flow, temperature, vacuum_pressure)
+        const xs = tf.tensor2d(data.map(row => [row.water_flow, row.temperature, row.vacuum_pressure]));
+        const ys = tf.tensor2d(data.map(row => row.temperature)); // Predict temperature
+
         await model.fit(xs, ys, {
             epochs: 100,
             callbacks: {
@@ -46,6 +48,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         console.log("🏆 Training Complete!");
         alert("Model Training Complete!");
+    }
+
+    async function fetchCSVData(url) {
+        const response = await fetch(url);
+        const text = await response.text();
+        const rows = text.split("\n").slice(1); // Skip header
+        return rows.map(row => {
+            const cols = row.split(",");
+            return {
+                time: parseFloat(cols[0]),
+                water_flow: parseFloat(cols[1]),
+                temperature: parseFloat(cols[2]),
+                vacuum_pressure: parseFloat(cols[3])
+            };
+        });
     }
 
     async function makePrediction() {
@@ -60,17 +77,17 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
-        // Make prediction based on input (e.g., water flow)
-        const prediction = model.predict(tf.tensor2d([[inputValue, 30, 1.5e-6]], [1, 3])); // Mock values for temp and pressure
+        // Make prediction based on user input
+        const prediction = model.predict(tf.tensor2d([[inputValue, 30, 1.5e-6]], [1, 3])); // Mock values for other features
         prediction.data().then(value => {
             predictionResult.innerText = value[0].toFixed(2);
         });
     }
 
-    // Update failure report based on mode and predictions
+    // Update failure report based on the mode
     function updateFailureReport() {
         let failureReport = "No significant issues detected.";
-        const dataFile = MODE_TO_CSV[mode]; // Simulate fetching data based on the mode
+        const dataFile = MODE_TO_CSV[mode];
         const failureData = {
             "Simulated Failure": "❌ CRITICAL FAILURE DETECTED!",
             "Predicted Failure": "⚠️ Predicted anomalies detected.",
@@ -84,11 +101,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         failureReportElement.innerText = failureReport;
     }
 
-    // Function to handle mode change
+    // Handle mode change
     function changeMode(newMode) {
         mode = newMode;
-        updateFailureReport(); // Update the failure report when mode changes
+        updateFailureReport();  // Update failure report when mode changes
         console.log(`Mode changed to: ${mode}`);
+        loadDataAndTrain(); // Reload and train model for new mode
     }
 
     // Train the model on button click
@@ -97,9 +115,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Predict based on user input on button click
     predictButton.addEventListener("click", makePrediction);
 
-    // Simulate mode change (you can use a dropdown or other controls for this)
-    setTimeout(() => changeMode(1), 5000); // Change mode after 5 seconds to simulate real-time update
+    // Set initial mode and start training with default mode
+    setTimeout(() => changeMode(1), 5000); // Simulate mode change after 5 seconds
 
-    // Initialize the page
-    changeMode(0); // Start with "Sim Normal" mode
+    // Initialize the page with the first mode
+    changeMode(0); // Start with "Sim Normal"
 });
