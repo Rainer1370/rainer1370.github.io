@@ -98,6 +98,42 @@
     color: #e0e0e0;
 }
 
+.article-tags {
+    margin: 10px 0 15px 0;
+}
+
+.article-tag {
+    display: inline-block;
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    color: #FFD700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin: 0 6px 6px 0;
+}
+
+.engineering-insight {
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin: 25px 0;
+}
+
+.engineering-insight p:first-child {
+    font-weight: bold;
+    color: #FFD700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.engineering-insight p:last-child {
+    font-style: italic;
+    margin-bottom: 0;
+}
+
 .article-sources {
     margin-top: 25px;
 }
