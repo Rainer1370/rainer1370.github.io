@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Measure, Compare, Correct: The Loop Behind Every Stable System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Why feedback loops in the human body, everyday technology, and particle accelerators all share the same fundamental structure, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">CONTROLS ENGINEERING</span>
+            <h1>Measure, Compare, Correct: The Loop Behind Every Stable System</h1>
+            <p class="article-subtitle">From your thermostat to a particle beam, almost every stable system on Earth runs on the same three-step loop.</p>
+            <p class="article-date">Published April 13, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Feedback loops follow the same basic structure everywhere: measure the current state, compare it to a target, and apply a correction &mdash; then repeat.</li>
+                    <li>The human body runs on negative feedback constantly, from temperature regulation to blood sugar control.</li>
+                    <li>Everyday technology like thermostats and cruise control use the exact same loop structure as biological systems.</li>
+                    <li>Particle accelerators push the same basic idea to extremes &mdash; correcting electron beam position thousands of times per second to hold it within microns.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Simplest Idea in Engineering</h2>
+            <p>
+                Strip away the jargon, and a feedback loop is almost embarrassingly simple: measure something,
+                compare it to where you want it to be, and nudge it back if it's off. Then do that again. And
+                again. Forever, or for as long as the system needs to stay stable.
+            </p>
+            <p>
+                That's it. That's the whole idea behind an enormous share of the stable systems around you,
+                biological and mechanical alike.
+            </p>
+
+            <h2>Feedback in Your Own Body</h2>
+            <p>
+                Your body runs on this loop constantly, and most of the time you never notice. Body temperature
+                regulation is the textbook example: temperature-sensitive nerve endings measure your core
+                temperature, and when it rises too high, the hypothalamus signals your sweat glands to activate,
+                cooling you down. Once temperature returns to normal, the signal stops. Measure, compare,
+                correct, repeat &mdash; and you were never consciously aware any of it happened.
+            </p>
+            <p>
+                Blood sugar regulation works the same way, using insulin and glucagon to compensate for anything
+                that pushes blood glucose above or below its target range. Almost every homeostatic process in
+                the body follows this same negative feedback structure: sense a deviation from the set point,
+                activate a corrective response, and stop once the deviation is resolved.
+            </p>
+            <p>
+                Occasionally the body uses the opposite structure &mdash; positive feedback, where the response
+                <em>amplifies</em> the change instead of reversing it. Labor contractions during childbirth are
+                the standard example: contractions release a hormone that intensifies further contractions,
+                deliberately pushing the process toward a defined endpoint rather than back toward a steady
+                state. It's a useful reminder that "feedback" isn't inherently stabilizing &mdash; it's the
+                <em>negative</em> feedback loop that keeps a system steady, and that distinction matters as much
+                in engineering as it does in physiology.
+            </p>
+
+            <h2>The Same Loop, Built Out of Metal and Wire</h2>
+            <p>
+                A household thermostat is often used to teach the concept for exactly this reason: it's a
+                mechanical stand-in for the same loop your body runs biologically. The thermostat measures room
+                temperature, compares it to the set point, and switches the heating or cooling system on or off
+                to correct the difference. Cruise control in a car does the same thing with vehicle speed
+                instead of temperature &mdash; measuring current speed, comparing it to the target, and
+                adjusting engine output to correct the difference, continuously, for as long as it's engaged.
+            </p>
+            <p>
+                None of this is a coincidence or a loose metaphor. Control engineers borrowed heavily from
+                exactly this kind of physiological regulation when formalizing feedback control theory in the
+                mid-20th century, and the mathematics of a thermostat and the mathematics of the body's
+                temperature regulation are, structurally, closely related problems.
+            </p>
+
+            <h2>Pushing the Same Loop to Its Limits</h2>
+            <p>
+                Particle accelerators run the identical loop, just under far less forgiving conditions. At a
+                synchrotron light source like NSLS-II, the electron beam's position has to be held stable to
+                within microns &mdash; a small fraction of the beam's own width &mdash; for the facility's X-ray
+                beamlines to produce usable data. Left uncorrected, the beam drifts due to mechanical vibration,
+                temperature changes, and other disturbances, exactly the way your body would overheat without a
+                working feedback response.
+            </p>
+            <p>
+                The correction loop looks the same in structure as the thermostat: beam position monitors
+                measure the electron beam's actual position, a control algorithm compares that to the desired
+                reference orbit, and correction magnets adjust the beam's trajectory to close the gap. What's
+                different is the speed and precision required &mdash; modern fast orbit feedback systems
+                recalculate and apply corrections thousands of times per second, using PID
+                (proportional-integral-derivative) control algorithms similar in principle to the ones found in
+                industrial thermostats, just running orders of magnitude faster and holding a far tighter
+                tolerance. NSLS-II's own real-time orbit correction work, going back to foundational research on
+                real-time harmonic closed orbit correction, is part of a design lineage that modern synchrotrons
+                worldwide still build on.
+            </p>
+
+            <h2>Why the Same Loop Shows Up Everywhere</h2>
+            <p>
+                The reason this exact structure keeps reappearing &mdash; in bodies, thermostats, cars, and
+                particle beams &mdash; isn't coincidence. Any system that needs to stay near a target state, in
+                the presence of disturbances it can't fully predict or eliminate, needs some version of this
+                loop. There's no way around measuring the current state, comparing it to where you want to be,
+                and correcting the difference. The only things that actually change between a thermostat and a
+                synchrotron are the speed, precision, and consequences of getting it wrong.
+            </p>
+            <p>
+                That's worth remembering the next time a room feels the right temperature without you doing
+                anything about it, or the next time an accelerator facility produces a stable beam for an
+                experiment that depends on it: underneath, it's the same loop, running at very different
+                scales, doing the same simple job.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator,
+                with direct experience in beam stability and orbit correction systems.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://wtcs.pressbooks.pub/anatphys/chapter/1-8-homeostasis-and-feedback-systems/" target="_blank" rel="noopener noreferrer">"1.8 Homeostasis and Feedback Systems." General Anatomy &amp; Physiology, WTCS Pressbooks.</a></li>
+                    <li><a href="https://texasgateway.org/resource/biological-systems-homeostasis" target="_blank" rel="noopener noreferrer">"Biological Systems: Homeostasis." Texas Gateway.</a></li>
+                    <li><a href="https://humanbiology.pressbooks.tru.ca/chapter/9-6/" target="_blank" rel="noopener noreferrer">"7.8 Homeostasis and Feedback." Human Biology, TRU Pressbooks.</a></li>
+                    <li><a href="https://courses.lumenlearning.com/suny-ap1/chapter/homeostasis-and-feedback-loops/" target="_blank" rel="noopener noreferrer">"Homeostasis and Feedback Loops." Anatomy and Physiology I, Lumen Learning.</a></li>
+                    <li><a href="https://ieeexplore.ieee.org/document/73046" target="_blank" rel="noopener noreferrer">"Orbit stability and feedback control in synchrotron radiation rings." IEEE Conference Publication (NSLS, Brookhaven National Laboratory).</a></li>
+                    <li>Yu, L., Bozoki, E., Galayda, J., Krinsky, S., Vignola, G. "Real-time harmonic closed orbit correction." Nuclear Instruments and Methods in Physics Research Section A, vol. 284, no. 2, pp. 268&ndash;285, December 1989.</li>
+                    <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S016890022030646X" target="_blank" rel="noopener noreferrer">"Recent improvements in beam orbit feedback at NSLS-II." Nuclear Instruments and Methods in Physics Research, Section A, ScienceDirect.</a></li>
+                    <li><a href="https://researchgate.net/publication/287200595_Fast_orbit_feedback_implementation_at_Alba_synchrotron" target="_blank" rel="noopener noreferrer">"Fast orbit feedback implementation at Alba synchrotron." ResearchGate.</a></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    Claims about NSLS-II's specific orbit feedback and beam stability systems are informed by
+                    both the sources above and the author's direct professional experience.
+                </p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
