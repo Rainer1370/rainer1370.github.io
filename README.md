@@ -40,6 +40,7 @@ Occasional write-ups exploring controls engineering topics and cross-domain tech
 3. [Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate](https://rainer1370.com/pages/articles/ai-coding-safety-lessons.html)
 4. [The Fault That Doesn't Trip: Ground Leakage Current in Accelerator and X-Ray Systems](https://rainer1370.com/pages/articles/ground-leakage-current.html)
 5. [Measure, Compare, Correct: The Loop Behind Every Stable System](https://rainer1370.com/pages/articles/feedback-systems.html)
+6. [The Great Virtualization Reshuffle: A View From Both Sides of the VMware-to-Proxmox Shift](https://rainer1370.com/pages/articles/virtualization-market-shift.html)
 
 👉 Visit the [Articles Section](https://rainer1370.com/pages/articles.html) to read more.
 
