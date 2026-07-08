@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>What Particle Accelerators Can Teach Hospitals About Alarm Fatigue</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comparison of accelerator control system alarm architecture and hospital alarm fatigue, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">CONTROLS ENGINEERING</span>
+            <h1>What Particle Accelerators Can Teach Hospitals About Alarm Fatigue</h1>
+            <p class="article-subtitle">Why decades-old accelerator control architecture may hold answers for one of healthcare's toughest technical problems.</p>
+            <p class="article-date">Published July 8, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Hospital alarm fatigue is a well-documented patient safety problem, driven partly by a lack of standardization across device manufacturers.</li>
+                    <li>Medical device interoperability standards (e.g., IEEE 11073 SDC) are actively trying to solve this now.</li>
+                    <li>Accelerator control systems have used mature severity-based alarm hierarchies and suppression logic for decades.</li>
+                    <li>The two literatures don't appear to cite each other &mdash; a genuinely interesting, underexplored parallel.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Problem, As Hospitals Describe It</h2>
+            <p>
+                Alarm fatigue is one of the most persistent, well-documented problems in modern healthcare.
+                Physiologic monitors, infusion pumps, ventilators, and dozens of other bedside devices generate
+                a constant stream of alerts &mdash; many of them clinically insignificant &mdash; until clinicians
+                become desensitized and start missing the alarms that actually matter. Multiple studies have
+                measured alarm rates as high as one alarm every four minutes on physiologic monitors alone in
+                some ICUs.
+            </p>
+            <p>
+                What stood out to me, reading through the recent clinical engineering literature, is
+                <em>why</em> this problem has been so hard to solve: hospital devices come from dozens of
+                different manufacturers, each with its own proprietary alarm logic, thresholds, and priority
+                scheme. There's no shared framework for a nurse's station to say "these five simultaneous alarms
+                actually represent one underlying event" or "this alarm can wait because a higher-priority
+                condition already explains it." Recent efforts &mdash; including the IEEE 11073 SDC standard for
+                interoperable point-of-care alarm notification, and researchers explicitly proposing a
+                "networked-device paradigm" borrowed from commercial aviation &mdash; are actively trying to
+                build that shared framework now.
+            </p>
+
+            <h2>A Problem Accelerator Control Systems Solved Decades Ago</h2>
+            <p>
+                Reading that, I kept thinking about a problem that looked strikingly familiar &mdash; because
+                it's one I've spent a career managing.
+            </p>
+            <p>
+                A particle accelerator facility is, in a real sense, an ICU for machines. A modern accelerator
+                has vacuum systems, RF cavities, magnet power supplies, timing systems, and personnel/equipment
+                protection systems, all built by different vendors over different decades, all capable of
+                generating fault conditions simultaneously. If a facility treated every sensor trip as an
+                equally urgent, independent alarm, operators would drown in noise exactly the way ICU nurses
+                do &mdash; and unlike a hospital alarm, an unaddressed accelerator fault can mean beam loss,
+                equipment damage, or a safety event.
+            </p>
+            <p>
+                I spent over fifteen years managing exactly these systems at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator,
+                overseeing PPS, EPS, and accelerator alarm and interlock logic.
+            </p>
+            <p>
+                The controls community solved this problem long ago, largely through EPICS-based (Experimental
+                Physics and Industrial Control System) alarm handling architectures, which typically include:
+            </p>
+            <ul>
+                <li><strong>Severity-based hierarchies</strong> &mdash; alarms are classified (e.g., MINOR/MAJOR/INVALID) so operators can immediately distinguish "worth noting" from "requires action now."</li>
+                <li><strong>Alarm shelving and acknowledgment logic</strong> &mdash; a known, already-being-addressed condition can be suppressed from re-triggering operator attention, without disabling the underlying safety interlock.</li>
+                <li><strong>Root-cause suppression of cascading alarms</strong> &mdash; when one upstream fault predictably triggers a cascade of downstream alarms, the system can present the <em>cause</em>, not twenty symptoms.</li>
+                <li><strong>A vendor-agnostic integration layer</strong> &mdash; EPICS was explicitly built to unify heterogeneous hardware from many manufacturers under one control and alarm framework, which is precisely the interoperability problem hospital alarm researchers are now trying to solve with standards like IEEE 11073 SDC.</li>
+            </ul>
+            <p>
+                None of this is exotic technology. It's mature, battle-tested infrastructure running at national
+                laboratories and accelerator facilities worldwide, some of it for well over two decades.
+            </p>
+
+            <h2>The Actual Observation</h2>
+            <p>
+                I want to be precise about what I'm claiming here, and what I'm not.
+            </p>
+            <p>
+                I'm <strong>not</strong> claiming hospitals have never thought about alarm hierarchies or
+                suppression logic &mdash; human-factors-driven alarm management is an active, serious research
+                field, and the aviation-industry parallel researchers have already drawn is a good one. What I
+                haven't found evidence of is that field looking specifically at large-scale scientific facility
+                control systems &mdash; accelerators, synchrotrons, and similar &mdash; as a mature,
+                already-solved reference architecture for exactly this problem. The two literatures don't
+                appear to cite each other.
+            </p>
+            <p>
+                That's a genuinely interesting gap. Accelerator controls engineers have spent decades refining
+                alarm severity, shelving, and root-cause suppression logic under conditions where getting it
+                wrong has expensive, sometimes hazardous consequences. Medical device interoperability standards
+                are, in some respects, reinventing pieces of that wheel independently, a few decades later,
+                under arguably higher stakes.
+            </p>
+
+            <h2>Why This Kind of Cross-Domain Comparison Is Worth Doing</h2>
+            <p>
+                Most technical fields are deeply siloed by publication venue, professional society, and
+                vocabulary. A controls engineer doesn't read clinical engineering journals; a biomedical
+                engineer doesn't read accelerator physics proceedings. Genuinely useful parallels can sit in
+                plain sight for years simply because nobody with a foot in both worlds happened to notice.
+            </p>
+            <p>
+                I don't think every cross-domain comparison holds up under scrutiny &mdash; I ran a similar
+                exercise comparing accelerator vacuum diagnostics to pharmaceutical freeze-drying, and that one
+                turned out to be a well-known parallel already exploited by vacuum equipment vendors serving
+                both markets. The alarm systems comparison above held up better under the same scrutiny, which
+                is why it's the one I'm writing up.
+            </p>
+            <p>
+                If anyone working in clinical alarm management or medical device interoperability standards
+                wants to compare notes on how accelerator facilities structure alarm severity and suppression
+                logic, I'd genuinely welcome the conversation.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator,
+                overseeing PPS, EPS, and accelerator safety systems.
+            </p>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
