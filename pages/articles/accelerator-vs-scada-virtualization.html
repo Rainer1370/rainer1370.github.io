@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How accelerator control infrastructure and municipal SCADA systems independently converged on the same virtualized, redundant architecture, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">CONTROLS ENGINEERING</span>
+            <h1>What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure</h1>
+            <p class="article-subtitle">Two unrelated fields independently arrived at the same infrastructure architecture &mdash; because neither can tolerate downtime.</p>
+            <p class="article-date">Published July 1, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Legacy SCADA systems at water and wastewater utilities have historically run on single, non-redundant servers &mdash; a well-documented single point of failure.</li>
+                    <li>Utilities are now actively adopting virtualized, redundant infrastructure to eliminate that risk, with real case studies showing dramatic failover improvements.</li>
+                    <li>Accelerator control systems adopted the same architecture years earlier, for the same underlying reason.</li>
+                    <li>This isn't a hidden discovery &mdash; it's convergent validation: two unrelated high-stakes fields independently arrived at the same answer.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Problem, As Utilities Describe It</h2>
+            <p>
+                Municipal water and wastewater SCADA systems have historically been server-centric: all data
+                acquisition, visualization, and control logic runs through a single central server. That
+                architecture is simple to maintain and license, but it comes with an obvious weakness &mdash;
+                that server is a single point of failure. One water district reported an 18-hour outage when
+                its SCADA server failed, forcing operators to run the plant manually while backups were restored.
+            </p>
+            <p>
+                The industry's response has been a real, active shift toward virtualized, redundant
+                infrastructure. DC Water, for example, now runs dual, physically separated edge computing
+                platforms specifically so that a failure at one site fails over to the other with no
+                interruption &mdash; a configuration that reportedly cut failover time by roughly 90% compared
+                to their prior setup. Other utilities have made similar moves, pairing virtualization with
+                redundant historians and synchronized failover across separate physical hosts.
+            </p>
+
+            <h2>The Same Problem, Solved Earlier, In a Very Different Field</h2>
+            <p>
+                I've spent years building exactly this kind of infrastructure &mdash; just not for water
+                treatment.
+            </p>
+            <p>
+                At Brookhaven National Laboratory's NSLS-II, I led the transition from physical servers to a
+                fully virtualized infrastructure supporting accelerator operations, and at Applied Materials I
+                architected the Unified Server project, combining Proxmox virtualization with RHEL-based hosting
+                for production control systems. The motivation was identical to what utilities are describing
+                now: a live accelerator, like a live water system, cannot tolerate a single hardware failure
+                taking down operations. Redundant, virtualized infrastructure isn't a nice-to-have in either
+                domain &mdash; it's the only way to keep a safety-critical, always-on system running when a
+                single physical machine inevitably fails.
+            </p>
+
+            <h2>Why This Is Convergence, Not a New Discovery</h2>
+            <p>
+                I want to be precise about the claim here, because I think it's more interesting than "hidden
+                connection nobody's found."
+            </p>
+            <p>
+                This isn't a case where one field is sitting on an unsolved problem the other field already
+                fixed &mdash; unlike the alarm fatigue comparison I wrote up recently, water utilities are
+                <em>already</em> actively adopting virtualization and redundancy, with real case studies and
+                measurable results. What's genuinely interesting is that two fields with almost nothing in
+                common &mdash; high-energy particle physics and municipal water infrastructure &mdash;
+                independently converged on the same architectural answer, for the same underlying reason:
+                systems that can't tolerate downtime eventually all arrive at redundant, virtualized
+                infrastructure, regardless of what they're actually controlling.
+            </p>
+            <p>
+                That's not a hidden insight. It's evidence that the principle is correct &mdash; when two
+                unrelated fields facing the same constraint (zero tolerance for downtime) independently land on
+                the same solution, that's a stronger validation of the approach than either field's experience
+                alone.
+            </p>
+
+            <h2>Why This Kind of Comparison Is Still Worth Making</h2>
+            <p>
+                Not every cross-domain comparison holds up to scrutiny. I've run a few of these now &mdash; one
+                comparing accelerator vacuum diagnostics to pharmaceutical freeze-drying turned out to already
+                be well-known within the vacuum equipment industry; the alarm fatigue comparison held up as a
+                genuinely underexplored parallel. This one sits in between: not a hidden gap, but a real, useful
+                validation of infrastructure decisions that engineers in either field might otherwise
+                second-guess.
+            </p>
+            <p>
+                If you're managing infrastructure for a system that genuinely cannot go down &mdash; whether
+                it's a beamline, a treatment plant, or something else entirely &mdash; the fact that two
+                completely unrelated industries reached the same conclusion independently is worth knowing.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://www.connectivity4ir.co.uk/article/190005/Edge-computing-platforms-provide-double-redundancy-and-reduce-system-failover-time-by-90-per-cent.aspx" target="_blank" rel="noopener noreferrer">"Edge computing platforms provide double redundancy and reduce system failover time by 90 per cent." Stratus Technologies / DC Water case study.</a></li>
+                    <li><a href="https://inductiveautomation.com/blog/sustainable-scada-10-steps-for-water-districts" target="_blank" rel="noopener noreferrer">"Sustainable SCADA: 10 Steps for Water Districts." Inductive Automation.</a></li>
+                    <li><a href="https://inductiveautomation.com/resources/webinar/webinar-10-steps-architecting-sustainable-scada-system" target="_blank" rel="noopener noreferrer">"10 Steps to Architecting a Sustainable SCADA System." Inductive Automation webinar.</a></li>
+                    <li><a href="https://wwdmag.com/scada/sustainable-scada-water-districts" target="_blank" rel="noopener noreferrer">"Sustainable SCADA for Water Districts." Wastewater Digest.</a></li>
+                    <li><a href="https://www.vtscada.com/redundancy-and-automatic-failover/" target="_blank" rel="noopener noreferrer">"SCADA Redundancy and Automatic Failover." VTScada.</a></li>
+                    <li><a href="https://www.vtscada.com/ip-gateway-redundancy-key-to-water-wastewater-scada-upgrade/" target="_blank" rel="noopener noreferrer">"IP Gateway Redundancy Key to Water/Wastewater SCADA Upgrade." VTScada.</a></li>
+                    <li><a href="https://eureka.patsnap.com/report-how-to-optimize-scada-systems-for-data-redundancy" target="_blank" rel="noopener noreferrer">"How to Optimize SCADA Systems for Data Redundancy." PatSnap Eureka.</a></li>
+                    <li><a href="https://www.parasyn.com.au/article/the-top-5-problems-with-scada-systems/" target="_blank" rel="noopener noreferrer">"The 5 Critical Challenges of Modern Enterprise SCADA Systems." Parasyn.</a></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    Claims about accelerator control system virtualization (NSLS-II, Unified Server project) are
+                    drawn from the author's direct professional experience rather than external sources.
+                </p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>

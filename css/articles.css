@@ -97,3 +97,32 @@
     font-size: 0.95rem;
     color: #e0e0e0;
 }
+
+.article-sources {
+    margin-top: 25px;
+}
+
+.article-sources h3 {
+    font-size: 1.1rem;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.article-sources ul {
+    width: auto;
+    padding-left: 20px;
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+}
+
+.article-sources li {
+    margin-bottom: 8px;
+}
+
+.article-sources a {
+    color: #e0e0e0;
+}
+
+.article-sources a:hover {
+    color: #FFD700;
+}
