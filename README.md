@@ -29,6 +29,18 @@ Includes sections for:
 - Professional experience and technical expertise.
 - Interactive tools for data analysis, simulation, and visualization.
 - Technical publications and key accomplishments.
+- Articles on controls engineering and cross-domain technical observations.
+
+## **Articles**
+Occasional write-ups exploring controls engineering topics and cross-domain technical parallels &mdash; places where accelerator control systems and other high-stakes engineering fields have independently converged on (or diverged from) similar solutions.
+
+**Current Articles Include**:
+1. [What Particle Accelerators Can Teach Hospitals About Alarm Fatigue](https://rainer1370.com/pages/articles/accelerator-alarms-vs-hospital-alarms.html)
+2. [What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure](https://rainer1370.com/pages/articles/accelerator-vs-scada-virtualization.html)
+
+👉 Visit the [Articles Section](https://rainer1370.com/pages/articles.html) to read more.
+
+If you work in a field that touches on any of these topics and want to compare notes, or just have thoughts on an article, feel free to reach out &mdash; contact details are below.
 
 ## **Interactive Tools**
 The **Tools Section** features utilities for data encoding, engineering calculations, waveform analysis, and more.  
