@@ -27,8 +27,8 @@
             <div class="key-points">
                 <p class="key-points-label">KEY POINTS</p>
                 <ul>
-                    <li>Ground leakage current rarely causes an immediate, obvious failure &mdash; it degrades slowly and can masquerade as noise, drift, or measurement error long before it becomes a hard fault.</li>
-                    <li>In accelerator magnet power supplies, insulation degradation shows up as leakage current long before a full ground fault trips protection.</li>
+                    <li>Standard grounded AC circuits already have effective fast-trip protection against ground leakage &mdash; GFCI and RCD devices catch imbalance current in milliseconds.</li>
+                    <li>Ungrounded or floating DC systems, common in accelerator magnet power supplies, don't have that safety net &mdash; symmetrical insulation degradation produces no imbalance for a simple monitor to catch.</li>
                     <li>In X-ray tubes, leakage ("dark") current is a normal, characterized phenomenon that increases with vacuum degradation or contamination &mdash; and is one of the leading indicators of tube end-of-life.</li>
                     <li>In electron beam systems, stray leakage current can silently corrupt beam current measurements, leading to miscalibrated output without any obvious fault condition at all.</li>
                 </ul>
@@ -39,21 +39,26 @@
             <h2>Why Leakage Current Is a Different Kind of Problem</h2>
             <p>
                 Most electrical faults are self-announcing. A short circuit trips a breaker. A blown fuse opens
-                a circuit. A hard ground fault triggers a protection relay. These faults are disruptive, but
-                they're also honest &mdash; the system tells you something is wrong.
+                a circuit. In standard grounded AC circuits, even a small ground fault is usually caught fast
+                &mdash; a GFCI or RCD compares current between conductors and trips within milliseconds if it
+                detects an imbalance as small as a few milliamps. That protection is effective specifically
+                because it has two conductors to compare against a reference.
             </p>
             <p>
-                Ground leakage current doesn't play by those rules. It's a small, often gradually increasing
-                current finding an unintended path to ground through degraded insulation, contamination, or a
-                compromised dielectric. Below a certain threshold, it doesn't trip anything. It just sits there,
-                slowly getting worse, sometimes for months, before it either causes a catastrophic failure or
-                &mdash; more insidiously &mdash; quietly corrupts the data or performance of the system it's
-                degrading.
+                The systems this article is about don't have that luxury. Accelerator magnet power supplies
+                and X-ray tube high-voltage circuits are frequently ungrounded or floating DC systems, and the
+                most troublesome failure mode &mdash; degradation that affects both legs of the circuit
+                symmetrically &mdash; produces no imbalance for a simple two-conductor comparison to catch.
+                There's no neutral to compare against, and nothing trips. The current just sits there, slowly
+                getting worse, sometimes for months, before it either causes a catastrophic failure or &mdash;
+                more insidiously &mdash; quietly corrupts the data or performance of the system it's degrading.
             </p>
             <p>
-                That combination &mdash; slow onset, no clear failure signature, and downstream effects that
-                look like something else entirely &mdash; is what makes it genuinely dangerous in high-voltage
-                accelerator and X-ray systems.
+                That combination &mdash; slow onset, no fast-trip protection to catch it, and downstream
+                effects that look like something else entirely &mdash; is what makes it genuinely dangerous in
+                high-voltage accelerator and X-ray systems specifically, even though the equivalent problem in
+                an ordinary household circuit is already well handled by technology most people have in their
+                breaker panel.
             </p>
 
             <h2>Case One: Magnet Power Supply Insulation Faults</h2>
@@ -137,6 +142,8 @@
             <div class="article-sources">
                 <h3>Sources</h3>
                 <ul>
+                    <li><a href="https://www.electrakit.com/guides/gfci-afci-guide" target="_blank" rel="noopener noreferrer">"GFCI vs AFCI: NEC Requirements Explained." ElectraKit.</a></li>
+                    <li><a href="https://engineerfix.com/how-fast-does-a-gfci-trip/" target="_blank" rel="noopener noreferrer">"How Fast Does a GFCI Trip?" Engineer Fix (UL 943 trip-time standard).</a></li>
                     <li><a href="https://www.benderinc.com/know-how/technology/ungrounded-system/ground-fault-monitoring/" target="_blank" rel="noopener noreferrer">"Ground-fault Monitoring in Ungrounded Systems." Bender Inc.</a></li>
                     <li><a href="https://www.sciencedirect.com/science/article/pii/S1876610218311226" target="_blank" rel="noopener noreferrer">"Detection of Ground Insulation Faults in Ungrounded DC Power Supply Systems by Using a DC Current Injection Method." ScienceDirect.</a></li>
                     <li><a href="https://meetceras.com/10-common-causes-of-x-ray-tube-failures/" target="_blank" rel="noopener noreferrer">"10 Common Causes of X-Ray Tube Failures." Fuzhou Meetcera Technology.</a></li>
