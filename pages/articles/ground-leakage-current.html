@@ -28,9 +28,9 @@
                 <p class="key-points-label">KEY POINTS</p>
                 <ul>
                     <li>Standard grounded AC circuits already have effective fast-trip protection against ground leakage &mdash; GFCI and RCD devices catch imbalance current in milliseconds.</li>
-                    <li>Ungrounded or floating DC systems, common in accelerator magnet power supplies, don't have that safety net &mdash; symmetrical insulation degradation produces no imbalance for a simple monitor to catch.</li>
-                    <li>In X-ray tubes, leakage ("dark") current is a normal, characterized phenomenon that increases with vacuum degradation or contamination &mdash; and is one of the leading indicators of tube end-of-life.</li>
-                    <li>In electron beam systems, stray leakage current can silently corrupt beam current measurements, leading to miscalibrated output without any obvious fault condition at all.</li>
+                    <li>In accelerator magnet power supplies, insulation monitoring devices do detect and trip on ground faults &mdash; the hard problem is diagnosing which component or circuit is actually responsible.</li>
+                    <li>In X-ray tubes, leakage ("dark") current is a normal, characterized phenomenon that increases with vacuum degradation &mdash; useful as a trend, even though a single reading rarely triggers a hard fault.</li>
+                    <li>In microfocus X-ray sources, leakage current can degrade source spot size directly, with no fault signature at all &mdash; only a performance drift that requires active diagnostic work to catch.</li>
                 </ul>
             </div>
         </section>
@@ -45,38 +45,42 @@
                 because it has two conductors to compare against a reference.
             </p>
             <p>
-                The systems this article is about don't have that luxury. Accelerator magnet power supplies
-                and X-ray tube high-voltage circuits are frequently ungrounded or floating DC systems, and the
-                most troublesome failure mode &mdash; degradation that affects both legs of the circuit
-                symmetrically &mdash; produces no imbalance for a simple two-conductor comparison to catch.
-                There's no neutral to compare against, and nothing trips. The current just sits there, slowly
-                getting worse, sometimes for months, before it either causes a catastrophic failure or &mdash;
-                more insidiously &mdash; quietly corrupts the data or performance of the system it's degrading.
+                The systems this article is about don't have that luxury in the same way. Accelerator magnet
+                power supplies and X-ray tube high-voltage circuits are frequently ungrounded or floating DC
+                systems, where a two-conductor imbalance comparison doesn't apply the same way. Some of these
+                systems do have their own protection &mdash; insulation monitoring devices that detect and trip
+                on degraded resistance &mdash; but detecting that a fault exists and diagnosing exactly where
+                it is, or what it's actually doing to system performance, turn out to be very different
+                problems. In some cases the system trips but the root cause takes real diagnostic work to find.
+                In others, there's no trip at all &mdash; just a slow, characterizable drift in performance that
+                requires actively looking for it to catch.
             </p>
             <p>
-                That combination &mdash; slow onset, no fast-trip protection to catch it, and downstream
-                effects that look like something else entirely &mdash; is what makes it genuinely dangerous in
-                high-voltage accelerator and X-ray systems specifically, even though the equivalent problem in
-                an ordinary household circuit is already well handled by technology most people have in their
-                breaker panel.
+                That combination &mdash; a fault signature that's either absent or misleadingly indirect, and
+                downstream effects that look like something else entirely &mdash; is what makes ground leakage
+                genuinely difficult to manage in high-voltage accelerator and X-ray systems, even though the
+                simpler version of the same problem in an ordinary household circuit is already well handled by
+                technology most people have in their breaker panel.
             </p>
 
-            <h2>Case One: Magnet Power Supply Insulation Faults</h2>
+            <h2>Case One: Finding the Fault After It Trips</h2>
             <p>
                 Accelerator magnet power supplies &mdash; including the supplies driving sextupole and other
                 multipole correction magnets &mdash; are frequently operated in ungrounded or high-impedance
-                grounded configurations, which improves fault tolerance but makes early insulation degradation
-                harder to catch by simple means. Traditional passive detection methods struggle particularly
-                with <em>symmetrical</em> insulation degradation, where resistance degrades evenly across
-                conductors rather than in one obvious spot &mdash; a failure mode that produces no voltage
-                imbalance for a simple monitor to catch.
+                grounded configurations, and modern insulation monitoring devices (IMDs) do actively detect
+                ground insulation faults and trip or alarm the system before catastrophic failure. In that
+                sense, the protection works as intended.
             </p>
             <p>
-                Modern insulation monitoring devices (IMDs) address this by actively injecting a small test
-                current or signal and measuring the resulting leakage response, rather than passively waiting
-                for an imbalance to appear. This allows detection of insulation resistance degradation trending
-                toward failure well before it becomes a hard ground fault &mdash; the difference between a
-                scheduled maintenance action and an unplanned magnet trip mid-run.
+                The genuinely insidious part is what happens next. An IMD trip tells you insulation resistance
+                somewhere in the monitored zone has degraded below threshold &mdash; it doesn't tell you which
+                winding, which cable run, or which of potentially many parallel magnet circuits sharing a common
+                bus is actually responsible. Symmetrical degradation, where resistance drops evenly across
+                conductors rather than in one obvious spot, is particularly hard to localize: it produces no
+                voltage imbalance for simple methods to point to, and even active-injection IMDs that reliably
+                detect the fault's presence often can't pinpoint its location without further diagnostic work.
+                A tripped protection system and a diagnosed root cause are two very different things, and the
+                gap between them is where real downtime accumulates.
             </p>
 
             <h2>Case Two: X-Ray Tube Dark Current</h2>
@@ -95,6 +99,17 @@
                 gradual and each step looks like a minor performance variation rather than an obvious fault,
                 dark current trending is one of the more useful indicators for anticipating tube end-of-life
                 before a hard failure takes the source down entirely.
+            </p>
+            <p>
+                In microfocus and nanofocus X-ray sources specifically &mdash; the kind used in high-resolution
+                X-ray microscopy platforms &mdash; the effect can be more tenuous still. Rather than tripping any
+                protection or producing a clear alarm condition, ground leakage current here can subtly distort
+                the electron beam's focusing and manifest as a change in effective source spot size, directly
+                degrading imaging resolution without any fault signature at all. This is arguably the hardest
+                case of the three: there's no trip to investigate and no characterized dark current curve to
+                trend against, only a gradual performance degradation that requires thorough diagnostic
+                characterization &mdash; not just fault monitoring &mdash; to even detect, let alone attribute
+                to its actual cause.
             </p>
 
             <h2>Case Three: The Measurement That Lies to You</h2>
@@ -121,21 +136,23 @@
             <h2>The Common Thread</h2>
             <p>
                 All three cases share the same underlying lesson, and it's one that shows up constantly in
-                safety-critical controls work: <strong>the absence of an obvious fault is not the same as the
-                absence of a problem.</strong> Leakage current doesn't announce itself the way a short circuit
-                does. Catching it early requires actively looking for it &mdash; active insulation monitoring
-                rather than passive fault detection, dark current trending rather than waiting for arcing, and
-                independent verification of beam current measurements rather than trusting a single sensor path.
+                safety-critical controls work: <strong>a system telling you something is wrong is not the same
+                as a system telling you why.</strong> An IMD trip on a magnet power supply confirms a fault
+                exists without confirming where. X-ray tube dark current requires trending against a known
+                baseline to be useful at all. And in microfocus source applications, there may be no fault
+                signature whatsoever &mdash; just a performance drift that only shows up if you're actively
+                characterizing the system rather than waiting for it to complain.
             </p>
             <p>
-                That's the same principle behind redundant verification in any well-designed safety-critical
-                system: don't wait for a component to fail loudly. Build in the ability to notice when it's
-                failing quietly.
+                That's the same principle behind redundant, well-instrumented verification in any
+                well-designed safety-critical system: detection alone isn't the goal. The goal is enough
+                diagnostic visibility that a fault, once flagged, can actually be traced to its cause &mdash;
+                not just acknowledged and reset.
             </p>
 
             <div class="engineering-insight">
                 <p>ENGINEERING INSIGHT</p>
-                <p>The absence of an obvious fault is not the same as the absence of a problem.</p>
+                <p>A system telling you something is wrong is not the same as a system telling you why.</p>
             </div>
 
             <p class="article-bio">
@@ -158,9 +175,9 @@
                     <li><a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/6198804" target="_blank" rel="noopener noreferrer">"Electron beam multistage accelerator." U.S. Patent 6,198,804 (illustrates stray leakage current corrupting beam current measurement).</a></li>
                 </ul>
                 <p style="font-size: 0.85rem; color: #cccccc;">
-                    Claims about accelerator magnet power supply configurations and beam current feedback
-                    control are drawn from the author's direct professional experience, informed by the sources
-                    above.
+                    Claims about accelerator magnet power supply diagnostics, beam current feedback control, and
+                    the effect of ground leakage current on microfocus X-ray source spot size are drawn from the
+                    author's direct professional experience, informed by the sources above where noted.
                 </p>
             </div>
 
