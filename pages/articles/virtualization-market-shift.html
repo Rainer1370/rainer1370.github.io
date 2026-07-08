@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Great Virtualization Reshuffle: A View From Both Sides of the VMware-to-Proxmox Shift</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A firsthand comparison of VMware and Proxmox in production, and what the post-Broadcom virtualization market shift reveals about vendor lock-in, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">CONTROLS ENGINEERING</span>
+            <h1>The Great Virtualization Reshuffle: A View From Both Sides of the VMware-to-Proxmox Shift</h1>
+            <p class="article-subtitle">I've run production infrastructure on both platforms. Here's what the market data confirms about what I've already seen firsthand.</p>
+            <p class="article-date">Published March 23, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Broadcom's 2023 acquisition of VMware triggered licensing changes that have raised costs anywhere from 150% to over 1,000% for many organizations.</li>
+                    <li>Gartner projects that by 2028, roughly 70% of enterprise VMware customers will migrate at least half of their virtualized workloads to alternatives.</li>
+                    <li>Open-source alternatives like Proxmox VE have grown from a niche, homelab-associated tool to genuine production infrastructure at scale.</li>
+                    <li>Having operated both platforms in real production environments, the technical gap has narrowed far more than the pricing gap.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>A Market Disruption You Can Set Your Watch To</h2>
+            <p>
+                Enterprise virtualization doesn't usually make headlines. It's infrastructure &mdash; the kind
+                of thing that's supposed to be boring, reliable, and invisible when it's working. That changed
+                after Broadcom completed its $61 billion acquisition of VMware in November 2023 and restructured
+                the entire licensing model: perpetual licenses were eliminated, the product lineup was
+                consolidated from thousands of SKUs down to a handful of subscription bundles, and pricing
+                shifted to a per-core model with high minimum purchase requirements.
+            </p>
+            <p>
+                The result has been one of the most disruptive shifts server virtualization has seen in decades.
+                Reported price increases range from 150% up to over 1,000% depending on organization size and
+                prior licensing tier &mdash; AT&amp;T has publicly pursued legal action against Broadcom over a
+                reported price increase exceeding 1,000%, and Fidelity reportedly faced threats of being cut off
+                from key software over the new payment terms. Gartner now projects that by 2028, roughly 70% of
+                enterprise VMware customers will have migrated at least half of their virtualized workloads away
+                from the platform.
+            </p>
+            <p>
+                The disruption goes beyond pricing. Broadcom terminated the VMware Cloud Service Provider (VCSP)
+                partner program in January 2026, a move that excluded most European cloud providers from a
+                partnership structure many had built their businesses around. The European Cloud Competition
+                Observatory rated Broadcom's practices as a hard "red" flag, and the trade association CISPE
+                subsequently filed a formal competition complaint with the European Commission in March 2026.
+                Broadcom's own partner program has also shifted to an invitation-only model, pushing out many
+                smaller managed service providers and resellers who had built long-standing VMware practices.
+                Taken together, it's not just a price increase &mdash; it's a fundamental restructuring of who
+                gets to sell, support, and build a business around the platform at all.
+            </p>
+
+            <h2>Two Facilities, Two Platforms, One Honest Comparison</h2>
+            <p>
+                I've had the somewhat unusual experience of running serious production infrastructure on both
+                sides of this shift, in real operational environments where downtime wasn't an abstract cost.
+            </p>
+            <p>
+                At Brookhaven National Laboratory's NSLS-II, our infrastructure ran on VMware's vCenter,
+                integrated with Red Hat Satellite as part of a broader IaaS model supporting accelerator
+                operations. It was mature, well-documented, and backed by two decades of enterprise tooling and
+                third-party integration &mdash; exactly the reputation VMware built its dominance on.
+            </p>
+            <p>
+                At Applied Materials, I architected the Unified Server project on Proxmox, combining a Windows
+                user-facing environment with RHEL-based virtualization for EPICS IOC hosting. The experience
+                was, frankly, close to parity on the fundamentals: clustering, live migration, and high
+                availability all worked reliably in production, running the same class of safety-relevant
+                control infrastructure I'd previously trusted to VMware.
+            </p>
+            <p>
+                That personal experience lines up with what the broader market has been reporting since the
+                Broadcom acquisition: independent benchmarking has generally found raw hypervisor performance
+                between VMware's ESXi and Proxmox's KVM-based platform to be close, often within single-digit
+                percentages of each other. The gap that actually matters to most organizations right now isn't
+                technical capability &mdash; it's licensing cost and organizational risk tolerance.
+            </p>
+
+            <h2>What's Actually Driving the Decision</h2>
+            <p>
+                The economics are stark enough that they're doing most of the persuading on their own. A
+                documented case study from an Austrian mid-market company running roughly 80 VMs reported an 83%
+                cost reduction after migrating from VMware to Proxmox. Multiple industry sources describe
+                organizations facing three-year cost impacts in the hundreds of thousands of dollars if they
+                stay on VMware's new subscription model versus migrating &mdash; numbers substantial enough to
+                fund significant hardware refreshes or engineering headcount instead.
+            </p>
+            <p>
+                That doesn't mean migration is free or risk-free. Real-world migration projects consistently
+                take longer than initially planned &mdash; what teams scope as a straightforward multi-week
+                project often stretches into months once disaster-recovery re-engineering, application
+                compatibility testing, and staff retraining are properly accounted for. The organizations
+                reporting the smoothest transitions are the ones treating it as a genuine infrastructure project
+                with real planning, not a weekend cutover.
+            </p>
+
+            <h2>The Lesson Underneath the Pricing Story</h2>
+            <p>
+                Having sat on both sides of this personally, the part that stands out to me isn't really about
+                Proxmox versus VMware specifically. It's a reminder of a risk that's easy to underweight when a
+                platform has been the safe, obvious default for twenty years: single-vendor dependency for
+                mission-critical infrastructure is itself a form of technical debt, one that doesn't show up on
+                a balance sheet until the vendor's incentives change.
+            </p>
+            <p>
+                That's a familiar lesson to anyone who has worked in accelerator or industrial controls, where
+                vendor lock-in on a safety-critical subsystem has always been treated as a real design risk to
+                actively manage, not just a commercial inconvenience. The virtualization market is currently
+                relearning that lesson at enterprise scale, and the organizations that had already diversified
+                their infrastructure skills &mdash; the ones with real, current Linux and KVM competency on
+                staff, not just VMware specialists &mdash; are the ones navigating this transition with the
+                least disruption.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator,
+                with direct experience virtualizing production control infrastructure on both VMware and Proxmox
+                platforms.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://www.cloudmagazin.com/en/2026/03/18/vmware-cost-trap-2026-it-teams-examine-alternatives/" target="_blank" rel="noopener noreferrer">"VMware Cost Trap 2026: IT Teams Examine Alternatives." Cloud Magazin (covers Gartner's 2028 migration projection, AT&amp;T litigation, the VCSP program termination, and the CISPE/EU Commission complaint).</a></li>
+                    <li><a href="https://gocorptech.com/business-it-101/vmware-broadcom-migration-cost/" target="_blank" rel="noopener noreferrer">"VMware After Broadcom: A Cost Analysis of Your Migration Options." GoCorpTech (covers Fidelity's dispute with Broadcom over licensing terms).</a></li>
+                    <li><a href="https://www.cloudmagazin.com/en/2026/04/22/vmware-in-the-postbroadcom-era-2026-what-dach-companies-must/" target="_blank" rel="noopener noreferrer">"VMware in the Post-Broadcom Era 2026: What DACH Companies Must Decide Now." Cloud Magazin.</a></li>
+                    <li><a href="https://tech-insider.org/proxmox-vs-vmware-2026/" target="_blank" rel="noopener noreferrer">"Proxmox vs VMware 2026: Full Comparison." Tech Insider (independent benchmarking data).</a></li>
+                    <li><a href="https://vmwaremadesimple.com/articles/best-vmware-alternatives-2026.html" target="_blank" rel="noopener noreferrer">"Best VMware Alternatives in 2026: The Complete Guide." VMware Made Simple.</a></li>
+                    <li><a href="https://www.turbogeek.co.uk/vmware-in-2026-costs-alternatives-and-migration-guide/" target="_blank" rel="noopener noreferrer">"VMware in 2026: Costs, Alternatives, and Migration Guide." TurboGeek.</a></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    Claims about NSLS-II and Applied Materials virtualization infrastructure are drawn from the
+                    author's direct professional experience.
+                </p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
