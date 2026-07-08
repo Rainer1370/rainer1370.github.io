@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Small Improvements, Big Machines: What Fifteen Years in Accelerator Controls Taught Me</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal reflection on fifteen years in accelerator controls at NSLS-II, and what published research does and doesn't capture, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">REFLECTION</span>
+            <h1>Small Improvements, Big Machines: What Fifteen Years in Accelerator Controls Taught Me</h1>
+            <p class="article-subtitle">The published papers only capture a fraction of the work. Here's the part that doesn't usually make it into a journal.</p>
+            <p class="article-date">Published February 2, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Synchrotron light sources like NSLS-II serve thousands of outside researchers a year, but almost none of them see the controls and instrumentation work that keeps the beam usable.</li>
+                    <li>Peer-reviewed publication captures a narrow slice of accelerator engineering &mdash; most of the real work is incremental, unglamorous, and never written up at all.</li>
+                    <li>Two of my own co-authored papers, on beam position monitoring and machine-learning-assisted lattice optimization, are representative of that narrow slice.</li>
+                    <li>The actual skill of the job is closer to noticing small, persistent problems before they become big ones than to any single breakthrough.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>A Facility Most People Never See</h2>
+            <p>
+                NSLS-II is a third-generation synchrotron light source at Brookhaven National Laboratory
+                &mdash; a medium-energy electron storage ring that produces X-rays roughly 10,000 times
+                brighter than the facility it replaced. It exists to serve outside science: researchers from
+                universities, industry, and other national labs submit peer-reviewed proposals for beamtime,
+                then use the light NSLS-II produces to study material structure at nanoscale resolution. In a
+                given year, well over a thousand researchers pass through, most of them never setting foot near
+                the accelerator itself, focused entirely on their own experiment at their own beamline.
+            </p>
+            <p>
+                I spent over fifteen years on the part of the facility almost none of those researchers ever
+                think about: the controls, instrumentation, and operational infrastructure that has to work,
+                quietly and continuously, for any of that outside science to happen at all.
+            </p>
+
+            <h2>What the Papers Actually Represent</h2>
+            <p>
+                I'm a co-author on a couple of published papers to come out of that work. One describes a
+                dedicated beam position monitor pair developed for model-independent lattice characterization
+                &mdash; a project aimed at getting a more accurate, less assumption-dependent picture of where
+                the electron beam actually is, and how the magnetic lattice is actually behaving, rather than
+                relying purely on a theoretical model of how it's supposed to behave. The other applies a
+                genetic algorithm, enhanced with machine learning, to dynamic aperture optimization &mdash;
+                using computational search to find magnet configurations that maximize the usable beam
+                lifetime and injection efficiency, a problem with far too large a parameter space for pure
+                trial and error.
+            </p>
+            <p>
+                Both papers are real, specific pieces of work, and I'm glad they exist. But I want to be
+                honest about what they represent relative to the actual job: a narrow, unusually legible slice
+                of it. Most of what keeps an accelerator like NSLS-II running never gets written up as a paper,
+                because it isn't the kind of result a journal is built to capture. It's a firmware update that
+                quietly fixes an intermittent fault nobody had fully diagnosed. It's a virtualization migration
+                that removes a single point of failure before it ever causes an outage. It's noticing that a
+                diagnostic reading has drifted by an amount most people wouldn't flag, and tracking down why
+                before it becomes a real problem.
+            </p>
+
+            <h2>The Actual Skill</h2>
+            <p>
+                If I had to name the one skill that's mattered most over fifteen years, it isn't any single
+                technique or publication &mdash; it's a particular kind of attentiveness to small, persistent
+                anomalies, and a willingness to chase them down before they become large, obvious failures.
+                Almost everything I've written about on this site &mdash; ground leakage current that doesn't
+                trip anything, alarm systems that either say too much or too little, feedback loops that
+                quietly drift out of tolerance &mdash; comes back to some version of that same instinct: the
+                interesting failures are rarely the loud ones. They're the ones that look like nothing at all,
+                right up until they aren't.
+            </p>
+            <p>
+                That's not a glamorous way to describe a career, and it's not something that fits neatly into a
+                publication record. But it's the actual work, and it's the part I'd want anyone reading my
+                published papers to understand sits underneath them: not a small number of discrete results,
+                but fifteen years of paying close attention to a machine that doesn't forgive carelessness, on
+                behalf of scientists who never had to think about it at all.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator.
+                His publications are available on
+                <a href="https://www.researchgate.net/profile/Rob-Rainer" target="_blank" rel="noopener noreferrer">ResearchGate</a>.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://science.osti.gov/bes/suf/User-Facilities/X-Ray-Light-Sources/NSLS-II" target="_blank" rel="noopener noreferrer">"National Synchrotron Light Source II (NSLS-II)." U.S. Department of Energy Office of Science.</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/National_Synchrotron_Light_Source_II" target="_blank" rel="noopener noreferrer">"National Synchrotron Light Source II." Wikipedia (facility scale, user statistics, and history).</a></li>
+                    <li><a href="https://lightsources.org/lightsources-of-the-world/americas/national-synchrotron-light-source-ii/" target="_blank" rel="noopener noreferrer">"National Synchrotron Light Source II (NSLS-II)." Lightsources.org.</a></li>
+                    <li><a href="https://www.researchgate.net/publication/381666620_Dedicated_beam_position_monitor_pair_for_model-independent_lattice_characterization_at_NSLS-II" target="_blank" rel="noopener noreferrer">Li, Y., Ha, K., Padrazo, D., Kosciuk, B., Bacha, B., Seegitz, M., Rainer, R., Mead, J., Yang, X., Tian, Y., Todd, R., Smaluk, V., Cheng, W. "Dedicated beam position monitor pair for model-independent lattice characterization at NSLS-II." (2024).</a></li>
+                    <li>Li, Y., Cheng, W., Yu, L., Rainer, R. "Genetic algorithm enhanced by machine learning in dynamic aperture optimization." <em>Physical Review Accelerators and Beams.</em></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    This piece is a personal reflection, not a technical claim requiring independent
+                    verification beyond the cited facility background and the author's own co-authored
+                    publications.
+                </p>
+            </div>
+
+            <div class="engineering-insight">
+                <p>ENGINEERING INSIGHT</p>
+                <p>The interesting failures are rarely the loud ones. They're the ones that look like nothing at all, right up until they aren't.</p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
