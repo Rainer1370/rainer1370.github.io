@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A controls engineering perspective on AI coding mandates, verification, and why fast output and trustworthy output are not the same thing, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">CONTROLS ENGINEERING</span>
+            <h1>Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate</h1>
+            <p class="article-subtitle">The software industry is relearning a lesson safety-critical engineering has known for decades: speed and verification are not the same thing.</p>
+            <p class="article-date">Published June 1, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Some companies are mandating AI coding tool usage and tracking it as a performance metric.</li>
+                    <li>Independent research shows AI-generated code produces meaningfully more defects than human-written code, including more security vulnerabilities.</li>
+                    <li>At least one major company has moved the opposite direction, banning AI-generated code from being merged without human approval.</li>
+                    <li>Safety-critical engineering fields have always treated fast output and trustworthy output as separate problems &mdash; and that discipline is directly relevant here.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Claim vs. The Evidence</h2>
+            <p>
+                There's a narrative going around that AI has become good enough at writing code that some
+                companies are pushing their engineers to stop writing it by hand altogether. Some organizations
+                genuinely are mandating AI tool usage &mdash; JPMorgan Chase, for example, has tied AI
+                integration directly to software engineers' performance ratings.
+            </p>
+            <p>
+                But the underlying premise &mdash; that this shift is justified because AI-generated code has
+                become reliably trustworthy &mdash; doesn't hold up against the actual research.
+            </p>
+            <p>
+                A February 2026 study from AI research lab METR found that, contrary to developers' own
+                self-reported sense of being faster, AI coding tools can actually <em>slow experienced
+                developers down</em> once you account for the time spent finding and correcting errors in
+                AI-generated output. Separately, researchers examining large volumes of pull requests found
+                AI-generated code produced roughly 1.7 times more defects than human-written code, with a higher
+                rate of critical and major issues, including security problems like improper credential
+                handling.
+            </p>
+            <p>
+                Some companies are responding accordingly. Amazon reportedly implemented a policy requiring
+                human approval before AI-generated code can be merged, specifically because of reliability
+                concerns. Godot, the open-source game engine, went further and banned substantial AI-generated
+                code contributions outright.
+            </p>
+
+            <h2>Why This Looks Familiar</h2>
+            <p>
+                I've spent my career in a field that never had the luxury of treating "it works" and "it's safe
+                to trust" as the same question.
+            </p>
+            <p>
+                Accelerator personnel and equipment protection systems don't get to assume a sensor reading, an
+                interlock signal, or a control output is correct just because it was produced quickly or looks
+                plausible. Every safety-critical decision path is built around independent verification:
+                redundant sensors, cross-checked logic, and a design philosophy that assumes any single
+                component &mdash; hardware or software &mdash; can be wrong, and builds in a way to catch it
+                before it matters.
+            </p>
+            <p>
+                That discipline exists precisely because speed and correctness are different properties of a
+                system, and conflating them is how failures happen. A control system that responds instantly
+                but occasionally acts on bad data isn't actually functional &mdash; it's just fast and wrong,
+                which is often worse than slow and right.
+            </p>
+            <p>
+                The AI coding conversation is running headlong into the same lesson. Fast code generation is a
+                genuine capability. Whether that code is architecturally sound, secure, and maintainable is a
+                separate question that generation speed says nothing about &mdash; and treating the two as
+                equivalent is exactly the kind of reasoning that safety-critical engineering was built to
+                prevent.
+            </p>
+
+            <h2>The Part That Should Concern Engineering Leaders</h2>
+            <p>
+                There's a legal dimension here that's easy to miss. U.S. Copyright Office guidance holds that
+                works generated solely by AI, without meaningful human authorship, are not eligible for
+                copyright protection. Some legal commentary has gone further, raising the question of what
+                happens when code in production is not fully understood by the humans responsible for it
+                &mdash; a gap researchers have started calling "comprehension debt" or "epistemic debt."
+            </p>
+            <p>
+                That's a familiar shape of problem to anyone who has worked around configuration control and
+                change management in a regulated engineering environment: a system nobody can fully explain is
+                a system nobody can safely certify, maintain, or take responsibility for when something goes
+                wrong. "The AI made the mistake" is not likely to hold up as an engineering or legal defense,
+                any more than "the sensor was wrong" excuses a facility from having redundant verification in
+                the first place.
+            </p>
+
+            <h2>What I'd Actually Recommend</h2>
+            <p>
+                None of this is an argument against using AI coding tools &mdash; I use them myself, including
+                in modernizing legacy accelerator control systems. The argument is against treating
+                AI-generated output as inherently trustworthy simply because it was fast to produce.
+            </p>
+            <p>
+                The organizations getting this right, based on what's publicly reported, are the ones treating
+                AI-generated code the way a controls engineer treats any single unverified input: useful, often
+                correct, but never trusted without independent review. Mandatory human review, documentation of
+                design intent alongside generated output, and genuine understanding of what's being deployed
+                aren't friction to be optimized away &mdash; they're the verification layer that separates a
+                fast system from a trustworthy one.
+            </p>
+            <p>
+                That's not a new idea. It's just being rediscovered, one production incident at a time, by an
+                industry that's used to moving faster than the safety-critical world ever could afford to.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including as Senior Technology Engineer, Lead Operator and Work Control Coordinator,
+                overseeing safety-critical interlock and verification systems.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://techcrunch.com/2026/05/29/coders-are-refusing-to-work-without-ai-and-that-could-come-back-to-bite-them/" target="_blank" rel="noopener noreferrer">"Coders are refusing to work without AI — and that could come back to bite them." TechCrunch, May 2026 (covers METR's February 2026 findings).</a></li>
+                    <li><a href="https://leaddev.com/ai/ai-coding-mandates-are-driving-developers-to-the-brink" target="_blank" rel="noopener noreferrer">"AI coding mandates are driving developers to the brink." LeadDev, February 2026.</a></li>
+                    <li><a href="https://medium.com/@ryannsj/amazon-just-banned-ai-code-without-human-approval-heres-why-they-re-right-21a51d5a596a" target="_blank" rel="noopener noreferrer">"Amazon Just Banned AI Code Without Human Approval." Medium, March 2026.</a></li>
+                    <li><a href="https://medium.com/@keneade/your-ai-is-writing-code-no-one-understands-and-thats-becoming-a-legal-problem-e1d6aa6b174f" target="_blank" rel="noopener noreferrer">"Your AI Is Writing Code No One Understands — And That's Becoming a Legal Problem." Medium, March 2026.</a></li>
+                    <li><a href="https://www.gamedeveloper.com/business/godot-to-ban-almost-all-ai-coding-contributions" target="_blank" rel="noopener noreferrer">"Godot to ban (almost all) AI coding contributions." Game Developer.</a></li>
+                    <li><a href="https://techworldwithsahana.substack.com/p/developers-are-being-forced-to-use" target="_blank" rel="noopener noreferrer">"Developers Are Being Forced to Use AI — And We Need to Talk About It." April 2026 (covers JPMorgan Chase AI mandate reporting).</a></li>
+                    <li><a href="https://www.baytechconsulting.com/blog/mastering-ai-code-revolution-2026" target="_blank" rel="noopener noreferrer">"Mastering the AI Code Revolution in 2026." Baytech Consulting, January 2026.</a></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    Claims about accelerator safety system design philosophy (interlocks, redundant
+                    verification) are drawn from the author's direct professional experience rather than
+                    external sources.
+                </p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>

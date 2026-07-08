@@ -37,6 +37,7 @@ Occasional write-ups exploring controls engineering topics and cross-domain tech
 **Current Articles Include**:
 1. [What Particle Accelerators Can Teach Hospitals About Alarm Fatigue](https://rainer1370.com/pages/articles/accelerator-alarms-vs-hospital-alarms.html)
 2. [What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure](https://rainer1370.com/pages/articles/accelerator-vs-scada-virtualization.html)
+3. [Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate](https://rainer1370.com/pages/articles/ai-coding-safety-lessons.html)
 
 👉 Visit the [Articles Section](https://rainer1370.com/pages/articles.html) to read more.
 
