@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Self-Tuning by Design: Building an Adaptive PID Simulator for Accelerator Timing Drift</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A technical write-up on an adaptive PID timing-drift simulator with a decoupled safety interlock, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+    <style>
+        .code-block {
+            background: rgba(0,0,0,0.35);
+            border-left: 4px solid #FFD700;
+            padding: 14px 18px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-family: "Courier New", monospace;
+            font-size: 0.85rem;
+            color: #e8e8e8;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">PROJECT WRITE-UP</span>
+            <h1>Self-Tuning by Design: Building an Adaptive PID Simulator for Accelerator Timing Drift</h1>
+            <p class="article-subtitle">A personal project simulating one of the quieter, harder problems in accelerator timing: phase drift that changes character depending on conditions.</p>
+            <p class="article-date">Published July 9, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Accelerator timing systems have to hold laser phase locked to a master oscillator within tight tolerances, despite constantly shifting environmental disturbances.</li>
+                    <li>A fixed-gain PID controller struggles here, because the "right" amount of correction aggressiveness changes depending on how far out of lock the system currently is.</li>
+                    <li>This project simulates the full loop &mdash; environment, oscillator, laser, and control &mdash; with a PID controller that adjusts its own gains in response to real-time error behavior.</li>
+                    <li>The safety logic (beam dump on lock loss) runs as an independent process from the control loop itself, so a misbehaving controller can't prevent the safe-state response.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Problem</h2>
+            <p>
+                Accelerator timing systems depend on holding a laser's phase locked to a master oscillator, often
+                to sub-picosecond tolerances. In the real world, that lock is constantly under attack from things
+                that have nothing to do with the timing system itself: lab temperature drift, fiber temperature
+                changes, external vibration, power supply stability. None of these disturbances are constant, and
+                none of them are fully predictable.
+            </p>
+            <p>
+                A standard fixed-gain PID controller handles this reasonably well as long as conditions stay
+                roughly the same. The trouble is that the right response to a small phase error and the right
+                response to a large one aren't really the same problem. React too gently to a large error and the
+                system takes too long to recover, risking a lock loss. React too aggressively to normal small
+                fluctuations and the system oscillates, chasing noise instead of settling. A single fixed set of
+                gains is always a compromise between those two failure modes.
+            </p>
+
+            <h2>What I Built</h2>
+            <p>
+                I wrote a full software simulation of this problem, structured as a set of cooperating EPICS soft
+                IOC processes rather than a single monolithic script &mdash; closer to how a real distributed
+                timing system is actually organized:
+            </p>
+            <ul>
+                <li><strong>envSim.py</strong> generates simulated environmental disturbances &mdash; lab temperature, fiber temperature, external vibration, power stability &mdash; each publishing to its own PV.</li>
+                <li><strong>moSim.py</strong> models the master oscillator's phase response to those disturbances.</li>
+                <li><strong>laserSim.py</strong> simulates the laser's phase behavior, including its own drift dynamics.</li>
+                <li><strong>control.py</strong> implements the actual PID control loop, reading phase error and adjusting correction outputs.</li>
+                <li><strong>beam.py</strong> independently monitors phase lock status and triggers a beam dump if the error exceeds a configurable threshold.</li>
+                <li>A <strong>Phoebus GUI</strong> ties it all together for live visualization and manual override.</li>
+            </ul>
+            <p>
+                Each piece runs as its own process, communicating purely through EPICS PVs &mdash; the same
+                architecture a real timing system would use, just with simulated hardware underneath instead of
+                real oscillators and lasers.
+            </p>
+
+            <h2>The Adaptive Part</h2>
+            <p>
+                The core of the project is in <code>control.py</code>. Instead of running fixed PID gains, the
+                controller inspects its own recent behavior every cycle and nudges its gains accordingly:
+            </p>
+            <div class="code-block">if kp_mode == 0:
+    kp = max(0.05, min(kp + (0.002 if abs(laser_phase_error) &gt; 2.0 else -0.001), 5.0))
+
+if ki_mode == 0:
+    ki = max(0.001, min(ki + (0.001 if abs(piezo_output) &gt; 0.5 else -0.0005), 1.0))</div>
+            <p>
+                When the phase error is large, proportional gain creeps up, pushing the system to correct more
+                aggressively. When the error is small, gain relaxes back down, avoiding the oscillation that an
+                overly aggressive fixed gain would cause on minor noise. Integral gain responds to how hard the
+                piezo actuator is already working, tightening up if it looks like accumulated error is building.
+                Every adjustment is bounded, so the system can't wind its own gains up into instability.
+            </p>
+            <p>
+                The correction itself is split between two actuators with different response characteristics
+                &mdash; a fast PLL path handling 60% of the correction, and a slower piezo path handling the
+                remaining 40% &mdash; mirroring how real timing systems often pair a fast, limited-range actuator
+                with a slower, wider-range one rather than relying on a single correction path.
+            </p>
+
+            <h2>The Part I Think Matters Most</h2>
+            <p>
+                The most important design decision in this project isn't the adaptive gain logic &mdash; it's
+                that the safety response doesn't depend on it.
+            </p>
+            <p>
+                <code>beam.py</code> runs as a completely separate process from <code>control.py</code>. It
+                watches phase error against a threshold and triggers a beam dump if that threshold is exceeded,
+                regardless of what the control loop is doing, whether the control loop is doing anything at all,
+                or whether the control loop has a bug in it that day. If the adaptive PID logic misbehaves &mdash;
+                bad tuning, a stuck actuator, an unhandled edge case &mdash; the safety monitor doesn't need it to
+                behave correctly in order to do its job.
+            </p>
+            <p>
+                That's not an incidental implementation detail. It's the same principle behind real accelerator
+                personnel and equipment protection systems: the component responsible for keeping things safe
+                should never depend on the component being protected against. A simulation is a low-stakes place
+                to build that habit, but it's the same habit that matters at full scale.
+            </p>
+
+            <h2>Why I Built It This Way</h2>
+            <p>
+                I could have written this as a single script with a control loop and some conditionals bolted
+                on. I didn't, because that's not how real distributed timing systems are built, and a simulation
+                that doesn't reflect the actual architecture teaches the wrong lessons. Running it as cooperating
+                EPICS processes means the simulation exercises the same PV-based coordination, the same process
+                independence, and the same "no single point of failure in the safety path" discipline that a
+                production timing system requires.
+            </p>
+            <p>
+                The project is public on GitHub for anyone who wants to look at the full implementation.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering at Applied Materials, and spent
+                over 15 years in controls and accelerator operations at Brookhaven National Laboratory's
+                NSLS-II, including leading an EPICS-based accelerator timing system modernization from legacy
+                VME/RTEMS infrastructure.
+            </p>
+
+            <div class="article-sources">
+                <h3>Source</h3>
+                <ul>
+                    <li><a href="https://github.com/Rainer1370/TimingSim" target="_blank" rel="noopener noreferrer">TimingSim on GitHub</a> &mdash; full source code for the simulation described in this piece.</li>
+                </ul>
+            </div>
+
+            <div class="engineering-insight">
+                <p>ENGINEERING INSIGHT</p>
+                <p>The component responsible for keeping things safe should never depend on the component being protected against.</p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
