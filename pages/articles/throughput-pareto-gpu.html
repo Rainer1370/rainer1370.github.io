@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Why data reconstruction bottlenecks in equipment throughput are a genuine multi-objective optimization problem, made harder by the 2026 AI-driven memory shortage, by Rob Rainer.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls & Systems Engineering</em></p>
+            <span class="article-category">TECHNICAL ESSAY</span>
+            <h1>Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks</h1>
+            <p class="article-subtitle">Faster detectors and better motion control aren't always enough. Data reconstruction is a genuine multi-objective optimization problem, and the AI memory boom has made it harder to solve.</p>
+            <p class="article-date">Published July 13, 2026</p>
+
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>Improving equipment throughput is rarely a single-variable problem &mdash; motion control, detector speed, and data reconstruction can all be limiting factors at different times, and fixing one just exposes the next.</li>
+                    <li>Data reconstruction throughput scales well with additional GPUs &mdash; multi-GPU CT and tomographic reconstruction studies report speedups ranging from roughly linear to superlinear, depending on problem size and memory constraints.</li>
+                    <li>Adding GPUs to fix a reconstruction bottleneck runs directly into a very real, very current cost problem: the AI-driven memory shortage has pushed GPU and DRAM prices up sharply through 2026.</li>
+                    <li>The result is a genuine Pareto-limited multi-objective optimization problem &mdash; throughput and cost can't both be optimized independently, and the right answer depends on where you're willing to sit on that tradeoff curve.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Problem Isn't Always Where You'd Expect</h2>
+            <p>
+                In equipment throughput optimization work generally, the instinct is often that throughput is
+                primarily a mechanical and motion-control problem &mdash; faster stages, tighter tolerances,
+                less time wasted moving between positions. That instinct isn't wrong, but it's frequently
+                incomplete. Motion control and detector acquisition speed are real contributors, but as those
+                improve, a different bottleneck often becomes the limiting factor: data reconstruction.
+            </p>
+            <p>
+                That's a common pattern in throughput optimization generally, and it's worth naming explicitly:
+                improving one stage of a pipeline doesn't improve overall throughput once a different stage
+                becomes the binding constraint. You don't find out reconstruction is the bottleneck until you've
+                already fixed the things that were bottlenecks before it.
+            </p>
+
+            <h2>Why Reconstruction Is a Genuinely Parallel Problem</h2>
+            <p>
+                The reason GPUs matter so much for this specific bottleneck is that image and tomographic
+                reconstruction is unusually well-suited to parallel computation. Published work on multi-GPU CT
+                and tomographic reconstruction consistently shows large speedups from adding GPU resources
+                &mdash; one study using three GPUs for iterative statistical reconstruction reported roughly a
+                72x speedup over a CPU baseline, and an analytical FDK-based reconstruction approach reported
+                speedups over 1000x using multiple GPUs versus CPU. Other multi-GPU ptychographic and
+                tomographic reconstruction work has reported <em>superlinear</em> speedups when moving from
+                fewer to more GPUs, specifically because splitting a large dataset across more GPUs lets each
+                one fit its share of the problem into fast on-board memory, avoiding slower memory-swapping
+                penalties that hurt performance on a single, memory-constrained GPU.
+            </p>
+            <p>
+                In practice, this means adding a second GPU to a reconstruction pipeline can come close to
+                halving reconstruction time &mdash; not always exactly linear, since real-world scaling depends
+                on problem size, memory constraints, and communication overhead between GPUs, but close enough
+                that it's a legitimate, high-leverage lever for any throughput optimization effort to pull.
+            </p>
+
+            <h2>The Lever That Got More Expensive While We Were Reaching for It</h2>
+            <p>
+                Here's where the story stops being purely technical. Adding GPUs is the obvious fix for a
+                reconstruction bottleneck &mdash; but 2026 turned out to be one of the worst possible years to be
+                buying GPUs and the DRAM that feeds them.
+            </p>
+            <p>
+                The underlying cause is a genuine, structural shift in the memory market, not a temporary blip.
+                AI data centers are projected to consume something like 70% of the world's memory output in
+                2026, up from roughly 20-30% in 2022, as the three dominant DRAM manufacturers &mdash; Samsung,
+                SK Hynix, and Micron &mdash; redirect wafer capacity toward the high-bandwidth memory that AI
+                accelerators need. That memory carries far richer margins than conventional GPU or system DRAM,
+                so the reallocation isn't a supply hiccup; it's where the money is. TrendForce reported DRAM
+                contract prices rising somewhere in the range of 50-90% quarter-over-quarter at points during
+                2026, and GPU vendors have passed a meaningful share of that cost increase through to buyers.
+                Industry forecasts generally don't expect meaningful relief before 2027 or 2028, when new
+                fabrication capacity currently under construction actually comes online.
+            </p>
+            <p>
+                That's the environment any throughput optimization effort is operating in right now: the fix for
+                a real engineering bottleneck (add GPUs) runs directly into a real macroeconomic bottleneck (GPU
+                and memory costs climbing sharply, driven by demand that has nothing to do with the problem at
+                hand).
+            </p>
+
+            <h2>Why This Is a Pareto Problem, Not a Solvable One</h2>
+            <p>
+                Once cost and throughput are both real constraints, you're no longer looking for "the" answer
+                &mdash; you're looking at a Pareto front. In multi-objective optimization, a solution is
+                Pareto-optimal if you can't improve one objective (throughput) without making another objective
+                (cost) worse. The set of all such solutions forms a curve, and the honest job of an engineering
+                team isn't to find a point that maximizes both simultaneously &mdash; that point usually doesn't
+                exist &mdash; it's to characterize the tradeoff curve clearly enough that leadership can make an
+                informed decision about where on it to sit.
+            </p>
+            <p>
+                For a team optimizing equipment throughput, that reframes the whole conversation. Instead of
+                "how do we make reconstruction faster," the real question becomes: how much additional
+                throughput is a given GPU budget actually worth, given current, inflated hardware pricing, and
+                is that the best use of that budget relative to the other levers still available (motion control
+                refinement, detector timing, algorithmic improvements to the reconstruction pipeline itself that
+                reduce compute requirements without adding hardware)?
+            </p>
+
+            <h2>The Practical Takeaway</h2>
+            <p>
+                Throughput problems in complex equipment systems are rarely single-variable, and the "obvious"
+                fix for whichever bottleneck is currently binding may not be the best use of budget once you
+                account for what that fix actually costs right now. Right now, GPU-based reconstruction
+                acceleration is a genuinely powerful lever &mdash; the technical case for it is strong and
+                well-documented &mdash; but it's an unusually expensive lever to pull in 2026 specifically,
+                because of a memory market shift that has nothing to do with any one team's reconstruction
+                pipeline and everything to do with global AI infrastructure demand. Leading a throughput effort
+                well means being honest about that tradeoff rather than treating more GPUs as a free win.
+            </p>
+
+            <p class="article-bio">
+                Rob Rainer is Director of Controls &amp; Electrical Engineering, with experience leading
+                cross-disciplinary throughput optimization efforts spanning systems engineering, electrical,
+                motion control, and data reconstruction in semiconductor capital equipment environments. He
+                previously spent over 15 years in controls and accelerator operations at Brookhaven National
+                Laboratory's NSLS-II.
+            </p>
+
+            <div class="article-sources">
+                <h3>Sources</h3>
+                <ul>
+                    <li><a href="https://www.cnbc.com/2026/01/10/micron-ai-memory-shortage-hbm-nvidia-samsung.html" target="_blank" rel="noopener noreferrer">"AI memory is sold out, causing an unprecedented surge in prices." CNBC, January 2026.</a></li>
+                    <li><a href="https://spectrum.ieee.org/dram-shortage" target="_blank" rel="noopener noreferrer">"AI Boom Fuels DRAM Shortage and Price Surge." IEEE Spectrum, April 2026.</a></li>
+                    <li><a href="https://www.idc.com/resource-center/blog/global-memory-shortage-crisis-market-analysis-and-the-potential-impact-on-the-smartphone-and-pc-markets-in-2026/" target="_blank" rel="noopener noreferrer">"Global Memory Shortage Crisis: Market Analysis and the Potential Impact on the Smartphone and PC Markets in 2026." IDC.</a></li>
+                    <li><a href="https://openscholarship.wustl.edu/eng_etds/373/" target="_blank" rel="noopener noreferrer">Mitra, A. "Multi-GPU Acceleration of Iterative X-ray CT Image Reconstruction." Washington University Open Scholarship.</a></li>
+                    <li><a href="https://arxiv.org/pdf/2106.07575" target="_blank" rel="noopener noreferrer">"Scalable and accurate multi-GPU based image reconstruction of large-scale ptychography data." arXiv.</a></li>
+                    <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10974446/" target="_blank" rel="noopener noreferrer">"Iterative Reconstruction of Micro Computed Tomography Scans Using Multiple Heterogeneous GPUs." PMC.</a></li>
+                    <li><a href="https://kunlei.github.io/docs/blog/posts/2024-04-02-pareto-front/index.html" target="_blank" rel="noopener noreferrer">"Multi-Objective Optimization and Pareto Front." Kunlei Lian.</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Multi-objective_optimization" target="_blank" rel="noopener noreferrer">"Multi-objective optimization." Wikipedia.</a></li>
+                </ul>
+                <p style="font-size: 0.85rem; color: #cccccc;">
+                    This piece describes general engineering principles and industry-wide market conditions
+                    rather than any specific employer's programs or proprietary information; the technical and
+                    market claims above are independently sourced.
+                </p>
+            </div>
+
+            <div class="engineering-insight">
+                <p>ENGINEERING INSIGHT</p>
+                <p>The "obvious" fix for a bottleneck isn't automatically the right one once you account for what it actually costs right now.</p>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+</body>
+</html>
