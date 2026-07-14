@@ -35,15 +35,16 @@ Includes sections for:
 Occasional write-ups exploring controls engineering topics and cross-domain technical parallels &mdash; places where accelerator control systems and other high-stakes engineering fields have independently converged on (or diverged from) similar solutions.
 
 **Current Articles Include**:
-1. [Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks](https://rainer1370.com/pages/articles/throughput-pareto-gpu.html)
-2. [Self-Tuning by Design: Building an Adaptive PID Simulator for Accelerator Timing Drift](https://rainer1370.com/pages/articles/timingsim-writeup.html)
-3. [What Particle Accelerators Can Teach Hospitals About Alarm Fatigue](https://rainer1370.com/pages/articles/accelerator-alarms-vs-hospital-alarms.html)
-4. [What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure](https://rainer1370.com/pages/articles/accelerator-vs-scada-virtualization.html)
-5. [Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate](https://rainer1370.com/pages/articles/ai-coding-safety-lessons.html)
-6. [Detected, Not Diagnosed: Ground Leakage Current in Accelerator and X-Ray Systems](https://rainer1370.com/pages/articles/ground-leakage-current.html)
-7. [Measure, Compare, Correct: The Loop Behind Every Stable System](https://rainer1370.com/pages/articles/feedback-systems.html)
-8. [The Great Virtualization Reshuffle: A View From Both Sides of the VMware-to-Proxmox Shift](https://rainer1370.com/pages/articles/virtualization-market-shift.html)
-9. [Small Improvements, Big Machines: What Fifteen Years in Accelerator Controls Taught Me](https://rainer1370.com/pages/articles/accelerator-reflection.html)
+1. [The Branching Origins Hypothesis: A Young Scientist's Thought Experiment](https://rainer1370.com/pages/articles/branching-origins-hypothesis.html)
+2. [Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks](https://rainer1370.com/pages/articles/throughput-pareto-gpu.html)
+3. [Self-Tuning by Design: Building an Adaptive PID Simulator for Accelerator Timing Drift](https://rainer1370.com/pages/articles/timingsim-writeup.html)
+4. [What Particle Accelerators Can Teach Hospitals About Alarm Fatigue](https://rainer1370.com/pages/articles/accelerator-alarms-vs-hospital-alarms.html)
+5. [What Particle Accelerators and Water Utilities Both Learned About Single Points of Failure](https://rainer1370.com/pages/articles/accelerator-vs-scada-virtualization.html)
+6. [Fast Code Isn't Trustworthy Code: A Controls Engineer's Take on the AI Coding Debate](https://rainer1370.com/pages/articles/ai-coding-safety-lessons.html)
+7. [Detected, Not Diagnosed: Ground Leakage Current in Accelerator and X-Ray Systems](https://rainer1370.com/pages/articles/ground-leakage-current.html)
+8. [Measure, Compare, Correct: The Loop Behind Every Stable System](https://rainer1370.com/pages/articles/feedback-systems.html)
+9. [The Great Virtualization Reshuffle: A View From Both Sides of the VMware-to-Proxmox Shift](https://rainer1370.com/pages/articles/virtualization-market-shift.html)
+10. [Small Improvements, Big Machines: What Fifteen Years in Accelerator Controls Taught Me](https://rainer1370.com/pages/articles/accelerator-reflection.html)
 
 👉 Visit the [Articles Section](https://rainer1370.com/pages/articles.html) to read more.
 
