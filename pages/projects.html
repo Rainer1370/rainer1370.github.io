@@ -27,7 +27,7 @@
     <!-- Main Content -->
     <main>
 
-        <section class="project">
+        <section class="project" id="precision-motion">
             <h2>Precision Stage Alignment & Geometric Correction (Sigray)</h2>
             <ul>
                 <li>
@@ -55,6 +55,28 @@
                     mitigation of mechanical misalignment while preserving system stability, predictability,
                     and operator trust.
                 </li>
+                <li><strong>Digital-twin pathway:</strong> The virtual-coordinate and correction layers provide a model-based controls foundation. A synchronized kinematic twin could extend this work with calibration replay, uncertainty tracking, collision-envelope testing, and what-if analysis before commands reach hardware.</li>
+            </ul>
+        </section>
+
+        <section class="project">
+            <h2>Adaptive Accelerator Timing Digital Twin</h2>
+            <ul>
+                <li>Built a distributed software model of environmental drift, an oscillator, laser response, and feedback control using cooperating EPICS soft IOCs.</li>
+                <li>Connected simulated plant state to the same PV-based interfaces used by operational controls, enabling realistic integration and failure-scenario testing.</li>
+                <li>Implemented adaptive PID behavior and real-time visualization to evaluate control strategies as operating conditions change.</li>
+                <li><strong>Maturity:</strong> Implemented simulation and digital-twin prototype; it models a representative system rather than mirroring a specific live production asset.</li>
+                <li><a href="/pages/articles/timingsim-writeup.html">Read the technical write-up →</a></li>
+            </ul>
+        </section>
+
+        <section class="project">
+            <h2>Lunar Waste-to-Resource (W2R) System</h2>
+            <ul>
+                <li>Developed an Artemis-aligned conceptual architecture for transforming mixed lunar-habitat waste into recoverable gases, feedstocks, and structural material.</li>
+                <li>Integrated plasma pyrolysis, solid-oxide electrolysis, additive manufacturing, EPICS supervision, equipment protection, and predictive analytics within a digital-twin framework.</li>
+                <li><strong>Provenance:</strong> Independent conceptual design developed as a response to NASA's LunaRecycle Challenge. It is not presented as an awarded, commissioned, built, or NASA-endorsed system.</li>
+                <li><a href="/pages/digital-twins.html#w2r">View the concept summary</a> · <a href="/downloads/lunar-waste-to-resource-concept.pdf">Download the full proposal (PDF)</a></li>
             </ul>
         </section>
         
