@@ -1,140 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Rob Rainer Portfolio</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rob Rainer is a controls and electrical engineering leader with expertise in EPICS, digital twins, accelerator and X-ray system controls, precision motion, Python applications, and AI/ML-driven optimization.">
-    <meta name="author" content="Rob Rainer">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/articles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="/js/scripts.js" defer></script>
+    <meta name="description" content="Rob Rainer's controls, electrical engineering, EPICS, digital-twin, X-ray, accelerator, and technical leadership portfolio.">
+    <title>Rob Rainer | Controls &amp; Systems Engineering</title>
+    <link rel="stylesheet" href="css/home-modern.css">
 </head>
-<!-- Header Section -->
-<div id="header"></div>    
 <body>
+    <nav class="nav-shell" aria-label="Primary navigation">
+        <a class="brand" href="index.html" aria-label="Rob Rainer homepage">RR<span>.</span></a>
+        <div class="nav-links">
+            <a href="pages/about.html">About</a>
+            <a href="pages/projects.html">Projects</a>
+            <a href="pages/articles.html">Writing</a>
+            <a href="pages/tools.html">Tools</a>
+        </div>
+    </nav>
 
-
-    <!-- Main Content -->
     <main>
-        <!-- Banner Section -->
-        <section class="banner" style="margin-bottom: 10px;">
-            <img src="/assets/NSLS2CR.jpg" alt="NSLS-II Control Room" style="width:100%; max-width: 1200px; height:auto; display:block; margin:0 auto;">
-            <p style="text-align: center; margin-top: 5px;">
-                <a href="https://www.bnl.gov/nsls2/" style="color: #FFD700; text-decoration: none;">NSLS II Control Room</a>
-            </p>
-        </section>
-
-
-        <!-- Welcome Section -->
-        <section>
-            <h1 style="text-align: center;">Welcome</h1>
-            <p style="text-align: center; margin-bottom: 10px;">
-                Hi, I'm Rob Rainer. I’m a <strong>controls and electrical engineering leader</strong> whose work spans
-                accelerator and X-ray systems, EPICS-based infrastructure, precision motion, timing systems, and
-                Python-driven applications. I focus on reliability, scalable architecture, model-informed controls,
-                and engineering systems that can be observed, simulated, and improved.
-            </p>
-
-            <p style="text-align: center; margin-bottom: 10px;">
-                I have extensive experience across national laboratory environments and industry, and I enjoy
-                bridging hands-on engineering with system-level design, mentorship, and strategic technical leadership.
-                I actively explore AI-assisted workflows to improve diagnostics, automation, and system performance.
-            </p>
-        
-            <!-- Separation Bar -->
-            <hr class="separator">
-        </section>
-
-        <section class="project article-card">
-            <h2 style="text-align: center;">Digital Twins & Model-Informed Controls</h2>
-            <p style="text-align: center; margin-bottom: 18px;">
-                My portfolio now distinguishes between implemented simulations, model-based controls that form a
-                digital-twin foundation, and forward-looking conceptual designs. The common thread is connecting
-                system state, executable models, scenario testing, and engineering decisions.
-            </p>
-            <ul>
-                <li><strong>Adaptive Accelerator Timing Twin:</strong> Implemented EPICS simulation and digital-twin prototype for environmental drift, oscillator, laser, and adaptive PID behavior.</li>
-                <li><strong>Precision Motion & Geometric Correction:</strong> Twin-ready virtual-coordinate and kinematic correction foundation for X-ray microscopy stages.</li>
-                <li><strong>Lunar Waste-to-Resource System:</strong> Artemis-aligned conceptual design with an EPICS supervisory layer and predictive digital twin.</li>
-            </ul>
-            <p style="text-align: center;"><a href="/pages/projects.html#digital-twins" class="button">Explore Digital-Twin Work</a></p>
-            <hr class="separator">
-        </section>
-
-        <!-- Latest Articles Section -->
-        <section class="project article-card">
-            <h2 style="text-align: center;">Latest Articles</h2>
-            <p style="text-align: center; margin-bottom: 20px;">
-                Occasional write-ups on controls engineering and cross-domain technical observations.
-            </p>
-
-            <div style="text-align: left; margin-bottom: 20px;">
-                <h3 style="margin-bottom: 5px;"><a href="/pages/articles/branching-origins-hypothesis.html" style="color: #FFD700; text-decoration: none;">The Branching Origins Hypothesis: A Young Scientist's Thought Experiment</a></h3>
-                <p class="article-meta">Published July 14, 2026</p>
+        <section class="hero">
+            <p class="eyebrow">CONTROL SYSTEMS · DIGITAL TWINS · AI/ML</p>
+            <h1>Engineering systems that can be <em>observed, simulated, and improved.</em></h1>
+            <p class="hero-copy">I’m Rob Rainer, a controls and electrical engineering leader specializing in EPICS, precision motion, accelerator and X-ray systems, resilient infrastructure, and model-informed automation.</p>
+            <div class="hero-actions">
+                <a class="button-primary" href="pages/projects.html#digital-twins">Explore digital-twin work</a>
+                <a class="button-secondary" href="pages/projects.html">View all projects →</a>
             </div>
-
-            <div style="text-align: left; margin-bottom: 20px;">
-                <h3 style="margin-bottom: 5px;"><a href="/pages/articles/throughput-pareto-gpu.html" style="color: #FFD700; text-decoration: none;">Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks</a></h3>
-                <p class="article-meta">Published July 13, 2026</p>
+            <div class="signal-row" aria-label="Areas of expertise">
+                <span>EPICS 7</span><span>Python</span><span>Phoebus</span><span>Simulation</span><span>Predictive controls</span>
             </div>
-
-            <div style="text-align: left; margin-bottom: 20px;">
-                <h3 style="margin-bottom: 5px;"><a href="/pages/articles/timingsim-writeup.html" style="color: #FFD700; text-decoration: none;">Self-Tuning by Design: Building an Adaptive PID Simulator for Accelerator Timing Drift</a></h3>
-                <p class="article-meta">Published July 9, 2026</p>
-            </div>
-
-            <p style="text-align: center;">
-                <a href="/pages/articles.html" class="button">View All Articles</a>
-            </p>
-
-            <!-- Separation Bar -->
-            <hr class="separator">
         </section>
 
-        <!-- Highlighted Projects Section -->
-        <section>
-            <h2>Highlighted Projects</h2>
-            <ul>
-                <li>
-                    <strong>AI-Assisted Accelerator Timing System:</strong>  
-                    Leveraged AI to modernize the timing system by designing and implementing Ethernet-based EPICS IOCs, eliminating reliance on deprecated 3100 CPUs and RTEMS. This upgrade improved reliability, enabled remote diagnostics, and enhanced system scalability.  
-                </li>
-
-                <li>
-                    <strong>EPICS-Based Area Radiation Monitor (ARM) Modernization:</strong> 
-                    <ul>
-                        <li>Updated the EPICS device driver to accommodate new hardware, using AI to optimize the refactoring process.</li>
-                        <li>Modernized the way ARMs, which are a part of the Personnel Protection System (PPS), transmit data streams over the network through network hardware and configuration upgrades, improving reliability and scalability.</li>
-                    </ul>
-                </li>
-
-                <li>
-                    <strong>SBM Top-Off Application:</strong> Enhanced machine efficiency by enabling uniform beam injection and implementing ML techniques for optimization.
-                </li>
-
-                <li>
-                    <strong>Server Virtualization for Accelerator Control Systems:</strong>
-                    <ul>
-                        <li>Deployed and managed virtualized environments to optimize resource allocation and system redundancy.</li>
-                        <li>Integrated EPICS-based services into virtual machines to streamline deployment, enhance maintainability, and improve operational flexibility.</li>
-                    </ul>                    
-                </li>
-
-                <li>
-                    <strong>Power Supply Controller (PSC) Controls Development:</strong>
-                    Designed and deployed EPICS IOCs for modular PSC systems, enhancing power supply control infrastructure at BNL and LBNL. This work includes developing, integrating, and supporting control systems for precise and reliable power regulation in accelerator environments.
-                </li>
-            </ul>
-
-            <!-- Separation Bar -->
-            <hr class="separator">
+        <section class="dark-section">
+            <p class="section-kicker">Selected work</p>
+            <div class="section-heading dark-heading">
+                <h2>Digital twins, grounded in real control systems</h2>
+                <p>Each project is labeled by maturity so implemented work, twin-ready foundations, and forward-looking concepts remain clearly distinguished.</p>
+            </div>
+            <div class="card-grid dark-grid">
+                <a class="dark-card" href="pages/projects/adaptive-timing-digital-twin.html">
+                    <span class="card-label">Implemented simulation</span>
+                    <h3>Adaptive Accelerator Timing Twin</h3>
+                    <p>A distributed EPICS soft-IOC model used to test self-tuning PID control against drift and disturbance scenarios.</p>
+                    <strong>View project →</strong>
+                </a>
+                <a class="dark-card" href="pages/projects/precision-motion-correction.html">
+                    <span class="card-label">Model-based controls foundation</span>
+                    <h3>Precision Motion &amp; Geometric Correction</h3>
+                    <p>A real-time virtual-coordinate layer mapping measured stage error into corrected motion commands.</p>
+                    <strong>View project →</strong>
+                </a>
+                <a class="dark-card" href="pages/projects/lunar-waste-to-resource.html">
+                    <span class="card-label">Conceptual design</span>
+                    <h3>Lunar Waste-to-Resource System</h3>
+                    <p>An Artemis-aligned architecture combining plasma processing, resource recovery, EPICS supervision, and predictive modeling.</p>
+                    <strong>View project →</strong>
+                </a>
+            </div>
         </section>
 
+        <section class="definition-section">
+            <p class="section-kicker"><span class="pulse"></span>DIGITAL-TWIN APPROACH</p>
+            <h2>Physical system + live state + executable model + closed-loop learning</h2>
+            <p>Not every simulation is a digital twin. My work emphasizes the operational connection: live telemetry, state estimation, scenario testing, predictive insight, and safe feedback into engineering decisions.</p>
+        </section>
+
+        <section class="light-section">
+            <p class="section-kicker">Engineering &amp; mentorship</p>
+            <div class="section-heading">
+                <h2>Highlighted Projects</h2>
+                <p>Selected technical work, including the mentoring conversations that turn curiosity into structured engineering inquiry.</p>
+            </div>
+            <div class="card-grid">
+                <a class="light-card" href="pages/articles/energy-generation-with-nadiyah.html">
+                    <span class="card-label">Mentorship · August 2, 2026</span>
+                    <h3>From Sunlight to Turbines: Exploring Energy Generation with Nadiyah</h3>
+                    <p>A technical essay developed from a conversation with my daughter about solar energy, mechanical conversion, fission, fusion, and lightning.</p>
+                    <strong>Read mentorship essay →</strong>
+                </a>
+                <a class="light-card" href="pages/projects/precision-motion-correction.html">
+                    <span class="card-label">Implemented controls system</span>
+                    <h3>Precision Stage Alignment &amp; Geometric Correction</h3>
+                    <p>Real-time correction layers for high-precision X-ray microscopy motion.</p>
+                    <strong>View project →</strong>
+                </a>
+                <a class="light-card" href="pages/projects/unified-server.html">
+                    <span class="card-label">Engineering architecture</span>
+                    <h3>Unified Server Architecture</h3>
+                    <p>A resilient virtualized architecture consolidating production IOCs, applications, SCADA services, automation, and recovery tooling.</p>
+                    <strong>View project →</strong>
+                </a>
+            </div>
+            <div class="section-actions">
+                <a class="button-primary" href="pages/articles/energy-generation-with-nadiyah.html">Read the Mentorship Essay</a>
+                <a class="button-secondary" href="pages/projects.html">View all projects →</a>
+            </div>
+        </section>
+
+        <section class="articles-section">
+            <p class="section-kicker">Writing</p>
+            <div class="section-heading">
+                <h2>Latest Articles</h2>
+                <p>Technical essays, project reflections, and cross-domain observations from controls engineering and science mentorship.</p>
+            </div>
+            <div class="article-list">
+                <a href="pages/articles/energy-generation-with-nadiyah.html"><span>August 2, 2026</span><strong>From Sunlight to Turbines: Exploring Energy Generation with Nadiyah</strong><b>→</b></a>
+                <a href="pages/articles/branching-origins-hypothesis.html"><span>July 14, 2026</span><strong>The Branching Origins Hypothesis: A Young Scientist's Thought Experiment</strong><b>→</b></a>
+                <a href="pages/articles/throughput-pareto-gpu.html"><span>July 13, 2026</span><strong>Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks</strong><b>→</b></a>
+            </div>
+            <div class="section-actions"><a class="button-primary" href="pages/articles.html">View All Articles</a></div>
+        </section>
     </main>
 
+    <footer class="site-footer">
+        <span>© 2026 Rob Rainer</span>
+        <a href="mailto:rainer1370@gmail.com">rainer1370@gmail.com</a>
+    </footer>
 </body>
-<!-- Footer Section -->
-<div id="footer"></div>    
 </html>
