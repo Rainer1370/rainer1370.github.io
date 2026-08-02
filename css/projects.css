@@ -1,0 +1,13 @@
+.project-intro { text-align: left; }
+.project-intro p { line-height: 1.65; }
+.project-legend { border-left: 4px solid #FFD700; padding: 10px 15px; background: rgba(0,0,0,.15); }
+.project-group-heading { width: 75%; max-width: 1200px; margin: 38px auto 8px; border-bottom: 2px solid rgba(255,215,0,.65); }
+.project-group-heading h2 { margin: 0 0 10px; color: #fff; }
+.project-card h2 a { color: #FFD700; text-decoration: none; }
+.project-card h2 a:hover { color: #FF8C00; text-decoration: underline; }
+.project-detail-meta { color: #FFD700; font-style: italic; margin-bottom: 14px; }
+.project-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.project-fact { background: rgba(0,0,0,.2); border-top: 3px solid #FFD700; border-radius: 4px; padding: 14px; }
+.project-fact strong { display: block; color: #FFD700; font-size: .78rem; letter-spacing: .04em; margin-bottom: 6px; text-transform: uppercase; }
+.project-page-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
+@media (max-width: 768px) { .project-group-heading { width: 90%; } .project-facts { grid-template-columns: 1fr; } .project-page-nav { flex-direction: column; } }

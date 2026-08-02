@@ -1,183 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Projects</title>
+    <title>Engineering Projects | Rob Rainer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Controls, digital-twin, X-ray instrumentation, accelerator, infrastructure, and systems-engineering projects by Rob Rainer.">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="/css/projects.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="/js/scripts.js" defer></script>
 </head>
 <body>
-    
-    <!-- Header -->
     <div id="header"></div>
-    
-    <section class="project">
-        <figure>
-            <img src="/assets/uspas2019.jpg" alt="Rob Rainer at the USPAS EPICS meeting" style="width: 100%; max-height: 400px; object-fit: cover;">
-            <figcaption style="text-align: center; font-style: italic; margin-top: 5px;">
-                <a href="https://controlssoftware.sns.ornl.gov/training/2019_USPAS" target="_blank" style="text-decoration:none; color:#FFD700;">
-                    2019 USPAS EPICS Meeting, Oak Ridge National Laboratory
-                </a>
-            </figcaption>
-        </figure>
-    </section>
-                    
-    <!-- Main Content -->
     <main>
-
-        <section class="project" id="precision-motion">
-            <h2>Precision Stage Alignment & Geometric Correction (Sigray)</h2>
-            <ul>
-                <li>
-                    Led the development of advanced stage-alignment mitigation techniques within the controls layer
-                    for high-precision motion systems used in X-ray microscopy platforms at 
-                    <a href="https://www.sigray.com" target="_blank" rel="noopener noreferrer">XCT &mdash; Applied Materials (formerly Sigray, Inc.)</a>.
-                </li>
-                <li>
-                    Designed and implemented a <strong>manual cubic spline correction workflow</strong> that allows
-                    operators and engineers to explicitly compensate for known stage misalignments by mapping
-                    measured error profiles to motion commands at the EPICS controls level.
-                </li>
-                <li>
-                    Developed an <strong>automated geometric transform–based correction engine</strong> that dynamically
-                    mitigates misalignment effects by applying real-time coordinate transformations, improving
-                    repeatability and alignment accuracy across full motion ranges.
-                </li>
-                <li>
-                    Implemented <strong>multiple correction modes</strong>, allowing seamless switching between
-                    manual spline-based compensation and fully automated geometric correction depending on
-                    operational context, calibration state, or experimental requirements.
-                </li>
-                <li>
-                    This hybrid approach balances transparency and control with automation, providing robust
-                    mitigation of mechanical misalignment while preserving system stability, predictability,
-                    and operator trust.
-                </li>
-                <li><strong>Digital-twin pathway:</strong> The virtual-coordinate and correction layers provide a model-based controls foundation. A synchronized kinematic twin could extend this work with calibration replay, uncertainty tracking, collision-envelope testing, and what-if analysis before commands reach hardware.</li>
-            </ul>
+        <section class="project project-intro">
+            <h1>Engineering Projects</h1>
+            <p>Selected work spanning X-ray instrumentation, accelerator controls, EPICS, digital twins, precision motion, infrastructure, automation, and cross-functional systems engineering.</p>
+            <p class="project-legend"><strong>Project labels matter:</strong> implemented systems, prototypes, twin-ready foundations, and conceptual designs are identified separately.</p>
         </section>
 
-        <section class="project">
-            <h2>Adaptive Accelerator Timing Digital Twin</h2>
-            <ul>
-                <li>Built a distributed software model of environmental drift, an oscillator, laser response, and feedback control using cooperating EPICS soft IOCs.</li>
-                <li>Connected simulated plant state to the same PV-based interfaces used by operational controls, enabling realistic integration and failure-scenario testing.</li>
-                <li>Implemented adaptive PID behavior and real-time visualization to evaluate control strategies as operating conditions change.</li>
-                <li><strong>Maturity:</strong> Implemented simulation and digital-twin prototype; it models a representative system rather than mirroring a specific live production asset.</li>
-                <li><a href="/pages/articles/timingsim-writeup.html">Read the technical write-up →</a></li>
-            </ul>
+        <div class="project-group-heading"><h2>X-Ray Instrumentation & Systems</h2></div>
+
+        <section class="project article-card project-card" id="precision-motion">
+            <p class="article-meta">Implemented controls system</p>
+            <h2><a href="/pages/projects/precision-motion-correction.html">Precision Stage Alignment & Geometric Correction</a></h2>
+            <div class="article-tags"><span class="article-tag">EPICS</span><span class="article-tag">Motion Control</span><span class="article-tag">Digital-Twin Foundation</span></div>
+            <p class="article-summary">Hybrid spline and geometric-transform correction layers for high-precision X-ray microscopy motion, translating measured stage error into corrected virtual coordinates while preserving transparent operator control.</p>
+            <a href="/pages/projects/precision-motion-correction.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>Lunar Waste-to-Resource (W2R) System</h2>
-            <ul>
-                <li>Developed an Artemis-aligned conceptual architecture for transforming mixed lunar-habitat waste into recoverable gases, feedstocks, and structural material.</li>
-                <li>Integrated plasma pyrolysis, solid-oxide electrolysis, additive manufacturing, EPICS supervision, equipment protection, and predictive analytics within a digital-twin framework.</li>
-                <li><strong>Provenance:</strong> Independent conceptual design developed as a response to NASA's LunaRecycle Challenge. It is not presented as an awarded, commissioned, built, or NASA-endorsed system.</li>
-                <li><a href="/pages/digital-twins.html#w2r">View the concept summary</a> · <a href="/downloads/lunar-waste-to-resource-concept.pdf">Download the full proposal (PDF)</a></li>
-            </ul>
-        </section>
-        
-        <section class="project">
-            <h2>Power Supply Controller (PSC) Controls Development</h2>
-            <ul>
-                <li>
-                    Contributed to the <a href="https://als.lbl.gov/als-u/" target="_blank">ALS-U project</a> at LBNL as part of the Osprey DCS team, 
-                    focusing on the integration and deployment of advanced Power Supply Controller (PSC) systems.
-                </li>
-                <li>
-                    Designed and deployed modular 
-                    <a href="https://epics-controls.org/" target="_blank">EPICS</a> IOCs to control and monitor PSCs, ensuring high-precision power regulation 
-                    for accelerator magnets and supporting systems.
-                </li>
-                <li>
-                    Developed user-facing 
-                    <a href="https://control-system-studio.readthedocs.io/en/latest/" target="_blank">Phoebus</a> GUIs to provide streamlined visibility and 
-                    intuitive control of PSC states, interlocks, and diagnostics.
-                </li>
-                <li>
-                    Supported power supply integration efforts across BNL and LBNL by standardizing control infrastructure and improving reliability, 
-                    maintainability, and real-time response.
-                </li>
-                <li>
-                    Additionally, created a custom EPICS IOC and Phoebus interface for Tripp Lite PDUs, enabling remote monitoring, outlet-level 
-                    power cycling, and improved rack-level power management.
-                </li>
-            </ul>
+        <section class="project article-card project-card">
+            <p class="article-meta">Implemented detector integration</p>
+            <h2><a href="/pages/projects/hamamatsu-f40-detector.html">Hamamatsu F40 2D X-Ray Detector Driver & UI</a></h2>
+            <div class="article-tags"><span class="article-tag">areaDetector</span><span class="article-tag">C++</span><span class="article-tag">USB/FX3</span><span class="article-tag">Phoebus</span></div>
+            <p class="article-summary">An EPICS areaDetector driver and Linux operator interface spanning FX3 firmware loading, USB endpoint communication, NDArray publishing, simulation, detector corrections, diagnostics, and production deployment.</p>
+            <a href="/pages/projects/hamamatsu-f40-detector.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>Network Infrastructure Upgrades</h2>
-            <ul>
-                <li>
-                    As part of the 
-                    <a href="https://www.bnl.gov/nsls2/datascience/" target="_blank">NSLS-II Data Science and Systems Integration (DSSI)</a> group, 
-                    I contributed to major network infrastructure improvements supporting accelerator operations.
-                </li>
-                <li>
-                    The NSLS-II facility has transitioned to an IaaS (Infrastructure as a Service) model for its network stack. 
-                    This includes the use of vCenter and Satellite to manage local data centers and virtual servers, providing a flexible and scalable 
-                    infrastructure to support various applications and services.
-                </li>
-                <li>
-                    This virtualization model enables centralized deployment of tools and configurations, improving system efficiency. 
-                    It also enhances cybersecurity by offering greater control and protection over critical system components.
-                </li>
-            </ul>
-        </section>
-        
-        <section class="project">
-            <h2>AI-Assisted Accelerator Timing System</h2>
-            <ul>
-                <li>Used AI-assisted development to design and implement Ethernet-based EPICS IOCs, replacing deprecated 3100 CPUs and RTEMS. This modernization improved reliability, enabled remote diagnostics, and enhanced system scalability while eliminating reliance on aging VME-based infrastructure.</li>
-                <li>Developed a new device driver for MRF230 series timing modules, leveraging AI-generated code optimizations to streamline implementation and reduce development time. The transition to an Ethernet-based architecture provided greater flexibility in control, remote management, and integration with existing accelerator infrastructure.</li>
-            </ul>
+        <section class="project article-card project-card">
+            <p class="article-meta">Validated infrastructure architecture</p>
+            <h2><a href="/pages/projects/unified-server.html">Unified Server Architecture</a></h2>
+            <div class="article-tags"><span class="article-tag">Proxmox</span><span class="article-tag">RHEL</span><span class="article-tag">EPICS</span><span class="article-tag">Resilience</span></div>
+            <p class="article-summary">A virtualized industrial-server architecture consolidating Windows applications, Linux-hosted production IOCs, SCADA services, automation, and recovery tooling for advanced X-ray systems.</p>
+            <a href="/pages/projects/unified-server.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>EPICS-Based Area Radiation Monitor (ARM) Modernization</h2>
-            <ul>
-                <li>Updated the EPICS device driver to accommodate new hardware, using AI to optimize the refactoring process.</li>
-                <li>Modernized the way ARMs, part of the Personnel Protection System (PPS), transmit data streams over the network 
-                through hardware and configuration upgrades, improving reliability and scalability.</li>
-            </ul>
+        <section class="project article-card project-card">
+            <p class="article-meta">Cross-functional engineering initiative</p>
+            <h2><a href="/pages/projects/apex-throughput-taskforce.html">APEX Throughput Improvement Taskforce</a></h2>
+            <div class="article-tags"><span class="article-tag">Systems Engineering</span><span class="article-tag">Throughput</span><span class="article-tag">Technical Leadership</span></div>
+            <p class="article-summary">System-level coordination across hardware, controls, motion, detector, software, and applications teams toward a 40 UPH target and an engineering path to 80 UPH. The figures are development objectives, not claimed production results.</p>
+            <a href="/pages/projects/apex-throughput-taskforce.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>SBM Top-Off Application</h2>
-            <ul>
-                <li>Enhanced machine efficiency by enabling uniform beam injection and implementing ML techniques for optimization.</li>
-            </ul>
+        <div class="project-group-heading" id="digital-twins"><h2>Digital Twins & Model-Informed Controls</h2></div>
+
+        <section class="project article-card project-card">
+            <p class="article-meta">Implemented simulation · Digital-twin prototype</p>
+            <h2><a href="/pages/projects/adaptive-timing-digital-twin.html">Adaptive Accelerator Timing Digital Twin</a></h2>
+            <div class="article-tags"><span class="article-tag">Simulation</span><span class="article-tag">Adaptive PID</span><span class="article-tag">EPICS</span><span class="article-tag">Safety</span></div>
+            <p class="article-summary">A distributed model of environmental drift, oscillator and laser response, adaptive feedback, and an independent protection path, implemented through the same PV-based boundaries used in operational controls.</p>
+            <a href="/pages/projects/adaptive-timing-digital-twin.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>Nominal Gaps Application</h2>
-            <ul>
-                <li>Developed a centralized tool allowing operators to control all accelerator insertion devices simultaneously from one location, 
-                improving operational efficiency.</li>
-            </ul>
+        <section class="project article-card project-card">
+            <p class="article-meta">Conceptual design</p>
+            <h2><a href="/pages/projects/lunar-waste-to-resource.html">Lunar Waste-to-Resource System</a></h2>
+            <div class="article-tags"><span class="article-tag">Artemis</span><span class="article-tag">ISRU</span><span class="article-tag">Digital Twin</span><span class="article-tag">EPICS</span></div>
+            <p class="article-summary">An independent LunaRecycle Challenge concept integrating plasma pyrolysis, electrolysis, additive manufacturing, supervisory controls, and predictive modeling for lunar resource recovery.</p>
+            <a href="/pages/projects/lunar-waste-to-resource.html" class="button">View Project</a>
         </section>
 
-        <section class="project">
-            <h2>Beam Dump Recovery Tool</h2>
-            <ul>
-                <li>Automated recovery of the machine after a beam dump, ensuring key recovery steps (such as EPS reset and RF state switches) 
-                are not overlooked, and the system is configured appropriately.</li>
-            </ul>
-        </section>
+        <div class="project-group-heading"><h2>Accelerator Controls & Infrastructure</h2></div>
 
-        <section class="project">
-            <h2>Injection Configuration Tool</h2>
-            <ul>
-                <li>Created a Python-based tool that interfaces with EPICS PVs to configure various injection types, simplifying the setup 
-                and ensuring better consistency in operations.</li>
-            </ul>
-        </section>
+        <section class="project article-card project-card"><p class="article-meta">National laboratory controls integration</p><h2><a href="/pages/projects/psc-controls.html">Power Supply Controller Controls Development</a></h2><div class="article-tags"><span class="article-tag">EPICS</span><span class="article-tag">Phoebus</span><span class="article-tag">ALS-U</span><span class="article-tag">Power Systems</span></div><p class="article-summary">Modular EPICS IOCs and Phoebus interfaces for accelerator-magnet power supplies, interlocks, diagnostics, and rack-level PDU management across BNL and LBNL environments.</p><a href="/pages/projects/psc-controls.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Infrastructure modernization</p><h2><a href="/pages/projects/network-infrastructure.html">Network & Virtual Infrastructure Upgrades</a></h2><div class="article-tags"><span class="article-tag">IaaS</span><span class="article-tag">vCenter</span><span class="article-tag">RHEL</span><span class="article-tag">Cybersecurity</span></div><p class="article-summary">Contributions to centralized, virtualized infrastructure supporting accelerator operations, with improved deployment consistency, scalability, maintainability, and control over critical services.</p><a href="/pages/projects/network-infrastructure.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Timing-system modernization</p><h2><a href="/pages/projects/accelerator-timing-modernization.html">AI-Assisted Accelerator Timing System</a></h2><div class="article-tags"><span class="article-tag">Timing</span><span class="article-tag">EPICS</span><span class="article-tag">Ethernet</span><span class="article-tag">AI-Assisted Development</span></div><p class="article-summary">Modernization of legacy VME/RTEMS timing infrastructure through Ethernet-based EPICS IOCs, new MRF230-series support, remote diagnostics, and a more maintainable architecture.</p><a href="/pages/projects/accelerator-timing-modernization.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Protection-system modernization</p><h2><a href="/pages/projects/area-radiation-monitor.html">EPICS-Based Area Radiation Monitor Modernization</a></h2><div class="article-tags"><span class="article-tag">EPICS</span><span class="article-tag">PPS</span><span class="article-tag">Networking</span><span class="article-tag">Reliability</span></div><p class="article-summary">Driver, hardware, and network-path modernization for radiation-monitor data used by the Personnel Protection System, improving supportability and reliable transport.</p><a href="/pages/projects/area-radiation-monitor.html" class="button">View Project</a></section>
+
+        <div class="project-group-heading"><h2>Operations Applications</h2></div>
+
+        <section class="project article-card project-card"><p class="article-meta">Machine-operations application</p><h2><a href="/pages/projects/sbm-top-off.html">SBM Top-Off Application</a></h2><div class="article-tags"><span class="article-tag">Accelerator Operations</span><span class="article-tag">Optimization</span><span class="article-tag">Machine Learning</span></div><p class="article-summary">Controls and optimization work supporting uniform beam injection and improved machine efficiency during top-off operation.</p><a href="/pages/projects/sbm-top-off.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Centralized operations control</p><h2><a href="/pages/projects/nominal-gaps.html">Nominal Gaps Application</a></h2><div class="article-tags"><span class="article-tag">Insertion Devices</span><span class="article-tag">EPICS</span><span class="article-tag">Operations</span></div><p class="article-summary">A centralized operator tool for coordinated control of accelerator insertion devices, reducing setup effort and improving consistency.</p><a href="/pages/projects/nominal-gaps.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Recovery automation</p><h2><a href="/pages/projects/beam-dump-recovery.html">Beam Dump Recovery Tool</a></h2><div class="article-tags"><span class="article-tag">Automation</span><span class="article-tag">Recovery</span><span class="article-tag">EPS</span><span class="article-tag">Operations</span></div><p class="article-summary">A guided recovery application that coordinates critical post-dump configuration steps and reduces the likelihood of missed resets or incorrect machine state.</p><a href="/pages/projects/beam-dump-recovery.html" class="button">View Project</a></section>
+
+        <section class="project article-card project-card"><p class="article-meta">Configuration automation</p><h2><a href="/pages/projects/injection-configuration.html">Injection Configuration Tool</a></h2><div class="article-tags"><span class="article-tag">Python</span><span class="article-tag">EPICS</span><span class="article-tag">Configuration Management</span></div><p class="article-summary">A Python application that configures EPICS process variables for multiple accelerator injection modes, improving repeatability and simplifying operator setup.</p><a href="/pages/projects/injection-configuration.html" class="button">View Project</a></section>
     </main>
-
-    <!-- Footer -->
     <div id="footer"></div>
 </body>
 </html>
