@@ -5,117 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Rob Rainer's controls, electrical engineering, EPICS, digital-twin, X-ray, accelerator, and technical leadership portfolio.">
     <title>Rob Rainer | Controls &amp; Systems Engineering</title>
-    <link rel="stylesheet" href="css/home-modern.css">
+    <link rel="stylesheet" href="/css/home-modern.css">
 </head>
 <body>
     <nav class="nav-shell" aria-label="Primary navigation">
-        <a class="brand" href="index.html" aria-label="Rob Rainer homepage">RR<span>.</span></a>
-        <div class="nav-links">
-            <a href="pages/about.html">About</a>
-            <a href="pages/projects.html">Projects</a>
-            <a href="pages/articles.html">Writing</a>
-            <a href="pages/tools.html">Tools</a>
-        </div>
+        <a class="brand" href="/">RR<span>.</span></a>
+        <div class="nav-links"><a href="/pages/about.html">About</a><a href="/pages/projects.html">Projects</a><a href="/pages/skills.html">Skills</a><a href="/pages/articles.html">Writing</a><a href="/pages/outreach.html">Outreach</a><a href="/pages/tools.html">Tools</a></div>
     </nav>
-
     <main>
         <section class="hero">
-            <p class="eyebrow">CONTROL SYSTEMS · DIGITAL TWINS · AI/ML</p>
-            <h1>Engineering systems that can be <em>observed, simulated, and improved.</em></h1>
-            <p class="hero-copy">I’m Rob Rainer, a controls and electrical engineering leader specializing in EPICS, precision motion, accelerator and X-ray systems, resilient infrastructure, and model-informed automation.</p>
-            <div class="hero-actions">
-                <a class="button-primary" href="pages/projects.html#digital-twins">Explore digital-twin work</a>
-                <a class="button-secondary" href="pages/projects.html">View all projects →</a>
+            <div class="hero-content">
+                <div>
+                    <p class="eyebrow">CONTROL SYSTEMS · DIGITAL TWINS · AI/ML</p>
+                    <h1>Engineering systems that can be <em>observed, simulated, and improved.</em></h1>
+                    <p class="hero-copy">I’m Rob Rainer, a controls and electrical engineering leader with 20+ years of experience spanning advanced instrumentation, accelerator operations, resilient infrastructure, and model-informed automation.</p>
+                    <div class="actions"><a class="primary" href="/pages/projects.html#digital-twins">Explore digital-twin work</a><a class="secondary" href="/pages/about.html">About my work →</a></div>
+                </div>
+                <figure class="portrait"><img src="/assets/Profile.jpg" alt="Rob Rainer"><figcaption><strong>Rob Rainer</strong><span>Controls &amp; Electrical Engineering</span></figcaption></figure>
             </div>
-            <div class="signal-row" aria-label="Areas of expertise">
-                <span>EPICS 7</span><span>Python</span><span>Phoebus</span><span>Simulation</span><span>Predictive controls</span>
-            </div>
+            <div class="signals"><span>EPICS 7</span><span>Python</span><span>Phoebus</span><span>Simulation</span><span>Predictive controls</span></div>
         </section>
-
+        <section class="control-room">
+            <img src="/assets/NSLS2CR.jpg" alt="NSLS-II accelerator control room">
+            <div><span class="kicker lime">EXPERIENCE IN CONTEXT</span><h2>20+ years engineering complex technical systems</h2><p>From materials science and photovoltaics to accelerator operations, EPICS controls, X-ray instrumentation, infrastructure, and multidisciplinary engineering leadership.</p><a href="/pages/about.html">Explore the professional journey →</a></div>
+        </section>
         <section class="dark-section">
-            <p class="section-kicker">Selected work</p>
-            <div class="section-heading dark-heading">
-                <h2>Digital twins, grounded in real control systems</h2>
-                <p>Each project is labeled by maturity so implemented work, twin-ready foundations, and forward-looking concepts remain clearly distinguished.</p>
-            </div>
-            <div class="card-grid dark-grid">
-                <a class="dark-card" href="pages/projects/adaptive-timing-digital-twin.html">
-                    <span class="card-label">Implemented simulation</span>
-                    <h3>Adaptive Accelerator Timing Twin</h3>
-                    <p>A distributed EPICS soft-IOC model used to test self-tuning PID control against drift and disturbance scenarios.</p>
-                    <strong>View project →</strong>
-                </a>
-                <a class="dark-card" href="pages/projects/precision-motion-correction.html">
-                    <span class="card-label">Model-based controls foundation</span>
-                    <h3>Precision Motion &amp; Geometric Correction</h3>
-                    <p>A real-time virtual-coordinate layer mapping measured stage error into corrected motion commands.</p>
-                    <strong>View project →</strong>
-                </a>
-                <a class="dark-card" href="pages/projects/lunar-waste-to-resource.html">
-                    <span class="card-label">Conceptual design</span>
-                    <h3>Lunar Waste-to-Resource System</h3>
-                    <p>An Artemis-aligned architecture combining plasma processing, resource recovery, EPICS supervision, and predictive modeling.</p>
-                    <strong>View project →</strong>
-                </a>
+            <span class="kicker">SELECTED WORK</span><div class="heading"><h2>Digital twins, grounded in real control systems</h2><p>Implemented simulations, twin-ready controls foundations, and forward-looking conceptual designs—clearly distinguished by maturity.</p></div>
+            <div class="grid">
+                <a class="dark-card" href="/pages/projects/adaptive-timing-digital-twin.html"><small>IMPLEMENTED SIMULATION</small><h3>Adaptive Accelerator Timing Twin</h3><p>A distributed EPICS model used to test self-tuning PID control against drift and disturbance scenarios.</p><strong>View project →</strong></a>
+                <a class="dark-card" href="/pages/projects/precision-motion-correction.html"><small>TWIN-READY FOUNDATION</small><h3>Precision Motion &amp; Geometric Correction</h3><p>A virtual-coordinate layer mapping measured stage error into corrected motion commands.</p><strong>View project →</strong></a>
+                <a class="dark-card" href="/pages/projects/lunar-waste-to-resource.html"><small>CONCEPTUAL DESIGN</small><h3>Lunar Waste-to-Resource System</h3><p>Artemis-aligned resource recovery with EPICS supervision and predictive modeling.</p><strong>View project →</strong></a>
             </div>
         </section>
-
-        <section class="definition-section">
-            <p class="section-kicker"><span class="pulse"></span>DIGITAL-TWIN APPROACH</p>
-            <h2>Physical system + live state + executable model + closed-loop learning</h2>
-            <p>Not every simulation is a digital twin. My work emphasizes the operational connection: live telemetry, state estimation, scenario testing, predictive insight, and safe feedback into engineering decisions.</p>
-        </section>
-
-        <section class="light-section">
-            <p class="section-kicker">Engineering &amp; mentorship</p>
-            <div class="section-heading">
-                <h2>Highlighted Projects</h2>
-                <p>Selected technical work, including the mentoring conversations that turn curiosity into structured engineering inquiry.</p>
-            </div>
-            <div class="card-grid">
-                <a class="light-card" href="pages/articles/energy-generation-with-nadiyah.html">
-                    <span class="card-label">Mentorship · August 2, 2026</span>
-                    <h3>From Sunlight to Turbines: Exploring Energy Generation with Nadiyah</h3>
-                    <p>A technical essay developed from a conversation with my daughter about solar energy, mechanical conversion, fission, fusion, and lightning.</p>
-                    <strong>Read mentorship essay →</strong>
-                </a>
-                <a class="light-card" href="pages/projects/precision-motion-correction.html">
-                    <span class="card-label">Implemented controls system</span>
-                    <h3>Precision Stage Alignment &amp; Geometric Correction</h3>
-                    <p>Real-time correction layers for high-precision X-ray microscopy motion.</p>
-                    <strong>View project →</strong>
-                </a>
-                <a class="light-card" href="pages/projects/unified-server.html">
-                    <span class="card-label">Engineering architecture</span>
-                    <h3>Unified Server Architecture</h3>
-                    <p>A resilient virtualized architecture consolidating production IOCs, applications, SCADA services, automation, and recovery tooling.</p>
-                    <strong>View project →</strong>
-                </a>
-            </div>
-            <div class="section-actions">
-                <a class="button-primary" href="pages/articles/energy-generation-with-nadiyah.html">Read the Mentorship Essay</a>
-                <a class="button-secondary" href="pages/projects.html">View all projects →</a>
+        <section class="definition"><span class="kicker">DIGITAL-TWIN APPROACH</span><h2>Physical system + live state + executable model + closed-loop learning</h2><p>Live telemetry, state estimation, scenario testing, predictive insight, and safe feedback into engineering decisions.</p></section>
+        <section class="light-section"><span class="kicker">ENGINEERING &amp; MENTORSHIP</span><div class="heading"><h2>Highlighted Projects</h2><p>Technical work and mentoring conversations that turn curiosity into structured engineering inquiry.</p></div>
+            <div class="grid">
+                <a class="light-card" href="/pages/articles/energy-generation-with-nadiyah.html"><small>MENTORSHIP · AUGUST 2, 2026</small><h3>From Sunlight to Turbines</h3><p>Exploring energy generation with Nadiyah through solar, mechanical, fission, fusion, and lightning.</p><strong>Read essay →</strong></a>
+                <a class="light-card" href="/pages/projects/precision-motion-correction.html"><small>IMPLEMENTED CONTROLS</small><h3>Precision Stage Alignment</h3><p>Real-time correction for high-precision X-ray microscopy motion.</p><strong>View project →</strong></a>
+                <a class="light-card" href="/pages/projects/unified-server.html"><small>ENGINEERING ARCHITECTURE</small><h3>Unified Server Architecture</h3><p>Resilient infrastructure for controls, applications, automation, and recovery.</p><strong>View project →</strong></a>
             </div>
         </section>
-
-        <section class="articles-section">
-            <p class="section-kicker">Writing</p>
-            <div class="section-heading">
-                <h2>Latest Articles</h2>
-                <p>Technical essays, project reflections, and cross-domain observations from controls engineering and science mentorship.</p>
-            </div>
-            <div class="article-list">
-                <a href="pages/articles/energy-generation-with-nadiyah.html"><span>August 2, 2026</span><strong>From Sunlight to Turbines: Exploring Energy Generation with Nadiyah</strong><b>→</b></a>
-                <a href="pages/articles/branching-origins-hypothesis.html"><span>July 14, 2026</span><strong>The Branching Origins Hypothesis: A Young Scientist's Thought Experiment</strong><b>→</b></a>
-                <a href="pages/articles/throughput-pareto-gpu.html"><span>July 13, 2026</span><strong>Throughput Isn't One Problem: A Pareto-Limited View of Reconstruction Bottlenecks</strong><b>→</b></a>
-            </div>
-            <div class="section-actions"><a class="button-primary" href="pages/articles.html">View All Articles</a></div>
+        <section class="articles"><span class="kicker">WRITING</span><div class="heading"><h2>Latest Articles</h2><p>Technical essays, project reflections, and science mentorship.</p></div>
+            <div class="article-list"><a href="/pages/articles/energy-generation-with-nadiyah.html"><span>AUG 2, 2026</span><strong>From Sunlight to Turbines: Exploring Energy Generation with Nadiyah</strong><b>→</b></a><a href="/pages/articles/branching-origins-hypothesis.html"><span>JUL 14, 2026</span><strong>The Branching Origins Hypothesis</strong><b>→</b></a><a href="/pages/articles/throughput-pareto-gpu.html"><span>JUL 13, 2026</span><strong>Throughput Isn't One Problem</strong><b>→</b></a></div>
+            <div class="actions"><a class="primary" href="/pages/articles.html">View all articles</a></div>
         </section>
     </main>
-
-    <footer class="site-footer">
-        <span>© 2026 Rob Rainer</span>
-        <a href="mailto:rainer1370@gmail.com">rainer1370@gmail.com</a>
-    </footer>
+    <footer><span>© 2026 Rob Rainer</span><a href="mailto:rainer1370@gmail.com">rainer1370@gmail.com</a></footer>
 </body>
 </html>
