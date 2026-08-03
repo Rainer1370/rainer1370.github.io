@@ -3,3 +3,12 @@
 .key-points{background:#0d4053;border-left:4px solid var(--lime);padding:22px 26px;margin:30px 0 0}.key-points-label{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.1em}.key-points ul{margin:8px 0 0;padding-left:22px}.key-points li{color:#e4eef0}
 .article-body{max-width:880px;padding:clamp(34px,6vw,72px)}.article-body>p{font-size:17px;line-height:1.78;color:#294650}.article-body h2{margin-top:42px}.article-body h3{margin-top:30px}.article-body strong{color:#102f3a}.engineering-insight{background:#e8f1ee;border-left:4px solid var(--teal);padding:22px 25px;margin:30px 0}.engineering-insight p:first-child{color:var(--teal);font-size:11px!important;font-weight:900;letter-spacing:.1em;margin-bottom:8px}.engineering-insight p:last-child{margin:0!important;color:var(--ink)!important;font:italic 600 20px/1.5 Georgia,serif}.article-bio{border-top:1px solid var(--line);margin-top:40px;padding-top:22px;color:var(--muted)!important;font-size:14px!important;font-style:italic}.article-sources{border-top:1px solid var(--line);margin-top:32px;padding-top:24px}.article-sources h3{color:var(--ink);font-size:21px}.article-sources a{color:#007f83}.article-sources ul{font-size:14px}
 @media(max-width:720px){.article-card{padding:28px 22px}.article-header,.article-body{padding:32px 23px}.article-body>p{font-size:16px}.key-points{padding:18px}}
+
+/* Readability and contrast */
+.article-meta,.project-detail-meta{color:#007578;font-size:13px;font-weight:900}
+.article-summary{color:#365864;font-size:15px;line-height:1.7}
+.article-tag{background:#e6eeeb;border-color:#b8cac5;color:#214f5a;font-size:11px;font-weight:900}
+.article-subtitle{color:#d9e7ea}
+.article-date{color:#b4c9cf}
+.article-body>p{color:#294b57}
+.article-bio{color:#45636d!important}
