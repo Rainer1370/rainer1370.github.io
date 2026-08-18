@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Load header and footer
     await Promise.all([
-        loadComponent("header", componentBasePath + "header.html?v=20260802-5"),
-        loadComponent("footer", componentBasePath + "footer.html?v=20260802-5"),
+        loadComponent("header", componentBasePath + "header.html"),
+        loadComponent("footer", componentBasePath + "footer.html"),
     ]);
 
     // Load tools dynamically
