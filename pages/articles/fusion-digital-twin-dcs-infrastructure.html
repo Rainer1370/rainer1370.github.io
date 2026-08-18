@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>From Simulation to Operations: A DCS Infrastructure for Fusion Digital Twins</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rob Rainer presents an EPICS-centered DCS reference architecture connecting fusion plant systems, deterministic controls, synchronized data, and operational digital twins.">
+    <meta name="author" content="Rob Rainer">
+    <meta property="og:title" content="From Simulation to Operations: A DCS Infrastructure for Fusion Digital Twins">
+    <meta property="og:description" content="An EPICS-centered reference architecture connecting physical plant systems, deterministic controls, synchronized data, and model-informed operations.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rainer1370.com/pages/articles/fusion-digital-twin-dcs-infrastructure.html">
+    <meta property="og:image" content="https://rainer1370.com/assets/fusion-digital-twin-reference-architecture.png">
+    <meta property="og:image:width" content="1440">
+    <meta property="og:image:height" content="960">
+    <link rel="canonical" href="https://rainer1370.com/pages/articles/fusion-digital-twin-dcs-infrastructure.html">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/articles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls &amp; Systems Engineering Leader</em></p>
+            <span class="article-category">FUSION &amp; DIGITAL TWINS</span>
+            <h1>From Simulation to Operations: A DCS Infrastructure for Fusion Digital Twins</h1>
+            <p class="article-subtitle">An EPICS-centered reference architecture connecting physical plant systems, deterministic controls, synchronized data, and model-informed operations.</p>
+            <p class="article-date">Published August 18, 2026</p>
+        </section>
+
+        <section class="project article-body">
+            <figure class="article-figure">
+                <img src="/assets/fusion-digital-twin-reference-architecture.svg"
+                     alt="Layered fusion digital twin DCS reference architecture">
+                <figcaption>
+                    Fusion Digital Twin DCS Reference Architecture &mdash; an independent public technical preview.
+                </figcaption>
+            </figure>
+
+            <p>Fusion digital twins are often described as high-fidelity models of plasma behavior, magnets, thermal systems, or an entire plant. Those models matter, but a model alone is not an operational digital twin. To become useful across design, commissioning, experiments, maintenance, and optimization, it needs a trustworthy connection to the facility that it represents.</p>
+
+            <p><strong>That connection is the distributed control system.</strong></p>
+
+            <p>I developed this reference architecture while considering how a modern fusion facility could use an EPICS-centered DCS not only to operate equipment, but also to create the data, timing, configuration, and workflow foundation required for a continuously evolving digital twin. I am now publishing the high-level design as an independent technical concept and an invitation to collaborate.</p>
+
+            <h2>The digital twin must share the plant's language</h2>
+
+            <p>In a large scientific facility, no single application owns the whole machine. Power supplies, vacuum equipment, cryogenics, diagnostics, heating, motion, utilities, timing, machine protection, personnel safety, and data systems all operate at different rates and under different engineering constraints.</p>
+
+            <p>The first requirement for a facility-scale twin is therefore not a more complicated model. It is a stable way to identify what the model is observing.</p>
+
+            <p>Each important physical quantity needs a governed identity, engineering units, timestamp, quality state, configuration context, and relationship to the equipment hierarchy. EPICS process variables can provide the supervisory namespace and live integration fabric, while a separate configuration and metadata layer records how those signals relate to devices, models, requirements, alarms, and archived data.</p>
+
+            <p>This creates a common language between the physical plant and its computational representations.</p>
+
+            <h2>A layered controls architecture</h2>
+
+            <p>The architecture deliberately separates responsibilities.</p>
+
+            <p>At the bottom are the physical systems: magnets, power conversion, vacuum, cryogenics, diagnostics, heating and fueling, cooling water, electrical distribution, and facility utilities. Above them are field devices and I/O, followed by PLCs, FPGA or real-time controllers, and independent protection systems where deterministic response is required.</p>
+
+            <p>EPICS IOCs and device gateways provide subsystem integration. They normalize protocols, expose health and status, enforce naming conventions, and connect equipment to supervisory services without pretending that Channel Access or PV Access should replace hard real-time control.</p>
+
+            <p>Above the control layer are the services that make a digital twin operationally meaningful: timing and event identity, configuration management, archiving, alarms, experiment orchestration, file and metadata services, and controlled data access. Digital-twin applications then consume those governed services for simulation, replay, state estimation, anomaly detection, optimization, and operator assistance.</p>
+
+            <p>The operator interface remains at the top&mdash;but the architecture is built from the physical process upward.</p>
+
+            <h2>One facility, several trust zones</h2>
+
+            <p>The most important design choice is that the digital twin is not allowed to bypass operational boundaries.</p>
+
+            <p>Safety-rated systems and machine protection remain independent authorities. Deterministic control stays close to the equipment. Supervisory commands pass through controlled interfaces. Simulation and optimization services begin read-only and earn broader authority only through verification, validation, access control, and an explicit operating procedure.</p>
+
+            <p>This allows powerful modeling and AI/ML tools to participate without making an unvalidated algorithm part of the safety chain.</p>
+
+            <p>The same principle applies to networks. Controls, timing, data, management, safety, and external-access functions should be segmented according to risk and operational need. Remote collaboration can be supported through governed gateways and replicated data services rather than direct access to control equipment.</p>
+
+            <h2>Time and configuration are part of the model</h2>
+
+            <p>A digital twin cannot explain an event if it does not know whether two measurements refer to the same instant&mdash;or whether the plant configuration changed between them.</p>
+
+            <p>The architecture therefore treats timing, event identity, and configuration as first-class services. Facility timing aligns fast data and experimental events. A shared run or event identifier propagates across supervisory records, data files, model executions, and experiment metadata. Configuration snapshots establish which software, calibration, device mapping, model parameters, and operating state were active.</p>
+
+            <p>With those foundations, a team can replay a shot or operating sequence, compare predicted and measured behavior, and determine whether the difference came from physics, instrumentation, configuration drift, or control-system behavior.</p>
+
+            <h2>A digital twin should grow with the facility</h2>
+
+            <p>The proposed deployment path is incremental.</p>
+
+            <h3>1. Controls-development twin</h3>
+
+            <p>Begin with protocol simulators, representative IOCs, operator displays, alarms, and subsystem state machines. This supports controls development before all hardware is available and gives engineers a safe place to test fault handling.</p>
+
+            <h3>2. Virtual commissioning</h3>
+
+            <p>Connect the simulated plant to production-like controls and sequencing. Test interfaces, naming, timing, permissions, recovery behavior, and operating procedures. Hardware-in-the-loop can be added where it provides the most value.</p>
+
+            <h3>3. Operational mirror</h3>
+
+            <p>Connect verified read-only services to the facility. Archive synchronized data, capture configuration context, and compare model output with measured behavior. Use the twin for replay, troubleshooting, training, and planning.</p>
+
+            <h3>4. Model-informed operations</h3>
+
+            <p>After validation, introduce advisory capabilities such as state estimation, anomaly detection, predictive maintenance, and optimization. Any path from advisory output to equipment commands remains controlled, reviewable, and reversible.</p>
+
+            <p>This approach avoids the common trap of waiting for a perfect whole-plant model. A useful twin can begin with one subsystem and become more capable as the facility and its models mature.</p>
+
+            <h2>Why EPICS is a strong foundation</h2>
+
+            <p>EPICS already provides many of the patterns needed for long-lived scientific facilities: distributed IOCs, a shared process-variable namespace, alarm and archiving ecosystems, operator interfaces, protocol support, and integration across custom and commercial equipment.</p>
+
+            <p>Its role in this architecture is not to do everything. Its value is that it can connect specialized systems without erasing their boundaries. PLCs can remain PLCs. Fast controllers can remain deterministic. Physics services can evolve independently. The DCS provides the supervisory contract through which they are observed, coordinated, and understood.</p>
+
+            <p>That makes EPICS particularly well suited to a digital twin that must span both conventional plant systems and experimental physics.</p>
+
+            <h2>What I am publishing&mdash;and what I am not</h2>
+
+            <p>I am publishing the architectural structure, engineering rationale, lifecycle, and collaboration model so that the work is visible and can contribute to the fusion-controls conversation.</p>
+
+            <p>I am intentionally not publishing a deployable facility package. Exact PV inventories, device and network mappings, credentials, protection settings, detailed interlock logic, procurement estimates, and implementation-specific automation are withheld. Those elements should be developed for a real facility under appropriate technical, safety, cybersecurity, and commercial controls.</p>
+
+            <p>This boundary is also practical: a reference architecture becomes valuable through adaptation, validation, commissioning, and lifecycle ownership&mdash;not by copying a diagram.</p>
+
+            <h2>An invitation to collaborate</h2>
+
+            <p>I would welcome conversations with fusion companies, national laboratories, universities, and engineering teams interested in developing a controls-connected digital twin.</p>
+
+            <p>A collaboration could begin with a small, measurable scope: one vacuum sector, magnet power-supply family, cryogenic loop, diagnostic system, or facility utility. From there, we could establish the namespace, simulator, IOC boundary, timing and configuration context, operator workflow, and validation plan needed to demonstrate the architecture in a real environment.</p>
+
+            <p>The goal is not simply to build another visualization. It is to create an operational engineering system that helps a facility design, commission, understand, improve, and safely scale the machine it is building.</p>
+
+            <p>If your facility is interested in exploring that path, I am available to help define the architecture and collaborate on a deployment.</p>
+
+            <div class="article-repository">
+                <span class="key-points-label">PUBLIC TECHNICAL PREVIEW</span>
+                <h3>Explore the reference architecture</h3>
+                <p>The public repository contains the architecture overview, publication boundary, collaboration model, and citation information.</p>
+                <a href="https://github.com/Rainer1370/fusion-digital-twin-dcs"
+                   class="button"
+                   target="_blank"
+                   rel="noopener noreferrer">View the GitHub Repository</a>
+                <a href="mailto:rainer1370@gmail.com?subject=Fusion%20Digital%20Twin%20DCS%20Collaboration"
+                   class="button article-contact-button">Discuss a Collaboration</a>
+            </div>
+
+            <p class="article-bio"><strong>Rob Rainer</strong> is a controls and systems engineering leader with more than 20 years of experience spanning scientific facilities, accelerator operations, EPICS controls, X-ray instrumentation, electrical engineering, infrastructure, and multidisciplinary technical leadership.</p>
+
+            <p class="article-disclaimer">This article describes an independent reference concept. It is not affiliated with, endorsed by, or a description of the internal systems of Thea Energy or any other fusion company.</p>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+    <div id="footer"></div>
+</body>
+</html>

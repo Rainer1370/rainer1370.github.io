@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc">
+  <title id="title">Fusion Digital Twin DCS Reference Architecture</title>
+  <desc id="desc">Layered reference architecture connecting fusion plant systems to deterministic control, EPICS supervisory integration, data context, digital twin services, and operator workflows.</desc>
+  <rect width="1440" height="960" fill="#f5f7f7"/>
+  <text x="720" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0b3142">Fusion Digital Twin DCS Reference Architecture</text>
+  <text x="720" y="91" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#42616c">Independent public technical preview • Robert Rainer • August 18, 2026</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="150" y="130" width="930" height="82" rx="12" fill="#8d2b7d"/>
+    <text x="180" y="165" font-size="24" font-weight="700" fill="white">7  Operator &amp; Engineering Workflows</text>
+    <text x="180" y="193" font-size="16" fill="#f7eaf4">Operations • alarms • trends • procedures • engineering access</text>
+
+    <rect x="150" y="224" width="930" height="82" rx="12" fill="#d85c2a"/>
+    <text x="180" y="259" font-size="24" font-weight="700" fill="white">6  Digital Twin &amp; Optimization Services</text>
+    <text x="180" y="287" font-size="16" fill="#fff0e9">Simulation • replay • state estimation • advisory optimization</text>
+
+    <rect x="150" y="318" width="930" height="82" rx="12" fill="#d89a13"/>
+    <text x="180" y="353" font-size="24" font-weight="700" fill="white">5  Data, Time &amp; Configuration Context</text>
+    <text x="180" y="381" font-size="16" fill="#fff8dc">Archiving • event identity • metadata • calibration • provenance</text>
+
+    <rect x="150" y="412" width="930" height="82" rx="12" fill="#4b8f3a"/>
+    <text x="180" y="447" font-size="24" font-weight="700" fill="white">4  EPICS Supervisory Integration</text>
+    <text x="180" y="475" font-size="16" fill="#eef9ea">Governed PV namespace • subsystem state • commands • health</text>
+
+    <rect x="150" y="506" width="930" height="82" rx="12" fill="#188675"/>
+    <text x="180" y="541" font-size="24" font-weight="700" fill="white">3  Deterministic Control &amp; Independent Protection</text>
+    <text x="180" y="569" font-size="16" fill="#e5f8f4">PLCs • FPGA/RT control • permissives • machine and personnel safety</text>
+
+    <rect x="150" y="600" width="930" height="82" rx="12" fill="#1876a3"/>
+    <text x="180" y="635" font-size="24" font-weight="700" fill="white">2  Device Interfaces, Gateways &amp; I/O</text>
+    <text x="180" y="663" font-size="16" fill="#e7f5fb">Industrial networks • DAQ • drivers • sensors • actuators</text>
+
+    <rect x="150" y="694" width="930" height="82" rx="12" fill="#344bb3"/>
+    <text x="180" y="729" font-size="24" font-weight="700" fill="white">1  Physical Fusion Plant Systems</text>
+    <text x="180" y="757" font-size="16" fill="#edf0ff">Magnets • vacuum • cryogenics • diagnostics • heating • utilities</text>
+
+    <rect x="1120" y="130" width="240" height="646" rx="14" fill="#ffffff" stroke="#9fb5bc" stroke-width="2"/>
+    <text x="1240" y="170" text-anchor="middle" font-size="22" font-weight="700" fill="#0b3142">Governance</text>
+    <line x1="1150" y1="188" x2="1330" y2="188" stroke="#c5d2d6"/>
+    <text x="1150" y="232" font-size="15" fill="#234b59">Timing &amp; event identity</text>
+    <text x="1150" y="278" font-size="15" fill="#234b59">Configuration control</text>
+    <text x="1150" y="324" font-size="15" fill="#234b59">Cybersecurity zones</text>
+    <text x="1150" y="370" font-size="15" fill="#234b59">Access &amp; audit</text>
+    <text x="1150" y="416" font-size="15" fill="#234b59">Requirements traceability</text>
+    <text x="1150" y="462" font-size="15" fill="#234b59">Alarm philosophy</text>
+    <text x="1150" y="508" font-size="15" fill="#234b59">Deployment &amp; recovery</text>
+    <text x="1150" y="554" font-size="15" fill="#234b59">Verification &amp; validation</text>
+    <text x="1150" y="600" font-size="15" fill="#234b59">Lifecycle ownership</text>
+    <rect x="1145" y="638" width="190" height="98" rx="10" fill="#eef4f3"/>
+    <text x="1240" y="672" text-anchor="middle" font-size="16" font-weight="700" fill="#0b3142">Authority rule</text>
+    <text x="1240" y="699" text-anchor="middle" font-size="13" fill="#42616c">Twin begins read-only.</text>
+    <text x="1240" y="722" text-anchor="middle" font-size="13" fill="#42616c">Protection stays independent.</text>
+
+    <path d="M105 735 L105 171" stroke="#0b3142" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+    <text x="82" y="465" transform="rotate(-90 82 465)" text-anchor="middle" font-size="18" font-weight="700" fill="#0b3142">ABSTRACTION &amp; DECISION SUPPORT</text>
+    <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#0b3142"/></marker></defs>
+
+    <rect x="150" y="820" width="1210" height="82" rx="12" fill="#0b3142"/>
+    <text x="755" y="853" text-anchor="middle" font-size="20" font-weight="700" fill="white">A digital twin becomes operational when the model shares the plant's</text>
+    <text x="755" y="882" text-anchor="middle" font-size="20" font-weight="700" fill="#bdd63c">identity, time, configuration, data quality, and authority boundaries.</text>
+  </g>
+</svg>
