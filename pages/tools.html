@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tools</title>
+    <title>Interactive Engineering & Everyday Tools | Rob Rainer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css?v=20260802-4">
+    <meta name="description" content="Free browser-based engineering utilities and everyday decision tools created by Rob Rainer and Control Lattice Systems.">
+    <link rel="canonical" href="https://rainer1370.com/pages/tools.html">
+    <link rel="stylesheet" href="/css/styles.css?v=20260918-1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="/js/scripts.js" defer></script>
+    <style>
+        .tools-hero{background:#071a24;color:#fff;border:0;position:relative;overflow:hidden}
+        .tools-hero:after{content:"";position:absolute;right:-80px;top:-140px;width:420px;height:420px;border:1px solid rgba(184,213,61,.35);border-radius:50%;box-shadow:0 0 0 52px rgba(0,166,166,.07),0 0 0 104px rgba(0,166,166,.04)}
+        .tools-hero>*{position:relative;z-index:1}.tools-hero .eyebrow,.tool-group .eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;color:#b8d53d}
+        .tools-hero h1{color:#fff;max-width:760px}.tools-hero p{max-width:720px;color:#c5d9df;font-size:18px}
+        .tools-hero .privacy-note{display:inline-flex;align-items:center;gap:9px;margin-top:10px;padding:9px 12px;border:1px solid #315563;color:#dbe8eb;font-size:13px}
+        .tool-group{box-shadow:none;background:transparent;border:0;padding:18px 0 6px}.tool-group header{background:transparent;border:0}.tool-group h2{margin:8px 0}.tool-group>p{color:#58717b;max-width:760px}
+        .tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
+        .tool-card{display:flex;flex-direction:column;min-height:250px;padding:24px;background:#fff;border:1px solid #cbd6d2;box-shadow:0 10px 26px rgba(7,26,36,.06);color:#071a24;transition:transform .2s,border-color .2s,box-shadow .2s}
+        .tool-card:hover{transform:translateY(-4px);border-color:#00a6a6;box-shadow:0 18px 34px rgba(7,26,36,.11);color:#071a24}
+        .tool-card .icon{width:42px;height:42px;display:grid;place-items:center;background:#e7eeeb;color:#007f83;font-size:18px;margin-bottom:22px}
+        .tool-card small{color:#007f83;font-size:11px;font-weight:800;letter-spacing:.11em}.tool-card h3{margin:8px 0 10px;font-size:22px}.tool-card p{color:#58717b;font-size:14px;line-height:1.55;margin:0 0 20px}.tool-card strong{margin-top:auto;font-size:13px}
+        .tool-card.featured{background:#0e4256;border-color:#0e4256;color:#fff}.tool-card.featured h3,.tool-card.featured strong{color:#fff}.tool-card.featured p{color:#c5d9df}.tool-card.featured small{color:#b8d53d}.tool-card.featured .icon{background:#b8d53d;color:#071a24}
+        .source-note{display:flex;justify-content:space-between;align-items:center;gap:24px;background:#e7eeeb;box-shadow:none}.source-note p{margin:0}.source-note a{white-space:nowrap;font-weight:800}
+        @media(max-width:820px){.tool-grid{grid-template-columns:1fr}.tool-card{min-height:220px}.source-note{align-items:flex-start;flex-direction:column}}
+    </style>
 </head>
 <body>
-    <!-- Header (Loaded Dynamically) -->
     <div id="header"></div>
-
-    <!-- Main Content -->
     <main>
-        <section>
-            <h1 style="text-align: center;">Tools Section</h1>
-            <p style="text-align: center;">
-                Welcome to the tool section! These interactive utilities support various technical applications.
-            </p>
-            <p style="text-align: center;">
-                Source code is available on 
-                <a href="https://github.com/Rainer1370/rainer1370.github.io.git" target="_blank">GitHub</a>.
-            </p>
+        <section class="tools-hero">
+            <span class="eyebrow">PRACTICAL UTILITIES</span>
+            <h1>Small tools for real problems.</h1>
+            <p>Engineering calculators, control-system demonstrations, and everyday decision aids—built to make a useful task clearer without unnecessary friction.</p>
+            <span class="privacy-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> The everyday tools run in your browser and do not require an account.</span>
         </section>
 
-        <section class="banner">
-            <figure>
-                <img src="/assets/tools.jpg" alt="Tools Section Logo" style="width: 100%; max-height: 400px; object-fit: cover;">
-                <figcaption style="text-align: center;">Interactive utilities for problem-solving.</figcaption>
-            </figure>
+        <section class="tool-group" aria-labelledby="everyday-tools">
+            <span class="eyebrow">EVERYDAY DECISIONS</span>
+            <h2 id="everyday-tools">Small Useful Things</h2>
+            <p>Three straightforward tools for decisions that are common, annoying, and usually more complicated than they should be.</p>
+            <div class="tool-grid">
+                <a class="tool-card featured" href="https://small-useful-things.rainer1370.chatgpt.site" target="_blank" rel="noopener noreferrer">
+                    <span class="icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span>
+                    <small>DECIDE</small><h3>Decision Untangler</h3>
+                    <p>Compare up to three choices against the criteria that matter to you, with adjustable importance and weighted results.</p>
+                    <strong>Open tool ↗</strong>
+                </a>
+                <a class="tool-card featured" href="https://small-useful-things.rainer1370.chatgpt.site" target="_blank" rel="noopener noreferrer">
+                    <span class="icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                    <small>COMPARE COSTS</small><h3>Repair or Replace?</h3>
+                    <p>Compare repair and replacement costs on an annualized basis instead of relying on the sticker price alone.</p>
+                    <strong>Open tool ↗</strong>
+                </a>
+                <a class="tool-card featured" href="https://small-useful-things.rainer1370.chatgpt.site" target="_blank" rel="noopener noreferrer">
+                    <span class="icon"><i class="fa-solid fa-message" aria-hidden="true"></i></span>
+                    <small>COMMUNICATE</small><h3>Difficult Message Builder</h3>
+                    <p>Turn facts, a request, and a boundary into a calmer, clearer message you can edit before sending.</p>
+                    <strong>Open tool ↗</strong>
+                </a>
+            </div>
         </section>
 
-        <!-- Tool Links -->
-        <section>
-            <h2>Available Tools</h2>
-            <ul style="text-align: left; list-style-type: disc; padding-left: 40px; max-width: 600px; margin: 0 auto;">
-                <li><a href="/pages/tools/8b10b.html">8b10b Encoder and Number Converter</a></li>
-                <li><a href="/pages/tools/ai.html">AI & Machine Learning Demo</a></li>
-                <li><a href="/pages/tools/light.html">Light Analysis Tool</a></li>
-                <li><a href="/pages/tools/pid.html">PID Controller Simulator</a></li>
-                <li><a href="/pages/tools/plc.html">PLC Simulator</a></li>
-                <li><a href="/pages/tools/qr.html">QR Code Generator</a></li>
-                <li><a href="/pages/tools/utc.html">UTC, Local Time, and Unix Timestamp Converter</a></li>
-            </ul>
+        <section class="tool-group" aria-labelledby="engineering-tools">
+            <span class="eyebrow">ENGINEERING & TECHNICAL</span>
+            <h2 id="engineering-tools">Interactive engineering utilities</h2>
+            <p>Focused browser tools for controls, automation, data conversion, and technical experimentation.</p>
+            <div class="tool-grid">
+                <a class="tool-card" href="/pages/tools/pid.html"><span class="icon"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></span><small>CONTROLS</small><h3>PID Controller Simulator</h3><p>Explore proportional, integral, and derivative response through an interactive control-loop demonstration.</p><strong>Launch simulator →</strong></a>
+                <a class="tool-card" href="/pages/tools/plc.html"><span class="icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span><small>AUTOMATION</small><h3>PLC Simulator</h3><p>Experiment with basic programmable-logic behavior and see how control conditions affect outputs.</p><strong>Launch simulator →</strong></a>
+                <a class="tool-card" href="/pages/tools/8b10b.html"><span class="icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span><small>DATA</small><h3>8b10b & Number Converter</h3><p>Convert number formats and work through 8b10b encoding concepts in one compact utility.</p><strong>Open converter →</strong></a>
+                <a class="tool-card" href="/pages/tools/light.html"><span class="icon"><i class="fa-solid fa-sun" aria-hidden="true"></i></span><small>ANALYSIS</small><h3>Light Analysis Tool</h3><p>Explore light-related values and calculations for technical analysis and experimentation.</p><strong>Open analysis →</strong></a>
+                <a class="tool-card" href="/pages/tools/utc.html"><span class="icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span><small>TIME</small><h3>UTC & Unix Time Converter</h3><p>Translate between UTC, local time, and Unix timestamps without juggling multiple references.</p><strong>Open converter →</strong></a>
+                <a class="tool-card" href="/pages/tools/qr.html"><span class="icon"><i class="fa-solid fa-qrcode" aria-hidden="true"></i></span><small>UTILITY</small><h3>QR Code Generator</h3><p>Create a QR code from text or a link directly in the browser.</p><strong>Generate a code →</strong></a>
+                <a class="tool-card" href="/pages/tools/ai.html"><span class="icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span><small>DEMONSTRATION</small><h3>AI & Machine Learning Demo</h3><p>A compact interactive demonstration of practical AI and machine-learning concepts.</p><strong>Open demo →</strong></a>
+            </div>
+        </section>
+
+        <section class="source-note">
+            <p><strong>Built in the open.</strong><br>Review the portfolio source, suggest an improvement, or adapt an idea for your own work.</p>
+            <a href="https://github.com/Rainer1370/rainer1370.github.io" target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a>
         </section>
     </main>
-
-    <!-- Footer (Loaded Dynamically) -->
     <div id="footer"></div>
 </body>
 </html>
