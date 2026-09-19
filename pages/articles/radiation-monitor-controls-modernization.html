@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>One Device, One Failure Domain: Modernizing an EPICS Radiation-Monitoring System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How Rob Rainer decoupled radiation monitors, serial-to-Ethernet gateways, and EPICS IOC instances to improve calibration, commissioning, reliability, and maintainability at an advanced scientific facility.">
+    <link rel="canonical" href="https://rainer1370.com/pages/articles/radiation-monitor-controls-modernization.html">
+    <meta property="og:title" content="One Device, One Failure Domain: Modernizing an EPICS Radiation-Monitoring System">
+    <meta property="og:description" content="A practical case study in fault isolation, lifecycle decoupling, reusable EPICS drivers, and smaller operational failure domains.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rainer1370.com/pages/articles/radiation-monitor-controls-modernization.html">
+    <link rel="stylesheet" href="/css/styles.css?v=20260802-4">
+    <link rel="stylesheet" href="/css/articles.css?v=20260802-4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+    <style>
+        .architecture-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch;margin:1.5rem 0}
+        .architecture-flow div{border:1px solid rgba(255,215,0,.55);border-radius:10px;padding:1rem;background:rgba(255,255,255,.04)}
+        .architecture-flow strong{display:block;color:#FFD700;margin-bottom:.35rem}
+        .comparison-table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+        .comparison-table th,.comparison-table td{border:1px solid rgba(255,255,255,.22);padding:.8rem;text-align:left;vertical-align:top}
+        .comparison-table th{color:#FFD700}
+        @media(max-width:760px){.architecture-flow{grid-template-columns:1fr}.comparison-table{font-size:.9rem}}
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Controls, Operations &amp; Systems Engineering</em></p>
+            <span class="article-category">EPICS CONTROLS · RELIABILITY · COMMISSIONING</span>
+            <h1>One Device, One Failure Domain: Modernizing an EPICS Radiation-Monitoring System</h1>
+            <p class="article-subtitle">How separating instrument, network, and IOC lifecycles turned a fragile calibration workflow into a standardized, maintainable architecture.</p>
+            <p class="article-date">Published September 19, 2026</p>
+            <div class="key-points">
+                <p class="key-points-label">KEY POINTS</p>
+                <ul>
+                    <li>A recurring communications problem usually belonged to one of three domains: the instrument hardware, the network path, or the IOC.</li>
+                    <li>Moving aging embedded network interfaces into stable rack-mounted gateways decoupled calibration from network provisioning.</li>
+                    <li>A reusable HPI6016 device-driver template preserved consistency while independent IOC instances reduced the impact of restarts and failures.</li>
+                    <li>The project improved operations and became a practical training environment for interns who later obtained positions at Brookhaven.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="project article-body">
+            <h2>The Failure Was Rarely “The Network”</h2>
+            <p>
+                In an advanced scientific facility, a device that disappears from an operator screen can look like
+                a network problem even when the network is working exactly as designed. During my work with
+                radiation-monitoring controls at Brookhaven National Laboratory, I taught technicians to begin
+                with three possible fault domains: the physical device and its interface hardware, the network
+                path, or the EPICS input/output controller.
+            </p>
+            <p>
+                The surrounding evidence usually narrowed the search quickly. When adjacent IOCs and neighboring
+                devices using the same network switches remained healthy, a common switch or network-path failure
+                became less likely. When one monitor failed while the rest continued communicating, the evidence
+                pointed toward that unit or its onboard communications interface. In practice, the recurring
+                problem was often an aging embedded Moxa interface rather than the shared network or IOC server.
+            </p>
+            <div class="engineering-insight">
+                <p>OPERATIONS RULE</p>
+                <p>Start with hardware, network, and IOC—but use the scope of the failure to decide which domain deserves attention first.</p>
+            </div>
+
+            <h2>The Original Architecture Coupled Unrelated Lifecycles</h2>
+            <p>
+                The network interface was installed inside the radiation monitor. That arrangement appeared
+                compact, but it tied together two components with very different maintenance needs. When a monitor
+                left the facility for calibration, its network interface went with it. When the calibrated or
+                replacement unit returned, its address and communications configuration had to be established
+                again.
+            </p>
+            <p>
+                This provisioning step became a bottleneck. The embedded interfaces were increasingly difficult to
+                configure, and a calibration activity that should have concerned the instrument also became a
+                controls and networking task. The equipment was physically available, but operations could still
+                wait on a deprecated communications component and a fragile IP-assignment process.
+            </p>
+            <p>
+                The EPICS deployment created a second concentration of risk. A single IOC served all of the
+                monitors. It provided a common implementation, but a restart or service interruption temporarily
+                removed communications for the entire group. Standardization had been achieved by sharing the
+                runtime rather than by sharing a controlled design.
+            </p>
+
+            <h2>Decouple the Instrument From the Network Endpoint</h2>
+            <p>
+                We moved the Ethernet conversion out of the instruments and installed modern serial-to-Ethernet
+                gateways in the equipment racks. Each monitor could then communicate over RS-485 to a stable,
+                maintainable gateway. The gateway—not the removable instrument—owned the persistent network
+                endpoint.
+            </p>
+            <div class="architecture-flow" aria-label="Modernized radiation monitor communications architecture">
+                <div><strong>HPI6016 monitor</strong>Replaceable and removable for calibration</div>
+                <div><strong>RS-485 connection</strong>Simple field communications boundary</div>
+                <div><strong>Rack gateway</strong>Stable Ethernet identity and IP configuration</div>
+                <div><strong>EPICS IOC instance</strong>Device-specific supervision on the virtual server</div>
+            </div>
+            <p>
+                That separation changed the maintenance workflow. A monitor could leave for calibration without
+                taking the facility's network configuration with it. A returning device connected to the existing
+                serial interface, and the rack gateway preserved the Ethernet-facing identity. The result was much
+                closer to plug-and-play replacement and eliminated a repeated provisioning dependency.
+            </p>
+
+            <h2>Standardize the Design, Not the Failure Domain</h2>
+            <p>
+                The software architecture followed the same principle. I developed a common template for the
+                HPI6016 device driver, executables, binaries, libraries, startup behavior, and supporting
+                configuration. Device-specific information, including endpoint addresses, was passed into a
+                smaller IOC instance through environment variables.
+            </p>
+            <p>
+                Each monitor therefore used the same reviewed implementation without requiring every monitor to
+                share one running IOC. An individual IOC could be restarted, diagnosed, or updated without
+                interrupting communications to every device. Common code reduced maintenance variation; separate
+                runtime instances reduced operational blast radius.
+            </p>
+
+            <table class="comparison-table">
+                <thead><tr><th>Earlier constraint</th><th>Modernized design</th><th>Operational result</th></tr></thead>
+                <tbody>
+                    <tr><td>Network card traveled with the monitor</td><td>Rack-mounted gateway retained the network identity</td><td>Calibration no longer forced network reprovisioning</td></tr>
+                    <tr><td>Deprecated embedded interface</td><td>Modern, accessible serial-to-Ethernet hardware</td><td>More reliable configuration and easier replacement</td></tr>
+                    <tr><td>One IOC served every monitor</td><td>Independent truncated IOC instances</td><td>Restarts and faults affected a smaller scope</td></tr>
+                    <tr><td>Consistency depended on a shared process</td><td>Common driver and deployment template</td><td>Standard behavior without a common runtime failure</td></tr>
+                    <tr><td>Device values were embedded in deployments</td><td>Environment-driven instance configuration</td><td>Repeatable provisioning with explicit differences</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Commission the Failure Behavior, Too</h2>
+            <p>
+                Successful commissioning cannot stop when the device produces a plausible reading. The important
+                tests include loss and restoration of serial communications, gateway disconnect and reconnect, IOC
+                restart, virtual-host recovery, stale data, invalid alarm state, incorrect endpoint configuration,
+                command/readback disagreement where applicable, and replacement after calibration.
+            </p>
+            <p>
+                This is where failure modes and effects analysis is useful. For each credible failure, the team
+                asks what the operator will see, how the condition will be distinguished from neighboring faults,
+                what evidence the IOC and archive will retain, what recovery is permitted, and how much of the
+                system is affected. The modernization reduced both the probability of repeated provisioning
+                failures and the consequence of an IOC-level interruption.
+            </p>
+            <p>
+                The supervisory EPICS architecture described here should not be confused with an independent
+                credited protective function. The exact safety role of radiation-monitoring equipment and its
+                interfaces depends on the facility design, authorization basis, and approved procedures. The
+                improvement documented here concerns operational communications, maintainability, fault isolation,
+                and availability within that governed system.
+            </p>
+
+            <h2>A Controls Project Became a Workforce Project</h2>
+            <p>
+                I involved several interns in this work. The project gave them something more valuable than an
+                isolated programming exercise: a real system with hardware boundaries, serial communications,
+                network dependencies, EPICS records and drivers, virtualized services, configuration management,
+                commissioning, and operating consequences.
+            </p>
+            <p>
+                They learned that engineering is not finished when software compiles. A useful implementation must
+                survive calibration cycles, restarts, replacements, handoffs, and troubleshooting by someone who
+                did not write it. Several of those students later obtained jobs at Brookhaven. Their progression
+                reinforced a lesson I have carried into technical leadership: modernization projects should leave
+                behind both a more maintainable system and more capable people.
+            </p>
+
+            <h2>The Broader Pattern</h2>
+            <p>
+                This architecture applies well beyond radiation monitors. Whenever replaceable field equipment
+                carries its own network identity, routine maintenance can accidentally become a networking event.
+                Whenever many devices share one supervisory process, a convenient implementation can become an
+                oversized failure domain. Whenever every deployment is handwritten, apparent flexibility becomes
+                configuration drift.
+            </p>
+            <p>
+                The alternative is a layered contract: keep durable infrastructure stable, make field equipment
+                replaceable, standardize reusable software, inject explicit instance configuration, and isolate
+                runtime failures to the smallest practical unit. That is not merely an EPICS technique. It is a
+                general method for making complex systems easier to operate, commission, and trust.
+            </p>
+
+            <div class="engineering-insight">
+                <p>ENGINEERING INSIGHT</p>
+                <p>Reliability improved when the instrument lifecycle, network lifecycle, and IOC lifecycle could change independently—while a common template kept their interfaces consistent.</p>
+            </div>
+
+            <p class="article-bio">
+                Rob Rainer is Managing Director &amp; Principal Engineer at Control Lattice Systems. He has more
+                than twenty years of experience spanning accelerator operations, EPICS controls, scientific
+                instrumentation, resilient infrastructure, electrical engineering, commissioning, and technical
+                leadership, including over fifteen years at Brookhaven National Laboratory's NSLS-II.
+            </p>
+
+            <div class="article-sources">
+                <h3>Notes and references</h3>
+                <ul>
+                    <li><a href="https://docs.epics-controls.org/" target="_blank" rel="noopener noreferrer">EPICS Documentation</a> — records, IOCs, Channel Access, PV Access, and operational tooling.</li>
+                    <li><a href="https://epics-modules.github.io/asyn/" target="_blank" rel="noopener noreferrer">EPICS asynDriver Documentation</a> — interfaces and support patterns for communicating with control-system devices.</li>
+                    <li>The system history, troubleshooting method, modernization decisions, commissioning observations, and mentoring outcomes described here are drawn from the author's direct professional experience. Specific network-interface and safety-system details are intentionally limited.</li>
+                </ul>
+            </div>
+
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+    <div id="footer"></div>
+</body>
+</html>
