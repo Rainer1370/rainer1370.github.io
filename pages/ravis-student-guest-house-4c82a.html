@@ -52,7 +52,7 @@
       {id:9,floor:"Third floor",rate:975,daily:31.45,notes:["Newly renovated","Shared third-floor kitchen","Shared bathroom"],blocked:[["2026-09-19","2026-10-17"],["2026-12-12","2027-01-10"]]},
       {id:10,floor:"Third floor",rate:975,daily:31.45,notes:["Newly renovated","Shared third-floor kitchen","Shared bathroom"],blocked:[["2026-09-20","2026-10-17"]]}
     ];
-    const AVAILABILITY_API_URL="";
+    const AVAILABILITY_API_URL="https://script.google.com/macros/s/AKfycbzU8V2_R8RlHVT1XnvLHiQAsp5e83glM-oW5ow6gehxmOJHk0H44m79HJ2Qy-KZowzd/exec";
     const SNAPSHOT_VERIFIED="September 21, 2026";
     const cards=document.querySelector("#room-cards"),results=document.querySelector("#room-results"),choice=document.querySelector("#room-choice");
     const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:n%1?2:0}).format(n);
