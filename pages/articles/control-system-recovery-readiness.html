@@ -76,7 +76,15 @@
 <h2>Recovery is also a team responsibility</h2>
 <p>Controls, infrastructure, equipment, and operations teams each see a different part of the event. A host administrator may verify that a virtual machine is healthy. A controls engineer may verify IOC behavior. An operator may recognize that the physical process has not settled. An integrated acceptance plan has to connect those perspectives and assign responsibility for resolving conflicts.</p>
 <p>A procedure is particularly useful when someone other than its author can explain what is blocking recovery, gather the required evidence, and carry out the permitted next step. That is a practical test of both the design and the knowledge transferred with it.</p>
-<p>This fits the approach I explore in <em>The Observable Machine</em> and through Control Lattice Systems: make system behavior understandable enough that people can make defensible engineering decisions. Recovery is a good place to apply that discipline. The machine should be able to show what it knows about its present state, what remains uncertain, and why it is ready to proceed.</p>
+<p>This fits the approach I explore in <a href="https://controllattice.com/observable-machine#book" target="_blank" rel="noopener noreferrer"><em>The Observable Machine</em></a> and through <a href="https://controllattice.com" target="_blank" rel="noopener noreferrer">Control Lattice Systems</a>: make system behavior understandable enough that people can make defensible engineering decisions. Recovery is a good place to apply that discipline. The machine should be able to show what it knows about its present state, what remains uncertain, and why it is ready to proceed.</p>
+            <div class="article-sources" aria-labelledby="control-lattice-resources">
+                <h3 id="control-lattice-resources">Related Control Lattice resources</h3>
+                <ul>
+                    <li><a href="https://controllattice.com/observable-machine#review" target="_blank" rel="noopener noreferrer">Machine Observability Review</a> — a scoped assessment of alarms, sequence state, timestamps, operator displays, logs, and difficult restarts.</li>
+                    <li><a href="https://controllattice.com/observable-machine#checklist" target="_blank" rel="noopener noreferrer">Free Machine Failure Evidence Checklist</a> — capture useful operating evidence before resetting, restarting, or changing a system.</li>
+                    <li><a href="https://controllattice.com/products#commissioning-toolkit" target="_blank" rel="noopener noreferrer">Controls Commissioning Toolkit</a> — organize checkout, acceptance, alarm, interlock, punch-list, and signoff records.</li>
+                </ul>
+            </div>
             <div class="article-sources">
                 <h3>Reference and related reading</h3>
                 <ol><li id="reference-1"><a href="https://www.slac.stanford.edu/grp/lcls/controls/global/doc/epics-modules/R7.0.2-1.0/autosave/R5.8-1.0.0/documentation/autoSaveRestore.html" target="_blank" rel="noopener noreferrer">EPICS autosave documentation</a> — sections on boot-time and runtime restoration and restore passes.</li></ol>
@@ -88,3 +96,4 @@
     <div id="footer"></div>
 </body>
 </html>
+
