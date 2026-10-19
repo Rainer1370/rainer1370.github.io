@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The System Is Back Online. Is It Ready to Run? | Rob Rainer</title>
+    <meta name="description" content="Why reconnecting a control system does not establish readiness to operate: state reconciliation, fresh measurements, EPICS restoration, recovery sequencing, and commissioning evidence.">
+    <link rel="canonical" href="https://rainer1370.com/pages/articles/control-system-recovery-readiness.html">
+    <meta property="og:title" content="The System Is Back Online. Is It Ready to Run?">
+    <meta property="og:description" content="Why reconnecting a control system does not establish readiness to operate: state reconciliation, fresh measurements, EPICS restoration, recovery sequencing, and commissioning evidence.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rainer1370.com/pages/articles/control-system-recovery-readiness.html">
+    <meta property="article:published_time" content="2026-10-19">
+    <meta name="author" content="Rob Rainer">
+    <link rel="stylesheet" href="/css/styles.css?v=20260802-4">
+    <link rel="stylesheet" href="/css/articles.css?v=20260802-4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "The System Is Back Online. Is It Ready to Run?", "description": "Why reconnecting a control system does not establish readiness to operate: state reconciliation, fresh measurements, EPICS restoration, recovery sequencing, and commissioning evidence.", "datePublished": "2026-10-19", "dateModified": "2026-10-19", "author": {"@type": "Person", "name": "Rob Rainer", "url": "https://rainer1370.com/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://rainer1370.com/pages/articles/control-system-recovery-readiness.html"}, "inLanguage": "en-US", "keywords": ["EPICS", "Controls", "Reliability", "Commissioning", "Systems Engineering"]}</script>
+    <style>
+        .recovery-steps{padding-left:1.5rem;color:#294650;font-size:17px;line-height:1.78}
+        .recovery-steps li{padding-left:.35rem;margin-bottom:1rem}
+        .recovery-table-wrap{margin:1.5rem 0;max-width:100%}
+        .recovery-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px;line-height:1.6;color:#294650}
+        .recovery-table caption{text-align:left;font-weight:700;margin-bottom:.65rem;color:var(--ink)}
+        .recovery-table th,.recovery-table td{border:1px solid var(--line,#c6d5d1);padding:.85rem;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+        .recovery-table th{background:#e8f1ee;color:var(--ink)}
+        .recovery-table th:first-child{width:40%}
+        .recovery-table tbody tr:nth-child(even){background:#f3f7f5}
+        @media(max-width:720px){.recovery-steps{font-size:16px}.recovery-table{font-size:14px}.recovery-table th,.recovery-table td{padding:.6rem}}
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Managing Director &amp; Principal Engineer · Control Lattice Systems</em></p>
+            <span class="article-category">Technical Article · Controls · Reliability</span>
+            <h1>The System Is Back Online. Is It Ready to Run?</h1>
+            <p class="article-subtitle">Engineering recovery and restart readiness in control systems</p>
+            <p class="article-date">Published <time datetime="2026-10-19">October 19, 2026</time></p>
+            <div class="key-points"><p class="key-points-label">KEY POINTS</p><ul><li>Reconnection establishes interface availability; readiness requires evidence about the present machine.</li><li>Saved settings, retained controller state, and physical equipment state must be reconciled.</li><li>Recovery needs explicit transitions, command authority, timeouts, and acceptance criteria.</li><li>Commissioning should test interrupted recovery and partial failures as well as successful startup.</li></ul></div>
+        </section>
+        <section class="project article-body">
+            <p>A control-system restart can restore communications while leaving important questions unanswered. Are the measurements current? Does the restored configuration match the equipment? Which controller has permission to act? I think recovery deserves the same engineering attention as normal operation, because the transition back into service is part of the machine’s behavior.</p>
+<h2>A green display can hide an unfinished recovery</h2>
+<p>Consider an illustrative cooling loop supporting a precision instrument. The supervisory input/output controller, or IOC, restarts while the local controller remains powered. A few seconds later, the process variables reconnect. Temperatures appear on the display, the pump reports running, and the communications alarm clears.</p>
+<p>Meanwhile, maintenance has changed a valve position. One temperature value has not been refreshed since the interruption. The IOC restores a previous setpoint, while the local controller retains a different operating mode. Each component can be functioning as designed while the combined system is still unready to resume its previous task.</p>
+<p>This example is hypothetical, but it exposes a useful design question: <strong>what evidence must exist between reconnection and permission to operate?</strong> A reconnect event answers whether an interface is available. It does not, by itself, reconcile the physical process with the software’s assumptions.</p>
+<h2>Recovery starts with what survived</h2>
+<p>Different failures leave different parts of a system intact. An IOC restart may leave a motor controller executing its last command. A controller power cycle may lose position knowledge while the IOC retains a saved value. A network interruption may hide equipment that has continued running normally. A host failure may interrupt several supervisory services at once.</p>
+<p>Those cases need different responses. Before designing a restart sequence, I would identify which component failed, what state could have changed during the interruption, and which information remains authoritative. If the cause or scope is uncertain, the recovery logic should expose that uncertainty and withhold the affected authority until it is resolved.</p>
+<p>The appropriate holding condition depends on the process. In some systems, essential cooling must continue throughout a supervisory failure. In others, particular commands must remain inhibited. Recovery design should preserve the behavior established by the hazard analysis and local protection design, including any independent safety functions.</p>
+<h2>Saved settings describe an earlier state</h2>
+<p>Persistence is useful, but its contents need an explicit meaning. A saved temperature target records a previous request. A saved motor coordinate records a value associated with a previous position reference. Neither establishes the equipment’s present condition.</p>
+<p>EPICS autosave makes this distinction concrete. Its documentation separates restoration before record initialization from restoration afterward, and explains that runtime restoration can have different processing effects from boot-time restoration. The restore phase and device-support behavior therefore matter; a save file is not a complete recovery policy. <sup><a href="#reference-1" aria-label="Reference 1">[1]</a></sup></p>
+<p>For each persisted value, I would ask whether startup should restore it, read it from the controller, compare it against an approved configuration, or require a deliberate operator action. Restarting a service should not silently replay a command whose original context has expired.</p>
+<h2>Measurements must earn their place again</h2>
+<p>Reconnection should trigger an assessment of measurement validity. A plausible number needs a known source, acceptable quality, and freshness appropriate to the decision it supports. The freshness threshold for a slow thermal trend may differ substantially from the threshold for a fast permissive.</p>
+<p>A recently received message can contain an old measurement. A recently assigned timestamp may describe record processing rather than a new physical acquisition. When comparing timestamps from different devices, the design also has to account for clock alignment and timestamp meaning. These details determine whether the recovery sequence is evaluating the current machine or a convincing picture of its past.</p>
+<p>In the cooling example, “pump running” alone might be insufficient to release the instrument. The approved sequence could require valid flow feedback, an acceptable temperature condition maintained for a defined interval, the expected controller mode, and confirmation that relevant maintenance restrictions have been cleared. Exact thresholds and durations belong to the equipment requirements and commissioning evidence.</p>
+<h2>Make the transition into operation explicit</h2>
+<p>I would describe recovery as a small sequence with observable entry conditions, timeouts, and a defined response when a condition fails. One possible structure is:</p>
+<ol class="recovery-steps">
+<li><strong>Establish the holding condition.</strong> Preserve required local services and protections. Restrict affected supervisory commands according to the approved recovery policy.</li>
+<li><strong>Reestablish trustworthy observation.</strong> Identify the connected equipment and obtain measurements with acceptable quality and freshness.</li>
+<li><strong>Reconcile configuration and physical state.</strong> Compare the active configuration, controller mode, command/readback relationship, and equipment state. Resolve discrepancies before proceeding.</li>
+<li><strong>Declare readiness.</strong> Evaluate the required evidence and identify the authority permitted to release operation. Display any remaining blocking conditions.</li>
+<li><strong>Resume and verify.</strong> Resume under the approved procedure and confirm the expected process response. A failed check returns the system to the defined holding or fault condition.</li>
+</ol>
+<p>This is an illustrative supervisory sequence, not a replacement for machine protection or a facility-specific safety design. Its purpose is to make the return to operation inspectable. If flow feedback becomes stale during validation, for example, readiness must be reevaluated rather than carried forward from an earlier successful check.</p>
+<h2>Commission the interrupted recovery</h2>
+<p>A successful cold start proves only one path through the design. Recovery testing should also examine partial failures and interruptions. These tests belong in simulation, on a suitable test system, or within approved commissioning arrangements for the real equipment.</p>
+<div class="recovery-table-wrap"><table class="recovery-table"><caption>Recovery commissioning test cases</caption><thead><tr><th scope="col">Test condition</th><th scope="col">Expected evidence or behavior</th></tr></thead><tbody><tr><td>IOC restarts while the local controller remains active</td><td>Reconcile retained mode and output state; do not assume the equipment stopped.</td></tr><tr><td>Communications return with stale measurement data</td><td>Keep the affected readiness condition unproven until valid fresh data arrives.</td></tr><tr><td>Saved configuration disagrees with approved configuration</td><td>Expose the discrepancy and apply the defined resolution policy.</td></tr><tr><td>A second failure occurs during validation</td><td>Return to the defined holding condition and repeat the checks that lost validity.</td></tr><tr><td>A command issued before the interruption arrives late</td><td>Reject expired or invalid-context commands through the designed command interface.</td></tr><tr><td>Operation resumes but the process response is wrong</td><td>Detect the failed acceptance condition and execute the approved response.</td></tr></tbody></table></div>
+<p>The record of a recovery should explain which configuration was active, what failed, which checks passed, and why operation was released. Where acknowledgement or authorization is required, it should record who acted. That evidence helps the next engineer distinguish a deliberate recovery from a machine that merely began responding again.</p>
+<h2>Recovery is also a team responsibility</h2>
+<p>Controls, infrastructure, equipment, and operations teams each see a different part of the event. A host administrator may verify that a virtual machine is healthy. A controls engineer may verify IOC behavior. An operator may recognize that the physical process has not settled. An integrated acceptance plan has to connect those perspectives and assign responsibility for resolving conflicts.</p>
+<p>A procedure is particularly useful when someone other than its author can explain what is blocking recovery, gather the required evidence, and carry out the permitted next step. That is a practical test of both the design and the knowledge transferred with it.</p>
+<p>This fits the approach I explore in <em>The Observable Machine</em> and through Control Lattice Systems: make system behavior understandable enough that people can make defensible engineering decisions. Recovery is a good place to apply that discipline. The machine should be able to show what it knows about its present state, what remains uncertain, and why it is ready to proceed.</p>
+            <div class="article-sources">
+                <h3>Reference and related reading</h3>
+                <ol><li id="reference-1"><a href="https://www.slac.stanford.edu/grp/lcls/controls/global/doc/epics-modules/R7.0.2-1.0/autosave/R5.8-1.0.0/documentation/autoSaveRestore.html" target="_blank" rel="noopener noreferrer">EPICS autosave documentation</a> — sections on boot-time and runtime restoration and restore passes.</li></ol>
+                <p>Related portfolio essay: <a href="/pages/articles/radiation-monitor-controls-modernization.html">One Device, One Failure Domain: Modernizing an EPICS Radiation-Monitoring System</a>.</p>
+            </div>
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+    <div id="footer"></div>
+</body>
+</html>
