@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Center BMS Digital Twin Reference Architecture | Robert Rainer</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 780px; margin: 2.5em auto; padding: 0 1.2em; line-height: 1.6; color: #1a1a1a; }
+  h1 { font-size: 1.7em; line-height: 1.25; }
+  h2 { font-size: 1.25em; margin-top: 1.8em; }
+  figure { margin: 1.5em 0; }
+  figure img { width: 100%; height: auto; border: 1px solid #d5dee1; border-radius: 8px; }
+  figcaption { font-size: .9em; color: #555; margin-top: .5em; }
+  .note { background: #f2f2f2; border-left: 4px solid #999; padding: .8em 1em; margin: 1.5em 0; font-size: .95em; }
+  .live { display: inline-block; background: #0a7d2c; color: #fff; font-size: .8em; padding: .2em .6em; border-radius: 1em; vertical-align: middle; }
+  ol, ul { padding-left: 1.3em; }
+  li { margin: .35em 0; }
+  a { color: #0b5fff; }
+  .hero { background: linear-gradient(rgba(11,49,66,.62), rgba(11,49,66,.62)), url('data-center-hero.jpg') center/cover no-repeat; color: #fff; border-radius: 12px; padding: 3.2em 1.6em; margin: 1.5em 0; }
+  .hero h1 { margin: 0 0 .3em; }
+  .hero p { color: #e8f1f4; margin: .4em 0; }
+  .credit { font-size: .8em; color: #888; margin-top: -.8em; }
+  footer { margin-top: 2em; font-size: .9em; color: #555; }
+</style>
+</head>
+<body>
+<header class="hero">
+<h1>Data Center BMS Digital Twin Reference Architecture</h1>
+<p><strong>A public technical preview by Robert Rainer</strong></p>
+</header>
+<p class="credit">Photo: data center interior — <a href="https://archilabs.ai/categories/data-centers">ArchiLabs</a></p>
+<p>This page presents a facility-scale controls and digital-twin architecture for data-center operations. It is an independent engineering concept developed by Robert Rainer using public information, established scientific-controls practice, and original systems-engineering work.</p>
+<p>It is not affiliated with, endorsed by, or representative of the internal systems of DataOne or any other data-center operator.</p>
+
+<figure>
+  <img src="data-center-bms-reference-architecture.svg" alt="Layered reference architecture connecting data center plant systems to deterministic control, EPICS supervisory integration, data context, digital twin services, and operator workflows.">
+  <figcaption>Data Center BMS Digital Twin Reference Architecture — seven layers from physical plant to operator workflows, with governance across all of them.</figcaption>
+</figure>
+
+<h2>The idea</h2>
+<p>A useful data-center digital twin cannot be a single thermal model sitting beside the facility. It must be connected to the operational control system through governed interfaces, shared identifiers, trustworthy time alignment, configuration control, and explicit boundaries between supervisory control, deterministic control, and safety.</p>
+<p>This reference architecture uses EPICS as a supervisory integration fabric while leaving fast control and independent protection in the layers where they belong. The digital twin is treated as a lifecycle capability: it can begin in simulation, support controls development and virtual commissioning, then evolve into replay, model comparison, diagnostics, optimization, and operator decision support.</p>
+
+<h2>Public architecture</h2>
+<p>The public design describes these layers:</p>
+<ol>
+  <li>Physical plant, instruments, actuators, and utility systems — chillers, CRAH/CRAC units, UPS, generators, racks, power distribution</li>
+  <li>Device interfaces, gateways, and subsystem IOCs — BACnet / Modbus, EPICS drivers, sensors, actuators, field controllers</li>
+  <li>Deterministic control and independent protection — BMS controllers, WebCTRL, sequences of operation, life safety</li>
+  <li>EPICS supervisory integration and a governed PV namespace — subsystem state, commands, health</li>
+  <li>Timing, event identity, configuration, archiving, and data services</li>
+  <li>Digital-twin, replay, estimation, and optimization services</li>
+  <li>Operator, engineering, and research workflows — Phoebus, web tools, notebooks</li>
+</ol>
+<p>The system is intentionally divided into operational zones so that simulation or analytics cannot silently become a safety authority.</p>
+
+<h2>Live demonstration <span class="live">LIVE</span></h2>
+<p>A working demonstrator of layers 1, 2, 4, and 7 runs now: a software IOC serves synthetic PVs for a data-center cooling plant, air handlers, power chain, environmental zones, and a 24-rack thermal map, rendered in the browser as the same Phoebus Display Builder screens used on the desktop. The cooling-anomaly scenario cycles about every 20 seconds, so watch the chilled-water temperature and the scenario label change.</p>
+<p><strong><a href="https://rainer1370.com/dataone-bms/">Open the live demo — rainer1370.com/dataone-bms</a></strong></p>
+<p>Displays: Overview, Cooling, Air Handlers, Power, Zones &amp; Alarms, Rack Thermal Map, PLC / EPICS Architecture.</p>
+<div class="note"><strong>Note:</strong> All values in the demonstrator are synthetic, generated by a software IOC for demonstration only. Nothing here is connected to a live building, BMS, or control system, and the displays are read-only — no control actions are possible from this page. The demonstrator is not a safety basis, operating procedure, or procurement specification.</div>
+
+<h2>What is public — and what is reserved</h2>
+<p>This technical preview publishes the system structure, engineering principles, lifecycle, and collaboration model. Deployment-grade details are intentionally withheld, including exact device inventories, addresses, credentials, protection thresholds, facility-specific network maps, detailed PV databases, vendor BOMs and cost models, and implementation-specific automation.</p>
+
+<h2>Collaboration</h2>
+<p>I am interested in collaborating with data-center operators, facilities teams, laboratories, universities, and engineering teams that want to evaluate, adapt, or deploy this architecture. Engagement can begin with an architecture workshop, a bounded subsystem pilot, or a simulation-to-IOC integration demonstrator.</p>
+<p>Contact: <strong>rainer1370@gmail.com</strong><br>
+Portfolio: <strong><a href="https://rainer1370.com/">rainer1370.com</a></strong><br>
+GitHub: <strong><a href="https://github.com/Rainer1370">Rainer1370</a></strong></p>
+
+<h2>Authorship and permitted use</h2>
+<p>Copyright © 2026 Robert Rainer. All rights reserved.</p>
+<p>This page is published for technical review, professional discussion, and collaboration. No license is granted for commercial implementation, redistribution, or derivative deployment. Contact the author to discuss evaluation or deployment rights.</p>
+
+<h2>Status</h2>
+<p><strong>Public technical preview — November 9, 2026.</strong> This is a reference architecture, not a certified design, safety basis, operating procedure, or procurement specification.</p>
+
+<footer>
+  <p>Robert Rainer — Control Lattice Systems · <a href="https://rainer1370.com/">rainer1370.com</a> · Companion piece to the <a href="https://github.com/Rainer1370/fusion-digital-twin-dcs">Fusion Digital Twin DCS Reference Architecture</a></p>
+</footer>
+</body>
+</html>
