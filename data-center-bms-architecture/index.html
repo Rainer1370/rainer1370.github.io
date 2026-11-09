@@ -64,7 +64,7 @@
 <h2>How it's built — Phoebus &amp; EPICS</h2>
 <p>The displays are built with <strong>Phoebus</strong> (Control System Studio) Display Builder: seven <code>.bob</code> files — Overview, Cooling, Air Handlers, Power, Zones &amp; Alarms, Rack Thermal Map, and PLC / EPICS Architecture.</p>
 <p>Live values come from <strong>EPICS 7 Channel Access</strong>: a caproto Python soft IOC serves a governed <code>D1:</code> PV namespace — 82 PV-bound widgets plus 24 rack-temperature PVs. The cooling-anomaly scenario cycles about every 20 seconds, so the chilled-water temperature, delta-T, and alarm state move together the way a real fault would present.</p>
-<p>On the web, ORNL's Display Builder Web Runtime (DBWR R1) renders the same <code>.bob</code> files unchanged in the browser, and PVWS R4 streams the live values over WebSocket. The web demo is read-only by design — no control actions are possible from the page.</p>
+<p>On the web, ORNL's Display Builder Web Runtime (DBWR R1) renders the same <code>.bob</code> files unchanged in the browser, and PVWS R4 streams the live values over WebSocket. Both run as web applications inside Tomcat 9 on Java 21, and Tailscale Funnel publishes Tomcat to the public web — so the chain is: DBWR makes the HTML, PVWS makes it live, Tomcat hosts them, and Funnel makes them public. The web demo is read-only by design — no control actions are possible from the page.</p>
 <p>The integration boundary is the same one this architecture draws: in a real facility, existing PLCs (Allen-Bradley, Siemens) interface into EPICS through drivers. The demo shows that interface layer only — the values are synthetic and nothing is connected to a live BMS.</p>
 
 <h2>What is public — and what is reserved</h2>
