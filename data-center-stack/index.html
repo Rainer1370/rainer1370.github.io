@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Center BMS — System Stack | Robert Rainer</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 780px; margin: 2.5em auto; padding: 0 1.2em; line-height: 1.6; color: #1a1a1a; }
+  h1 { font-size: 1.7em; line-height: 1.25; }
+  h2 { font-size: 1.25em; margin-top: 1.8em; }
+  .hero { background: linear-gradient(rgba(11,49,66,.62), rgba(11,49,66,.62)), url('data-center-stack-hero.jpg') center/cover no-repeat; color: #fff; border-radius: 12px; padding: 3.2em 1.6em; margin: 1.5em 0; }
+  .hero h1 { margin: 0 0 .3em; }
+  .hero p { color: #e8f1f4; margin: .4em 0; }
+  .credit { font-size: .8em; color: #888; margin-top: -.8em; }
+  .note { background: #f2f2f2; border-left: 4px solid #999; padding: .8em 1em; margin: 1.5em 0; font-size: .95em; }
+  .live { display: inline-block; background: #0a7d2c; color: #fff; font-size: .8em; padding: .2em .6em; border-radius: 1em; vertical-align: middle; }
+  .layer { border-radius: 10px; padding: .9em 1.2em; margin: .6em 0; color: #fff; }
+  .layer b { font-size: 1.05em; }
+  .layer span { display: block; font-size: .92em; opacity: .92; margin-top: .15em; }
+  .l7 { background: #8d2b7d; } .l6 { background: #d85c2a; } .l5 { background: #d89a13; }
+  .l4 { background: #4b8f3a; } .l3 { background: #188675; } .l2 { background: #1876a3; } .l1 { background: #344bb3; }
+  .flow { background: #0b3142; color: #fff; border-radius: 10px; padding: 1em 1.2em; margin: 1.5em 0; font-size: 1.02em; text-align: center; line-height: 1.9; }
+  .flow b { color: #bdd63c; }
+  ol, ul { padding-left: 1.3em; }
+  li { margin: .35em 0; }
+  a { color: #0b5fff; }
+  code { background: #eef1f2; padding: .1em .35em; border-radius: 4px; font-size: .92em; }
+  footer { margin-top: 2em; font-size: .9em; color: #555; }
+</style>
+</head>
+<body>
+<header class="hero">
+<h1>Data Center BMS — System Stack</h1>
+<p><strong>What actually runs the live demo — and what it would take to run a facility.</strong></p>
+</header>
+<p class="credit">Photo: data center aisle — <a href="https://net-serve.org/">net-serve.org</a></p>
+<p>This page is the companion to the <a href="https://rainer1370.com/data-center-bms-architecture/">Data Center BMS Digital Twin Reference Architecture</a>. Where that page describes the design, this one describes the running system: every layer of the stack behind the live demonstration, what each piece does, and what would change to operate a real facility with it.</p>
+
+<h2>The running stack <span class="live">LIVE</span></h2>
+<div class="layer l7"><b>7 &nbsp;Browser — Phoebus Display Builder Web Runtime</b><span>Any modern browser, nothing to install. The same seven .bob displays as the desktop Phoebus demo, rendered unchanged.</span></div>
+<div class="layer l6"><b>6 &nbsp;Public access — Tailscale Funnel</b><span>HTTPS on rain-meerkat.taildd0ff9.ts.net, certificate issued automatically. Works behind CGNAT with no open firewall ports.</span></div>
+<div class="layer l5"><b>5 &nbsp;Web services — Apache Tomcat 9 + Java 21</b><span>DBWR R1 and PVWS R4 (ORNL nightly builds). PVWS streams live values over WebSocket; the web demo is read-only by design.</span></div>
+<div class="layer l4"><b>4 &nbsp;Supervisory integration — EPICS 7 Channel Access</b><span>Governed D1: PV namespace. 82 PV-bound widgets plus 24 rack-temperature PVs, all served as Channel Access process variables.</span></div>
+<div class="layer l3"><b>3 &nbsp;Simulation — caproto Python soft IOC</b><span>A software IOC generates synthetic values, including the cooling-anomaly scenario that cycles about every 20 seconds.</span></div>
+<div class="layer l2"><b>2 &nbsp;Device interfaces — BACnet / Modbus + EPICS drivers</b><span>The integration boundary. In a real facility, existing PLCs (Allen-Bradley, Siemens) interface here through drivers. Not connected in the demo.</span></div>
+<div class="layer l1"><b>1 &nbsp;Physical plant — chillers, CRAH, UPS, generators, racks</b><span>Synthetic in the demo. This is the facility the stack is built to manage.</span></div>
+
+<h2>How it fits together</h2>
+<div class="flow">Soft IOC serves PVs &nbsp;<b>→</b>&nbsp; PVWS streams them over WebSocket &nbsp;<b>→</b>&nbsp; DBWR renders the .bob displays &nbsp;<b>→</b>&nbsp; Funnel publishes them &nbsp;<b>→</b>&nbsp; your browser</div>
+<p>The displays, the PV namespace, and the simulator are versioned together in a private repository, so the demo on screen always matches the code that produces it. The .bob files the web server shows are copies of the repository files; editing a display means re-copying it to the server.</p>
+
+<h2>From demo to facility</h2>
+<p>What changes to operate a real data center with this stack:</p>
+<ol>
+  <li>Replace the simulator IOC with real device IOCs and drivers — BACnet gateway to the existing WebCTRL/BMS, Modbus to meters and UPS, and field-controller interfaces.</li>
+  <li>Add the deterministic layer: sequences of operation, chiller staging, alarm management, and the facility's own protection and life-safety systems, which stay independent of the twin.</li>
+  <li>Add data services: archiving, trending, configuration control, and event identity, so every value carries its time, source, and calibration.</li>
+  <li>Keep the twin read-only at first. Advisory outputs — replay, state estimation, optimization suggestions — are reviewed by operators before anything changes in the plant.</li>
+  <li>Expand authority only after verification and operational acceptance, with bounded authority, safe fallback behavior, and cybersecurity review.</li>
+</ol>
+
+<h2>Running it</h2>
+<p>The stack runs on a single Ubuntu machine and restarts in this order: the IOC (<code>python simulator/dataone_ioc.py --interfaces 0.0.0.0</code>), then Tomcat (<code>bin/startup.sh</code>), then the tunnel (<code>tailscale funnel 8080</code>). Everything is user-level — no sudo, no open firewall ports.</p>
+<p><strong><a href="https://rainer1370.com/dataone-bms/">Open the live demo — rainer1370.com/dataone-bms</a></strong><br>
+<strong><a href="https://rainer1370.com/data-center-bms-architecture/">Read the reference architecture</a></strong></p>
+<div class="note"><strong>Note:</strong> All values in the demonstrator are synthetic, generated by a software IOC for demonstration only. Nothing here is connected to a live building, BMS, or control system, and the displays are read-only — no control actions are possible from this page. This page is not a safety basis, operating procedure, or procurement specification.</div>
+
+<h2>Collaboration</h2>
+<p>I am interested in collaborating with data-center operators, facilities teams, laboratories, universities, and engineering teams that want to evaluate, adapt, or deploy this architecture. Engagement can begin with an architecture workshop, a bounded subsystem pilot, or a simulation-to-IOC integration demonstrator.</p>
+<p>Contact: <strong>rainer1370@gmail.com</strong><br>
+Portfolio: <strong><a href="https://rainer1370.com/">rainer1370.com</a></strong><br>
+GitHub: <strong><a href="https://github.com/Rainer1370">Rainer1370</a></strong></p>
+
+<h2>Status</h2>
+<p><strong>Public technical preview — November 9, 2026.</strong> This is a reference architecture and a working demonstrator, not a certified design, safety basis, operating procedure, or procurement specification.</p>
+
+<footer>
+  <p>Robert Rainer — Control Lattice Systems · <a href="https://rainer1370.com/">rainer1370.com</a> · Companion to the <a href="https://rainer1370.com/data-center-bms-architecture/">Data Center BMS Digital Twin Reference Architecture</a> and the <a href="https://github.com/Rainer1370/fusion-digital-twin-dcs">Fusion Digital Twin DCS Reference Architecture</a></p>
+</footer>
+</body>
+</html>
