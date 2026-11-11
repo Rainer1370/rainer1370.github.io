@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Screen, Two Places: A Data Center BMS Twin Built on Phoebus and EPICS | Rob Rainer</title>
+    <meta name="description" content="A data center BMS digital twin reference architecture with a working demonstrator: the same Phoebus display runs on the desktop and in the browser, read-only by design, with a physically coherent fault scenario for teaching operators and engineers.">
+    <link rel="canonical" href="https://rainer1370.com/pages/articles/one-screen-two-places.html">
+    <meta property="og:title" content="One Screen, Two Places: A Data Center BMS Twin Built on Phoebus and EPICS">
+    <meta property="og:description" content="A data center BMS digital twin reference architecture with a working demonstrator: the same Phoebus display runs on the desktop and in the browser, read-only by design, with a physically coherent fault scenario for teaching operators and engineers.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rainer1370.com/pages/articles/one-screen-two-places.html">
+    <meta property="article:published_time" content="2026-11-11">
+    <meta name="author" content="Rob Rainer">
+    <link rel="stylesheet" href="/css/styles.css?v=20260802-4">
+    <link rel="stylesheet" href="/css/articles.css?v=20260802-4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/js/scripts.js" defer></script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "One Screen, Two Places: A Data Center BMS Twin Built on Phoebus and EPICS", "description": "A data center BMS digital twin reference architecture with a working demonstrator: the same Phoebus display runs on the desktop and in the browser, read-only by design, with a physically coherent fault scenario for teaching operators and engineers.", "datePublished": "2026-11-11", "dateModified": "2026-11-11", "author": {"@type": "Person", "name": "Rob Rainer", "url": "https://rainer1370.com/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://rainer1370.com/pages/articles/one-screen-two-places.html"}, "inLanguage": "en-US", "keywords": ["EPICS", "Phoebus", "Digital Twin", "BMS", "Data Center", "Controls"]}</script>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <section class="project article-header">
+            <p class="article-byline"><strong>Rob Rainer</strong><br><em>Managing Director &amp; Principal Engineer · Control Lattice Systems</em></p>
+            <span class="article-category">Technical Article · Controls · Digital Twin</span>
+            <h1>One Screen, Two Places: A Data Center BMS Twin Built on Phoebus and EPICS</h1>
+            <p class="article-subtitle">A data center BMS digital twin reference architecture, with a working demonstrator</p>
+            <p class="article-date">Published <time datetime="2026-11-11">November 11, 2026</time></p>
+            <div class="key-points"><p class="key-points-label">KEY POINTS</p><ul><li>One screen, two runtimes: the same Phoebus .bob file runs on the desktop and in the browser, unchanged — no second UI to drift out of sync.</li><li>The twin begins read-only, and protection stays independent. Supervision travels; control stays with the plant.</li><li>A cooling-anomaly scenario makes the parts fail together, the way a real fault presents — chilled water, air handlers, then racks.</li><li>Everything is synthetic and read-only. It is a teaching instrument and a design document, not a safety basis.</li></ul></div>
+        </section>
+        <section class="project article-body">
+            <p>I published a proof-of-concept design this week: a data center BMS digital twin reference architecture, with a working demonstrator behind it. It is not a product, not a safety basis, and not connected to any live building. It is a way of showing, with running screens instead of slides, how a facility&rsquo;s cooling, power, and environmental systems can be supervised from one coherent view &mdash; and how that view can travel from a control-room workstation to a browser without being rebuilt.</p>
+            <ul>
+                <li>Reference architecture: <a href="https://rainer1370.com/data-center-bms-architecture/">rainer1370.com/data-center-bms-architecture/</a></li>
+                <li>Live web demo: <a href="https://rainer1370.com/dataone-bms/">rainer1370.com/dataone-bms/</a></li>
+                <li>The running stack: <a href="https://rainer1370.com/data-center-stack/">rainer1370.com/data-center-stack/</a></li>
+                <li>Control Lattice Systems: <a href="https://controllattice.com/" target="_blank" rel="noopener noreferrer">controllattice.com</a></li>
+            </ul>
+<h2>The idea</h2>
+<p>A modern data center is a lot of systems that were never designed to talk to each other: chillers and pumps, CRAH and CRAC units, UPS and generators, rack-level sensors, and the building management controllers that sequence them. The operator&rsquo;s job is to hold all of that in one picture &mdash; what is normal, what is drifting, and what needs attention first.</p>
+<p>The architecture I published draws that picture as seven layers, from the physical plant at the bottom to operator and engineering workflows at the top. The middle layers are the point: device interfaces and gateways, deterministic control with independent protection, EPICS supervisory integration, and the data, time, and configuration context that makes a reading trustworthy. Two rules govern the whole stack, and I kept them from the fusion digital twin this work is a companion to: the twin begins read-only, and protection stays independent.</p>
+<h2>How it is built</h2>
+<p>The displays are built with Phoebus (Control System Studio) Display Builder &mdash; seven <code>.bob</code> files covering Overview, Cooling, Air Handlers, Power, Zones &amp; Alarms, a 24-rack thermal map, and a PLC / EPICS Architecture screen that draws the integration boundary itself.</p>
+<p>Live values come from EPICS 7 Channel Access. A caproto Python soft IOC serves a governed <code>D1:</code> process-variable namespace &mdash; 82 PV-bound widgets plus 24 rack-temperature PVs. A cooling-anomaly scenario cycles about every 20 seconds, so the chilled-water supply temperature, the delta-T, and the alarm state move together the way a real fault would present: CHWS 6.8 &deg;C rising to 9.1 &deg;C, delta-T collapsing from 5.5 to 3.2, a rack zone warming from 23.7 &deg;C to 28.4 &deg;C. That is the whole point of a twin &mdash; not a static picture, but a system whose parts fail together.</p>
+<h2>The part I care about most: portability</h2>
+<p>The same <code>.bob</code> file runs in two places. On the desktop it runs in Phoebus, the way an operator would use it. On the web, ORNL&rsquo;s Display Builder Web Runtime (DBWR R1) renders that identical file unchanged in the browser, and PVWS R4 streams the live values over WebSocket. Nothing is rewritten, nothing is re-skinned, and there is no second UI to drift out of sync with the first.</p>
+<p>The web copy is published through a funnel server &mdash; Tailscale Funnel in this demonstrator &mdash; and it is read-only by design. No control actions are possible from the page. That is not a limitation I worked around; it is the authority boundary the architecture insists on. Supervision travels; control stays with the plant.</p>
+<p>For anyone who has maintained two versions of the same screen &mdash; one for the control room, one for the people who need to see it from elsewhere &mdash; that portability is the whole argument. Build the screen once, in the tool the controls engineers already use, and let the runtime decide where it renders.</p>
+<h2>Who it is for</h2>
+<p>I use this with my students, technicians, operators, and junior engineers. It is a teaching instrument as much as a design document:</p>
+<ul>
+<li><strong>Students</strong> see what a supervisory system actually is &mdash; not a dashboard, but a governed namespace of named values with units, limits, and alarm states.</li>
+<li><strong>Technicians</strong> see the integration boundary: existing PLCs (Allen-Bradley, Siemens) interface into EPICS through drivers. The demo shows that interface layer only. I interface working PLCs into EPICS middleware; I do not program PLC logic, and the demo does not pretend otherwise.</li>
+<li><strong>Operators</strong> get a fault to watch. The anomaly scenario is a training fault with a physically coherent story &mdash; follow the chilled water, then the air handlers, then the racks, and the sequence of the failure reads itself.</li>
+<li><strong>Junior engineers</strong> see the discipline that surrounds the screens: naming, configuration, time, data quality, and the line between what the twin may observe and what only the protection system may do.</li>
+</ul>
+<h2>What it is not</h2>
+<p>Everything in the demonstrator is synthetic, generated by a software IOC for demonstration only. Nothing is connected to a live building, BMS, or control system. It is not a certified design, a safety basis, an operating procedure, or a procurement specification. If you are evaluating it for a real facility, the honest next step is a workshop, a bounded subsystem pilot, or a simulation-to-IOC integration demonstrator &mdash; not a copy-paste of these screens.</p>
+<h2>Where it goes next</h2>
+<p>The companion piece to this work is the Fusion Digital Twin DCS Reference Architecture, built on the same seven-layer pattern for a very different machine. The pattern holding across both is the part I want to keep testing: the same supervisory discipline, the same read-only-first authority rule, and the same insistence that the screen an operator trusts is the screen everyone else sees.</p>
+<p>If you run a facility, teach operators, or build the tools they work with, I would like to hear what you would change. The pages above are the place to start &mdash; and the live demo is the fastest way to judge whether the idea holds up.</p>
+<p><em>Robert Rainer is Managing Director &amp; Principal Engineer at Control Lattice Systems. Contact: rainer1370@gmail.com</em></p>
+            <div class="article-sources" aria-labelledby="related-pages">
+                <h3 id="related-pages">Related pages</h3>
+                <ul>
+                    <li><a href="https://rainer1370.com/data-center-bms-architecture/">Data Center BMS Reference Architecture</a> — the seven-layer architecture this essay describes.</li>
+                    <li><a href="https://rainer1370.com/dataone-bms/">Data Center BMS — Live Web Demo</a> — the running Phoebus/EPICS demonstrator.</li>
+                    <li><a href="https://rainer1370.com/data-center-stack/">Data Center BMS — System Stack</a> — the running stack behind the demo.</li>
+                    <li><a href="/pages/articles/fusion-digital-twin-dcs-infrastructure.html">From Simulation to Operations: A DCS Infrastructure for Fusion Digital Twins</a> — the companion architecture on the same seven-layer pattern.</li>
+                </ul>
+            </div>
+            <p><a href="/pages/articles.html" class="button">&larr; Back to Articles</a></p>
+        </section>
+    </main>
+    <div id="footer"></div>
+</body>
+</html>
